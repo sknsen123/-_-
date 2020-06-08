@@ -1,0 +1,239 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+  <script src="components/loader.js"></script>
+  <!-- <script src="js/app.js"></script> -->
+  <script src="lib/onsenui/js/onsenui.min.js"></script>
+
+  <link rel="stylesheet" href="components/loader.css">
+  <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
+  <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script>
+    // Page init event
+    'use strict';
+    
+    document.addEventListener('init', function(event) {
+      var page = event.target;
+      
+      // これって処理をまとめられたりするのかな？
+      // できればしたいな？？？
+
+      // 学習モードトップ⇔弥生時代
+      if (page.matches('#st-top-page')) {
+        page.querySelector('#yayoi-btn').onclick = function() {
+          document.querySelector('#navigator').pushPage('yayoi.html');
+        };
+      } else if (page.matches('#yayoi-page')) {
+        page.querySelector('#st-top-btn').onclick = function() {
+          document.querySelector('#navigator').popPage();
+        };
+      }
+
+      // 学習モードトップ⇔飛鳥時代
+      if (page.matches('#st-top-page')) {
+        page.querySelector('#asuka-btn').onclick = function() {
+          document.querySelector('#navigator').pushPage('asuka.html');
+        };
+      } else if (page.matches('#asuka-page')) {
+        page.querySelector('#st-top-btn').onclick = function() {
+          document.querySelector('#navigator').popPage();
+       };
+      }
+
+      // 学習モードトップ⇔奈良時代
+      if (page.matches('#st-top-page')) {
+        page.querySelector('#nara-btn').onclick = function() {
+          document.querySelector('#navigator').pushPage('nara.html');
+        };
+      } else if (page.matches('#nara-page')) {
+        page.querySelector('#st-top-btn').onclick = function() {
+          document.querySelector('#navigator').popPage();
+        };
+      }
+
+      // 年号リスト⇔学習ページ …にしたいんだけどどうしようか？？？
+      if (page.matches('#yayoi-page')) {
+        page.querySelector('#goro-btn').onclick = function() {
+          document.querySelector('#navigator').pushPage('study-list.html');
+        };
+      } else if (page.matches('#study-list-page')) {
+        page.querySelector('#st-top-btn').onclick = function() {
+          document.querySelector('#navigator').popPage({times: 2});
+        };
+      }
+
+    });
+
+    if (ons.platform.isIPhoneX()) {
+      document.documentElement.setAttribute('onsflag-iphonex-portrait', '');
+      document.documentElement.setAttribute('onsflag-iphonex-landscape', '');
+    }
+
+// 学習ページのJSを書きたい。
+// ページ開いたらその年号の解説とかが出るようにしたい。↓
+    document.getElementById('goro-btn').addEventListener('click', () =>{
+      // ここでどの年号が押されたかを判別
+          // 判別するためのコードが分からない
+
+      // 押された年号のその他(時代・番号・内容・語呂合わせ・解説)が入るようにして着地先に渡す？
+          // text.contentでいいのかな？
+    });
+
+
+  </script>
+</head>
+<body>
+  <!-- 学習モードトップ -->
+  <ons-navigator id="navigator" page="st-top.html"></ons-navigator>
+
+  <ons-template id="st-top.html">
+    <ons-page id="st-top-page">
+      <ons-toolbar>
+        <div class="center">学習モード</div>
+      </ons-toolbar>
+        
+      <!-- 下の画像は変えてください笑 -->
+      <img class="gil heta" src="css/ヘタリア_プロイセン.jpg">
+
+    <div>
+      <ons-list-header>時代選択</ons-list-header>
+      <ons-list>
+        <ons-list-item id="yayoi-btn">弥生</ons-list-item>
+        <ons-list-item id="asuka-btn">飛鳥</ons-list-item>
+        <ons-list-item id="nara-btn">奈良</ons-list-item>
+        <ons-list-item>平安</ons-list-item>
+        <ons-list-item>鎌倉</ons-list-item>
+        <ons-list-item>室町</ons-list-item>
+        <ons-list-item>安土桃山</ons-list-item>
+        <ons-list-item>江戸</ons-list-item>
+        <ons-list-item>明治</ons-list-item>
+        <ons-list-item>大正</ons-list-item>
+        <ons-list-item>昭和(戦前)</ons-list-item>
+        <ons-list-item>昭和(戦後)</ons-list-item>
+      </ons-list>
+    </div>
+  
+      <footer>
+        <a href="index.html">TOPへ戻る</a>
+      </footer>
+</ons-page>
+</ons-template>
+
+<!-- 弥生時代 -->
+<ons-template id="yayoi.html">
+  <ons-page id="yayoi-page">
+    <ons-toolbar>
+      <div class="center">弥生</div>
+    </ons-toolbar>
+      
+    <!-- 下の画像は変えてください笑 -->
+    <img class="Kiku heta" src="css/ヘタリア_日本.jpg">
+
+  <div>
+    <ons-list-header>年号選択</ons-list-header>
+    <ons-list>
+      <ons-list-item id="goro-btn">57</ons-list-item>
+      <ons-list-item>239</ons-list-item>
+    </ons-list>
+  </div>
+
+    <footer>
+      <ons-button id="st-top-btn">学習モードTOPへ戻る</ons-button>
+    </footer>
+</ons-page>
+</ons-template>
+
+<!-- 飛鳥時代 -->
+<ons-template id="asuka.html">
+  <ons-page id="asuka-page">
+    <ons-toolbar>
+      <div class="center">飛鳥</div>
+    </ons-toolbar>
+      
+    <!-- 下の画像は変えてください笑 -->
+    <img class="Feli heta" src="css/ヘタリア_北イタリア.jpg">
+
+  <div>
+    <ons-list-header>年号選択</ons-list-header>
+    <ons-list>
+      <ons-list-item>538/552</ons-list-item>
+      <ons-list-item>593</ons-list-item>
+      <ons-list-item>603</ons-list-item>
+      <ons-list-item>604</ons-list-item>
+      <ons-list-item>607</ons-list-item>
+      <ons-list-item>645</ons-list-item>
+      <ons-list-item>663</ons-list-item>
+      <ons-list-item>697</ons-list-item>
+      <ons-list-item>701</ons-list-item>
+    </ons-list>
+  </div>
+
+  <footer>
+    <ons-button id="st-top-btn">学習モードTOPへ戻る</ons-button>
+  </footer>
+</ons-page>
+</ons-template>
+
+<!-- 奈良時代 -->
+<ons-template id="nara.html">
+  <ons-page id="nara-page">
+    <ons-toolbar>
+      <div class="center">奈良</div>
+    </ons-toolbar>
+      
+    <!-- 下の画像は変えてください笑 -->
+    <img class="Rovi heta" src="css/ヘタリア_南イタリア.jpeg">
+
+  <div>
+    <ons-list-header>年号選択</ons-list-header>
+    <ons-list>
+      <ons-list-item>710</ons-list-item>
+      <ons-list-item>743</ons-list-item>
+    </ons-list>
+  </div>
+
+  <footer>
+    <ons-button id="st-top-btn">学習モードTOPへ戻る</ons-button>
+  </footer>
+</ons-page>
+</ons-template>
+
+<!-- 学習ページひな形 -->
+<ons-template id="study-list.html">
+  <ons-page id="study-list-page">
+    <ons-toolbar>
+      <div class="center"><span id="st-age"></span>時代 <span id="st-num"></span></div>
+    </ons-toolbar>
+
+    <!-- 語呂合わせ -->
+    <!-- どんな仕組みで表示するかイメージが分からないな… -->
+  <div>
+    <p id="age">年号</p>
+    <p id="goro">ゴロ合わせーーーーーーだ！！！ぜ！！！</p>
+  </div>
+
+  <!-- 写真(ふざけているのでちゃんと変更してね！) -->
+  <img class="Arther heta" src="css/ヘタリア_イギリス.jpg">
+
+  <p id="explanation">かいせーーーーーーーーーーーーーーーーーつ</p>
+  <p id="yuru">ゆるゆるのかいせーーーーーーーーーーーーーつ</p>
+
+
+  <footer>
+    <ons-button id="pop-button">前へ</ons-button>
+    <!-- これできていない…[options.time=数]でいけると温泉HPに書いてあるんだけどうまくいかない… -->
+    <ons-button id="st-top-btn">学習モードTOPへ戻る</ons-button>
+    <!-- <a href="study.html">学習モードTOPへ戻る</a> -->
+    <ons-button id="push-button">次へ</ons-button>
+  </footer>
+</ons-page>
+</ons-template>
+
+
+</body>
+</html>

@@ -1,0 +1,69 @@
+/**/
+/* トップページのCSS */
+.top-page {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.top-btn {
+  display: block;
+  margin: 20px auto;
+  background: #0076ff;
+  color: white;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 17px;
+  width: 300px;
+  height: 30px;
+  line-height: 30px;
+  user-select: none;
+  text-decoration: none;
+}
+
+.komachi {
+  display: block;
+  margin:30px auto;
+  max-width: 50%;
+}
+
+/* 学習モード 問題選択画面 */
+.heta {
+  display: block;
+  margin: 20px auto;
+  height: 200px;
+}
+
+.gil {
+  display: block;
+  margin: 20px auto;
+  height: 200px;
+}
+/* ↑これはふざけているので、完成させるときには違う画像を入れてください */
+
+.select-mode {
+  text-align: center;
+  display: block;
+}
+
+.mode {
+  margin-bottom: 20px;
+}
+
+.st-btn {
+  display: block;
+  margin: 0 auto;
+  background: #0076ff;
+  cursor: pointer;
+  color: white;
+}
+
+/* 成績表示ページ */
+table {
+  display: block;
+  margin: 0 auto;
+}
+
+/* フッター(各一番下にTOPへ戻るボタンがあるという感じにしたい)の設定 */
+footer {
+  text-align: center;
+}
