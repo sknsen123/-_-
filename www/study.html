@@ -15,8 +15,10 @@
 
   <script>
     // Page init event
+    // ↓うまく読み込めてないんだけどファイルの位置はあっているはず
+    // import History from "./css/history.json";
     'use strict';
-    
+
     document.addEventListener('init', function(event) {
       var page = event.target;
       
@@ -56,7 +58,7 @@
         };
       }
 
-      // 年号リスト⇔学習ページ …にしたいんだけどどうしようか？？？
+      // 年号リスト⇔学習ページ
       if (page.matches('#yayoi-page')) {
         page.querySelector('#goro-btn').onclick = function() {
           document.querySelector('#navigator').pushPage('study-list.html');
@@ -74,14 +76,28 @@
       document.documentElement.setAttribute('onsflag-iphonex-landscape', '');
     }
 
+    // 学習ページのJSのID取得→定数で定義
+    const age = document.querySelector('age');
+    const ageNum = document.querySelector('age-num');
+    const nengo = document.querySelector('nengo');
+    const goro = document.querySelector('goro');
+    const explanation = document.querySelector('explanation');
+    const yuru = document.querySelector('yuru');
+
 // 学習ページのJSを書きたい。
+// 'use strict'のあとにimportやったけどあってるのかな？
 // ページ開いたらその年号の解説とかが出るようにしたい。↓
     document.getElementById('goro-btn').addEventListener('click', () =>{
-      // ここでどの年号が押されたかを判別
-          // 判別するためのコードが分からない
+      // 全部に通し番号付けているからもう通し番号で判別したほうが早い？→全部に通し番号付けたほうが早い？
+      // 通し番号をつけるためのコードが分からない
 
-      // 押された年号のその他(時代・番号・内容・語呂合わせ・解説)が入るようにして着地先に渡す？
-          // text.contentでいいのかな？
+      // 押された年号のその他(時代・番号・内容・語呂合わせ・解説)が入るようにして着地先に渡す
+      age.textContent(history.その番号を取得する.時代);
+      ageNum.textContent(history.その番号を取得する.時代別);
+      nengo.textContent(history.その番号を取得する.年号);
+      goro.textContent(history.その番号を取得する.ゴロ合わせ);
+      explanation.textContent(history.その番号を取得する.内容);
+      yuru.textContent(history.その番号を取得する.解説);
     });
 
 
@@ -97,7 +113,7 @@
         <div class="center">学習モード</div>
       </ons-toolbar>
         
-      <!-- 下の画像は変えてください笑 -->
+      <!-- 下の画像は変えてください笑(イメージなのでちゃんと変更する！) -->
       <img class="gil heta" src="css/ヘタリア_プロイセン.jpg">
 
     <div>
@@ -131,7 +147,7 @@
       <div class="center">弥生</div>
     </ons-toolbar>
       
-    <!-- 下の画像は変えてください笑 -->
+    <!-- 下の画像は変えてください笑(イメージなのでちゃんと変更する！) -->
     <img class="Kiku heta" src="css/ヘタリア_日本.jpg">
 
   <div>
@@ -155,7 +171,7 @@
       <div class="center">飛鳥</div>
     </ons-toolbar>
       
-    <!-- 下の画像は変えてください笑 -->
+    <!-- 下の画像は変えてください笑(イメージなのでちゃんと変更する！) -->
     <img class="Feli heta" src="css/ヘタリア_北イタリア.jpg">
 
   <div>
@@ -186,7 +202,7 @@
       <div class="center">奈良</div>
     </ons-toolbar>
       
-    <!-- 下の画像は変えてください笑 -->
+    <!-- 下の画像は変えてください笑(イメージなのでちゃんと変更する！) -->
     <img class="Rovi heta" src="css/ヘタリア_南イタリア.jpeg">
 
   <div>
@@ -213,22 +229,25 @@
     <!-- 語呂合わせ -->
     <!-- どんな仕組みで表示するかイメージが分からないな… -->
   <div>
-    <p id="age">年号</p>
-    <p id="goro">ゴロ合わせーーーーーーだ！！！ぜ！！！</p>
+    <p id="age"></p>
+    <p id="age-num"></p>
+    <p id="nengo"></p>
+    <p id="goro"></p>
   </div>
 
-  <!-- 写真(ふざけているのでちゃんと変更してね！) -->
+  <!-- 写真(イメージなのでちゃんと変更する！) -->
   <img class="Arther heta" src="css/ヘタリア_イギリス.jpg">
 
-  <p id="explanation">かいせーーーーーーーーーーーーーーーーーつ</p>
-  <p id="yuru">ゆるゆるのかいせーーーーーーーーーーーーーつ</p>
+  <p id="explanation"></p>
+  <p id="yuru"></p>
 
 
   <footer>
+    <!-- これで前の年号に飛びたい -->
     <ons-button id="pop-button">前へ</ons-button>
-    <!-- これできていない…[options.time=数]でいけると温泉HPに書いてあるんだけどうまくいかない… -->
+    <!-- 時代一覧に飛ぶ -->
     <ons-button id="st-top-btn">学習モードTOPへ戻る</ons-button>
-    <!-- <a href="study.html">学習モードTOPへ戻る</a> -->
+    <!-- これで次の年号に飛びたい -->
     <ons-button id="push-button">次へ</ons-button>
   </footer>
 </ons-page>
