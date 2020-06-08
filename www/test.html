@@ -16,35 +16,22 @@
   <script>
     // Page init event
 
-    document.addEventListener('init', function(event) {
-      var page = event.target;
+    // 主な構造は演習モードと同じにしたい
+    // ただこれpractice同様分からぬ↓↓↓
+    function editSelects(event) {
+      document.getElementById('choose-sel').removeAttribute('modifier');
+      if (event.target.value == 'material' || event.target.value == 'underbar') {
+        document.getElementById('choose-sel').setAttribute('modifier', event.target.value);
+      } 
+    }
 
-      if (page.matches('#first-page')) {
-
-        page.querySelector('#push-button').onclick = function() {
-          document.querySelector('#navigator').pushPage('page2.html');
-        };
-
-      } else if (page.matches('#second-page')) {
-
-        page.querySelector('#pop-button').onclick = function() {
-          document.querySelector('#navigator').popPage();
-        };
-        page.querySelector('#push-button').onclick = function() {
-          document.querySelector('#navigator').pushPage('page3.html');
-        };
-
-      } else if (page.matches('#third-page')) {
-
-        page.querySelector('#pop-button').onclick = function() {
-          document.querySelector('#navigator').popPage();
-        };
-        page.querySelector('#push-button').onclick = function() {
-          document.querySelector('#navigator').pushPage('page1.html');
-        };
-
-      }
-    });
+    function addOption(event) {
+      const option = document.createElement('option');
+      var text = document.getElementById('optionLabel').value;
+      option.innerText = text;
+      text = '';
+      document.getElementById('dynamic-sel').appendChild(option);
+    }
 
     if (ons.platform.isIPhoneX()) {
       document.documentElement.setAttribute('onsflag-iphonex-portrait', '');
@@ -54,41 +41,33 @@
 </head>
 <body>
   <ons-page>
-
     <ons-toolbar>
-      <div class="center">テストモード</div>
+      <div class="center">テストモード・モード選択</div>
     </ons-toolbar>
-      
-    <img class="gilbert" src="css/ヘタリア_プロイセン.jpg">
 
-    <div class="select-mode">
-      <div class="q-num mode">
-        <label for="q-num">問題数</label>
-        <select id="q-num">
-          <option selected>50問</option>
-        </select>
-      </div>
+    <img src="css/ヘタリア_プロイセン.jpg" height="200">
   
-      <div class="age-num mode">
-        <label for="age-num">時代選択</label>
-        <select id="age-num">
-          <option selected>総合</option>
-          <option>弥生</option>
-          <option>飛鳥</option>
-        </select>
-      </div>
-  
-      <div class="ord mode">
-        <label for="ord">形式選択</label>
-        <select id="ord">
-          <option selected>ランダム</option>
-        </select>
-      </div>
-    </div>
+    <!-- もはやこれ下3つ全部固定だからoptionとかいらなくて普通に書くだけでいいのでは？ -->
+    <h3>問題数</h3>
+    <ons-form>
+      <ons-select id="choose-sel" onchange="editSelects(event)">
+        <option value="50">50問</option>
+      </ons-select>
+    </ons-form>
 
-    <button class="st-btn">スタート</button>
+    <h3>問題方式</h3>
+    <ons-select id="choose-sel" onchange="editSelects(event)">
+      <option value="all">全ての範囲から出題</option>
+    </ons-select>
+
+    <h3>出題順</h3>
+    <ons-select id="choose-sel" onchange="editSelects(event)">
+      <option value="random">ランダムに出題</option>
+    </ons-select>
 
     <footer>
+      <ons-button id="">スタート</ons-button>
+      <br>
       <a href="index.html">TOPへ戻る</a>
     </footer>
   </ons-page>

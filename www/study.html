@@ -12,11 +12,10 @@
   <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
   <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
   <link rel="stylesheet" href="css/style.css">
+  <script src="css/history.js"></script>
 
   <script>
     // Page init event
-    // ↓うまく読み込めてないんだけどファイルの位置はあっているはず
-    // import History from "./css/history.json";
     'use strict';
 
     document.addEventListener('init', function(event) {
@@ -28,7 +27,11 @@
       // 学習モードトップ⇔弥生時代
       if (page.matches('#st-top-page')) {
         page.querySelector('#yayoi-btn').onclick = function() {
-          document.querySelector('#navigator').pushPage('yayoi.html');
+          document.querySelector('#navigator').pushPage('yayoi.html', {
+            data: {
+              era: "弥生"
+            }
+          });
         };
       } else if (page.matches('#yayoi-page')) {
         page.querySelector('#st-top-btn').onclick = function() {
@@ -61,14 +64,18 @@
       // 年号リスト⇔学習ページ
       if (page.matches('#yayoi-page')) {
         page.querySelector('#goro-btn').onclick = function() {
-          document.querySelector('#navigator').pushPage('study-list.html');
+          let age = document.querySelector('#navigator').topPage.data;
+          // ↑「https://onsen.io/v2/api/js/ons-navigator.html#sending-custom-data-to-a-new-page」に書いてあるけど理解できない
+          age.year = "57";
+          document.querySelector('#navigator').pushPage('study-list.html', {
+            data: age
+          });
         };
       } else if (page.matches('#study-list-page')) {
         page.querySelector('#st-top-btn').onclick = function() {
           document.querySelector('#navigator').popPage({times: 2});
         };
       }
-
     });
 
     if (ons.platform.isIPhoneX()) {
@@ -86,19 +93,32 @@
 
 // 学習ページのJSを書きたい。
 // 'use strict'のあとにimportやったけどあってるのかな？
+// ※ querySelector よりも getElementById のほうが高速な処理らしい
+    if (page.matches('#study-list-page')) {
+      let age = document.querySelector('#navigator').topPage.data;
+      const goroHistory = history.find((element) => {
+        return element.年号 === age.year;
+      });
+      console.log(goroHistory);
+    }
 // ページ開いたらその年号の解説とかが出るようにしたい。↓
-    document.getElementById('goro-btn').addEventListener('click', () =>{
+    // document.getElementById('goro-btn').addEventListener('click', () =>{
+    //   let age = document.querySelector('#navigator').topPage.data;
+    //   const foundYear =  data.find((年号) => {
+    //     return 年号 === 57;
+    //   });
       // 全部に通し番号付けているからもう通し番号で判別したほうが早い？→全部に通し番号付けたほうが早い？
       // 通し番号をつけるためのコードが分からない
 
+
       // 押された年号のその他(時代・番号・内容・語呂合わせ・解説)が入るようにして着地先に渡す
-      age.textContent(history.その番号を取得する.時代);
-      ageNum.textContent(history.その番号を取得する.時代別);
-      nengo.textContent(history.その番号を取得する.年号);
-      goro.textContent(history.その番号を取得する.ゴロ合わせ);
-      explanation.textContent(history.その番号を取得する.内容);
-      yuru.textContent(history.その番号を取得する.解説);
-    });
+    //   age.textContent(history.その番号を取得する.時代);
+    //   ageNum.textContent(history.その番号を取得する.時代別);
+    //   nengo.textContent(history.その番号を取得する.年号);
+    //   goro.textContent(history.その番号を取得する.ゴロ合わせ);
+    //   explanation.textContent(history.その番号を取得する.内容);
+    //   yuru.textContent(history.その番号を取得する.解説);
+    // });
 
 
   </script>
@@ -147,7 +167,7 @@
       <div class="center">弥生</div>
     </ons-toolbar>
       
-    <!-- 下の画像は変えてください笑(イメージなのでちゃんと変更する！) -->
+    <!-- 下の画像はイメージなのでちゃんと変更する！ -->
     <img class="Kiku heta" src="css/ヘタリア_日本.jpg">
 
   <div>
@@ -236,6 +256,7 @@
   </div>
 
   <!-- 写真(イメージなのでちゃんと変更する！) -->
+  <!-- まだ写真はデータベースに加えていないので、うまくいったらデータベースに加える…！ -->
   <img class="Arther heta" src="css/ヘタリア_イギリス.jpg">
 
   <p id="explanation"></p>

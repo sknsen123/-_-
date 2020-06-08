@@ -16,117 +16,81 @@
   <script>
     // Page init event
 
-    document.addEventListener('init', function(event) {
-      var page = event.target;
-
-      if (page.matches('#first-page')) {
-
-        page.querySelector('#push-button').onclick = function() {
-          document.querySelector('#navigator').pushPage('page2.html');
-        };
-
-      } else if (page.matches('#second-page')) {
-
-        page.querySelector('#pop-button').onclick = function() {
-          document.querySelector('#navigator').popPage();
-        };
-        page.querySelector('#push-button').onclick = function() {
-          document.querySelector('#navigator').pushPage('page3.html');
-        };
-
-      } else if (page.matches('#third-page')) {
-
-        page.querySelector('#pop-button').onclick = function() {
-          document.querySelector('#navigator').popPage();
-        };
-        page.querySelector('#push-button').onclick = function() {
-          document.querySelector('#navigator').pushPage('page1.html');
-        };
-
-      }
-    });
-
     if (ons.platform.isIPhoneX()) {
       document.documentElement.setAttribute('onsflag-iphonex-portrait', '');
       document.documentElement.setAttribute('onsflag-iphonex-landscape', '');
     }
 
-    new Vue({
-      el: '#app',
-      template: '#main',
-      data() {
-        return {
-          items: [
-            { text: '10問', value: '10問' },
-            { text: '30問', value: '30問' },
-            { text: '50問', value: '50問' }
-          ],
-          selectedItem: '10問'
-        };
-      }
-    });
+    // 「editSelects」って何？→イベントハンドラーのこと
+    // 下のJavaScript全体的にわからない
+    // 「https://onsen.io/v2/api/js/ons-select.html#select-input」ここそのままコピペした
+    function editSelects(event) {
+      document.getElementById('choose-sel').removeAttribute('modifier');
+      if (event.target.value == 'material' || event.target.value == 'underbar') {
+        document.getElementById('choose-sel').setAttribute('modifier', event.target.value);
+      } 
+    }
+    function addOption(event) {
+      const option = document.createElement('option');
+      var text = document.getElementById('optionLabel').value;
+      option.innerText = text;
+      text = '';
+      document.getElementById('dynamic-sel').appendChild(option);
+    }
 
-    new Vue({
-      el: '#app',
-      template: '#main',
-      data() {
-        return {
-          items: [
-            { text: '10問', value: '10問' },
-            { text: '30問', value: '30問' },
-            { text: '50問', value: '50問' }
-          ],
-          selectedItem: '10問'
-        };
-      }
-    });
-
-    // 上で書いているやつよく分からないからドットインストールでやったJavaScriptのコードを見て移すのはありだと思われる
   </script>
 </head>
 <body>
+
   <ons-page>
-
     <ons-toolbar>
-      <div class="center">演習モード</div>
+      <div class="center">演習モード・モード選択</div>
     </ons-toolbar>
-      
-    <img class="gilbert" src="css/ヘタリア_プロイセン.jpg" height="200">
 
-    <div class="select-mode">
-      <div class="q-num mode">
-        <label for="q-num">問題数</label>
-        <select id="q-num">
-          <option selected>10問</option>
-          <option>30問</option>
-          <option>50問</option>
-        </select>
-      </div>
+    <img src="css/ヘタリア_プロイセン.jpg" height="200">
   
-      <div class="age-num mode">
-        <label for="age-num">時代選択</label>
-        <select id="age-num">
-          <option selected>総合</option>
-          <option>弥生</option>
-          <option>飛鳥</option>
-        </select>
-      </div>
-  
-      <div class="ord mode">
-        <label for="ord">形式選択</label>
-        <select id="ord">
-          <option selected>順番</option>
-          <option>ランダム</option>
-        </select>
-      </div>
-    </div>
+    <!-- 「https://itsakura.com/js-selectbox」selectボックスの値の習得の仕方。役立ちそう -->
+    <h3>問題数</h3>
+    <ons-form>
+      <ons-select id="choose-sel" onchange="editSelects(event)">
+        <option value="10">10問</option>
+        <option value="30">30問</option>
+        <option value="50">50問</option>
+      </ons-select>
+    </ons-form>
+
+    <h3>問題方式</h3>
+    <ons-form>
+      <ons-select id="choose-sel" onchange="editSelects(event)">
+        <option value="all">全ての範囲から出題</option>
+        <option value="age">弥生時代から出題</option>
+      </ons-select>
+    </ons-form>
+
+    <h3>出題順</h3>
+    <ons-form>
+      <ons-select id="choose-sel" onchange="editSelects(event)">
+        <option value="orderBy">順番に出題</option>
+        <option value="random">ランダムに出題</option>
+      </ons-select>
+    </ons-form>
+
+    <footer>
+      <ons-button id="">スタート</ons-button>
+      <br>
+      <a href="index.html">TOPへ戻る</a>
+    </footer>
+  </ons-page>
+
+
+  <!-- <ons-page>
 
     <button class="st-btn">スタート</button>
 
     <footer>
       <a href="index.html">TOPへ戻る</a>
     </footer>
-  </ons-page>
+  </ons-page> -->
 
   <!-- 現状、下しか出てこない⇒ons-pageの中に全てのページを入れなければならないってことかな？ -->
   <!-- <ons-page> -->
