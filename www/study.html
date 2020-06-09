@@ -115,21 +115,28 @@
         explanation.textContent = foundHistory.内容;
         yuru.textContent = foundHistory.解説;
 
-        // 全部の年号でこれを実行するにはクラスにしてインスタンスをいっぱいつくるしかない？
-        class HistoryList {
-          constructor (時代, 時代別, 年号, ゴロ合わせ, 内容, 解説) {
-            this.時代 = 時代;
-            this.時代別 = 時代別;
-            this.年号 = 年号;
-            this.ゴロ合わせ = ゴロ合わせ;
-            this.内容 = 内容;
-            this.解説 = 解説;
-          }
-        }
-        // この引数↓に上のfindメソッドで得た引数を入れたら上にそれぞれのインスタンスが生成されるはず
-        const historyList = new HistoryList(foundHistory.時代, foundHistory.時代別, foundHistory.年号, foundHistory.ゴロ合わせ, foundHistory.内容, foundHistory.解説);
+        // document.querySelector('goro-btn').addEventListener('click', () => {
+        //   const targetGoro = document.getElementById('goro-btn');
+        //   targetGoro.classList.toggle('goro-list');
 
-        console.log(`${historylist.年号}`);
+          // 全部の年号でこれを実行するにはクラスにしてインスタンスをいっぱいつくるしかない？
+          class HistoryList {
+            constructor (時代, 時代別, 年号, ゴロ合わせ, 内容, 解説) {
+              this.時代 = 時代;
+              this.時代別 = 時代別;
+              this.年号 = 年号;
+              this.ゴロ合わせ = ゴロ合わせ;
+              this.内容 = 内容;
+              this.解説 = 解説;
+            }
+            // メソッドはインスタンスの動作
+            // ⇒インスタンスの中身を決める動きはこの前でやらなければならない？
+          }
+          const historyList = new HistoryList(foundHistory.時代, foundHistory.時代別, foundHistory.年号, foundHistory.ゴロ合わせ, foundHistory.内容, foundHistory.解説);
+  
+          console.log(historyList);
+        // });
+
     
       }
     });
