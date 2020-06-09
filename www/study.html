@@ -23,11 +23,13 @@
       
       // これって処理をまとめられたりするのかな？
       // できればしたいな？？？
+      // 本当は全部英語で書くんやできっと…英語できないとダメやで…
 
       // 学習モードトップ⇔弥生時代
       if (page.matches('#st-top-page')) {
         page.querySelector('#yayoi-btn').onclick = function() {
           document.querySelector('#navigator').pushPage('yayoi.html', {
+            // 'yayoi.html'に"弥生"というデータを渡す
             data: {
               era: "弥生"
             }
@@ -66,7 +68,9 @@
         page.querySelector('#goro-btn').onclick = function() {
           let age = document.querySelector('#navigator').topPage.data;
           // ↑「https://onsen.io/v2/api/js/ons-navigator.html#sending-custom-data-to-a-new-page」に書いてあるけど理解できない
+          // topPage.data で上の'yayoi.html'に渡した"弥生"というデータを受け取る
           age.year = "57";
+          // ここでさらに"弥生"に"57"というデータを足す(=代入する)
           document.querySelector('#navigator').pushPage('study-list.html', {
             data: age
           });
@@ -84,22 +88,23 @@
     }
 
     // 学習ページのJSのID取得→定数で定義
-    const age = document.querySelector('age');
-    const ageNum = document.querySelector('age-num');
-    const nengo = document.querySelector('nengo');
-    const goro = document.querySelector('goro');
-    const explanation = document.querySelector('explanation');
-    const yuru = document.querySelector('yuru');
+    const age = document.getElementById('age');
+    const ageNum = document.getElementById('age-num');
+    const nengo = document.getElementById('nengo');
+    const goro = document.getElementById('goro');
+    const explanation = document.getElementById('explanation');
+    const yuru = document.getElementById('yuru');
 
 // 学習ページのJSを書きたい。
 // 'use strict'のあとにimportやったけどあってるのかな？
 // ※ querySelector よりも getElementById のほうが高速な処理らしい
     if (page.matches('#study-list-page')) {
-      let age = document.querySelector('#navigator').topPage.data;
-      const goroHistory = history.find((element) => {
+      let age = document.querySelector('#navigator').topPage.data; //ここで{era:"弥生", year:"57"}を受け取る
+      const foundHistory = history.find((element) => {
+        // historyという配列の中からelementを取り出す
         return element.年号 === age.year;
       });
-      console.log(goroHistory);
+      console.log(foundHistory);
     }
 // ページ開いたらその年号の解説とかが出るようにしたい。↓
     // document.getElementById('goro-btn').addEventListener('click', () =>{
