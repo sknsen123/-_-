@@ -1,5 +1,5 @@
 /**/
-/* トップページのCSS */
+/* トップページ */
 .top-page {
   text-align: center;
   margin-top: 50px;
@@ -26,7 +26,18 @@
   max-width: 50%;
 }
 
-/* 学習モード 問題選択画面 */
+/* 学習モード */
+.st-container {
+  background: white;
+  text-align: center;
+}
+
+.st-toptop > h1 {
+  color: red;
+  font-weight: bold;
+}
+
+/* 練習モード 問題選択画面 */
 .heta {
   display: block;
   margin: 20px auto;
