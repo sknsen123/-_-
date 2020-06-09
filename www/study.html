@@ -31,7 +31,7 @@
           document.querySelector('#navigator').pushPage('yayoi.html', {
             // 'yayoi.html'に"弥生"というデータを渡す
             data: {
-              era: "弥生"
+              時代: "弥生"
             }
           });
         };
@@ -69,11 +69,12 @@
           let age = document.querySelector('#navigator').topPage.data;
           // ↑「https://onsen.io/v2/api/js/ons-navigator.html#sending-custom-data-to-a-new-page」に書いてあるけど理解できない
           // topPage.data で上の'yayoi.html'に渡した"弥生"というデータを受け取る
-          age.year = "57";
+          age.年号 = "57";
           // ここでさらに"弥生"に"57"というデータを足す(=代入する)
           document.querySelector('#navigator').pushPage('study-list.html', {
             data: age
           });
+          console.log(age);
         };
       } else if (page.matches('#study-list-page')) {
         page.querySelector('#st-top-btn').onclick = function() {
@@ -102,7 +103,7 @@
       let age = document.querySelector('#navigator').topPage.data; //ここで{era:"弥生", year:"57"}を受け取る
       const foundHistory = history.find((element) => {
         // historyという配列の中からelementを取り出す
-        return element.年号 === age.year;
+        return element.年号 === age.年号;
       });
       console.log(foundHistory);
     }
