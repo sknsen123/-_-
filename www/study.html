@@ -71,12 +71,19 @@
       }
 
       // 年号リスト⇔学習ページ
+      // '#yayoi-page'の部分もクリックしたページに飛べるようにしなければならないと思う
       if (page.matches('#yayoi-page')) {
         page.querySelector('#goro-btn').onclick = function() {
+          // クラスの付けはずしの処理↓いや、おかしいな？
+          // const targetGoro = document.querySelector('goro-list');
+          // targetGoro.classList.remove('goro-list');
+          // document.getElementById().classList.add('goro-list');
+
           let age = document.querySelector('#navigator').topPage.data;
           // ↑「https://onsen.io/v2/api/js/ons-navigator.html#sending-custom-data-to-a-new-page」に書いてある
           // topPage.data で上の'yayoi.html'に渡した"弥生"というデータを受け取る
-          age.年号 = "57";
+          age.年号 = "57"; //←ここを変えなければならない
+          
           // ここでさらに"弥生"に"57"というデータを足す(=代入する)
           document.querySelector('#navigator').pushPage('study-list.html', {
             data: age
@@ -115,27 +122,22 @@
         explanation.textContent = foundHistory.内容;
         yuru.textContent = foundHistory.解説;
 
-        // document.querySelector('goro-btn').addEventListener('click', () => {
-        //   const targetGoro = document.getElementById('goro-btn');
-        //   targetGoro.classList.toggle('goro-list');
-
-          // 全部の年号でこれを実行するにはクラスにしてインスタンスをいっぱいつくるしかない？
-          class HistoryList {
-            constructor (時代, 時代別, 年号, ゴロ合わせ, 内容, 解説) {
-              this.時代 = 時代;
-              this.時代別 = 時代別;
-              this.年号 = 年号;
-              this.ゴロ合わせ = ゴロ合わせ;
-              this.内容 = 内容;
-              this.解説 = 解説;
-            }
-            // メソッドはインスタンスの動作
-            // ⇒インスタンスの中身を決める動きはこの前でやらなければならない？
+        // 全部の年号でこれを実行するにはクラスにしてインスタンスをいっぱいつくるしかない？
+        class HistoryList {
+          constructor (時代, 時代別, 年号, ゴロ合わせ, 内容, 解説) {
+            this.時代 = 時代;
+            this.時代別 = 時代別;
+            this.年号 = 年号;
+            this.ゴロ合わせ = ゴロ合わせ;
+            this.内容 = 内容;
+            this.解説 = 解説;
           }
-          const historyList = new HistoryList(foundHistory.時代, foundHistory.時代別, foundHistory.年号, foundHistory.ゴロ合わせ, foundHistory.内容, foundHistory.解説);
-  
-          console.log(historyList);
-        // });
+          // メソッドはインスタンスの動作
+          // ⇒インスタンスの中身を決める動きはこの前でやらなければならない？
+        }
+        const historyList = new HistoryList(foundHistory.時代, foundHistory.時代別, foundHistory.年号, foundHistory.ゴロ合わせ, foundHistory.内容, foundHistory.解説);
+
+        console.log(historyList);
 
     
       }
@@ -202,7 +204,7 @@
     <ons-list>
       <!-- 以下の年代もそうだけどボタンによってリストが付け変わるようにしたい… -->
       <!-- クラスを使うべきなのか？ -->
-      <ons-list-item class="goro-list" id="goro-btn">57</ons-list-item>
+      <ons-list-item class="goro^list" id="goro-btn">57</ons-list-item>
       <ons-list-item>239</ons-list-item>
     </ons-list>
   </div>
