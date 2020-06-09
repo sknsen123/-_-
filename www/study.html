@@ -16,8 +16,6 @@
 
   <script>
     // Page init event
-    'use strict';
-
     document.addEventListener('init', function(event) {
       var page = event.target;
       
@@ -73,17 +71,12 @@
       // 年号リスト⇔学習ページ
       // '#yayoi-page'の部分もクリックしたページに飛べるようにしなければならないと思う
       if (page.matches('#yayoi-page')) {
-        page.querySelector('#goro-btn').onclick = function() {
-          // クラスの付けはずしの処理↓いや、おかしいな？
-          // const targetGoro = document.querySelector('goro-list');
-          // targetGoro.classList.remove('goro-list');
-          // document.getElementById().classList.add('goro-list');
-
+        page.querySelector('#goro-btn1').onclick = function() {
           let age = document.querySelector('#navigator').topPage.data;
           // ↑「https://onsen.io/v2/api/js/ons-navigator.html#sending-custom-data-to-a-new-page」に書いてある
           // topPage.data で上の'yayoi.html'に渡した"弥生"というデータを受け取る
           age.年号 = "57"; //←ここを変えなければならない
-          
+
           // ここでさらに"弥生"に"57"というデータを足す(=代入する)
           document.querySelector('#navigator').pushPage('study-list.html', {
             data: age
@@ -94,10 +87,81 @@
           document.querySelector('#navigator').popPage({times: 2});
         };
       }
+      if (page.matches('#yayoi-page')) {
+        page.querySelector('#goro-btn2').onclick = function() {
+          let age = document.querySelector('#navigator').topPage.data;
+          age.年号 = "239"; 
+          document.querySelector('#navigator').pushPage('study-list.html', {
+            data: age
+          });
+        };
+      } else if (page.matches('#study-list-page')) {
+        page.querySelector('#st-top-btn').onclick = function() {
+          document.querySelector('#navigator').popPage({times: 2});
+        };
+      }
+      if (page.matches('#asuka-page')) {
+        page.querySelector('#goro-btn3').onclick = function() {
+          let age = document.querySelector('#navigator').topPage.data;
+          age.年号 = "538/552"; 
+          document.querySelector('#navigator').pushPage('study-list.html', {
+            data: age
+          });
+        };
+      } else if (page.matches('#study-list-page')) {
+        page.querySelector('#st-top-btn').onclick = function() {
+          document.querySelector('#navigator').popPage({times: 2});
+        };
+      }
+      if (page.matches('#asuka-page')) {
+        page.querySelector('#goro-btn4').onclick = function() {
+          let age = document.querySelector('#navigator').topPage.data;
+          age.年号 = "593"; 
+          document.querySelector('#navigator').pushPage('study-list.html', {
+            data: age
+          });
+        };
+      } else if (page.matches('#study-list-page')) {
+        page.querySelector('#st-top-btn').onclick = function() {
+          document.querySelector('#navigator').popPage({times: 2});
+        };
+      }
+      if (page.matches('#asuka-page')) {
+        page.querySelector('#goro-btn5').onclick = function() {
+          let age = document.querySelector('#navigator').topPage.data;
+          age.年号 = "603"; 
+          document.querySelector('#navigator').pushPage('study-list.html', {
+            data: age
+          });
+        };
+      } else if (page.matches('#study-list-page')) {
+        page.querySelector('#st-top-btn').onclick = function() {
+          document.querySelector('#navigator').popPage({times: 2});
+        };
+      }
+      if (page.matches('#asuka-page')) {
+        page.querySelector('#goro-btn6').onclick = function() {
+          let age = document.querySelector('#navigator').topPage.data;
+          age.年号 = "604"; 
+          document.querySelector('#navigator').pushPage('study-list.html', {
+            data: age
+          });
+        };
+      } else if (page.matches('#study-list-page')) {
+        page.querySelector('#st-top-btn').onclick = function() {
+          document.querySelector('#navigator').popPage({times: 2});
+        };
+      }
+      // ここまで力技で各学習ページを出しています。できればまとめよう。
+
       // ページ開いたらその年号の解説とかが出るようにしたい。↓
       // 学習ページのJSを書きたい。クラスとインスタンスを使うべき？
       // ※ querySelector よりも getElementById のほうが高速な処理らしい
+      // 次の年号に動く ⇒ 「次へ」next-btn・「前へ」prev-btn を使う
       if (page.matches('#study-list-page')) {
+        // page.querySelector('#next-btn').onclick = function() {
+        //   document.querySelector('#navigator').pushPage();
+        // }
         let age = document.querySelector('#navigator').topPage.data; //ここで{時代:"弥生", 年号:"57"}を受け取る
         const foundHistory = history.find((element) => {
           // historyという配列の中からelementを取り出す
@@ -122,25 +186,11 @@
         explanation.textContent = foundHistory.内容;
         yuru.textContent = foundHistory.解説;
 
-        // 全部の年号でこれを実行するにはクラスにしてインスタンスをいっぱいつくるしかない？
-        class HistoryList {
-          constructor (時代, 時代別, 年号, ゴロ合わせ, 内容, 解説) {
-            this.時代 = 時代;
-            this.時代別 = 時代別;
-            this.年号 = 年号;
-            this.ゴロ合わせ = ゴロ合わせ;
-            this.内容 = 内容;
-            this.解説 = 解説;
-          }
-          // メソッドはインスタンスの動作
-          // ⇒インスタンスの中身を決める動きはこの前でやらなければならない？
-        }
-        const historyList = new HistoryList(foundHistory.時代, foundHistory.時代別, foundHistory.年号, foundHistory.ゴロ合わせ, foundHistory.内容, foundHistory.解説);
-
-        console.log(historyList);
-
-    
-      }
+       } //else if (page.matches('#study-list-page')) {
+      //   page.querySelector('#prev-btn').onclick = function() {
+      //     document.querySelector('#navigator').popPage();
+      //   };
+      // }
     });
 
 
@@ -204,8 +254,8 @@
     <ons-list>
       <!-- 以下の年代もそうだけどボタンによってリストが付け変わるようにしたい… -->
       <!-- クラスを使うべきなのか？ -->
-      <ons-list-item class="goro^list" id="goro-btn">57</ons-list-item>
-      <ons-list-item>239</ons-list-item>
+      <ons-list-item id="goro-btn1">57</ons-list-item>
+      <ons-list-item id="goro-btn2">239</ons-list-item>
     </ons-list>
   </div>
 
@@ -228,10 +278,10 @@
   <div>
     <ons-list-header>年号選択</ons-list-header>
     <ons-list>
-      <ons-list-item>538/552</ons-list-item>
-      <ons-list-item>593</ons-list-item>
-      <ons-list-item>603</ons-list-item>
-      <ons-list-item>604</ons-list-item>
+      <ons-list-item id="goro-btn3">538/552</ons-list-item>
+      <ons-list-item id="goro-btn4">593</ons-list-item>
+      <ons-list-item id="goro-btn5">603</ons-list-item>
+      <ons-list-item id="goro-btn6">604</ons-list-item>
       <ons-list-item>607</ons-list-item>
       <ons-list-item>645</ons-list-item>
       <ons-list-item>663</ons-list-item>
@@ -296,11 +346,11 @@
 
   <footer>
     <!-- これで前の年号に飛びたい -->
-    <ons-button id="pop-button">前へ</ons-button>
+    <ons-button id="prev-btn">前へ</ons-button>
     <!-- 時代一覧に飛ぶ -->
     <ons-button id="st-top-btn">学習モードTOPへ戻る</ons-button>
     <!-- これで次の年号に飛びたい -->
-    <ons-button id="push-button">次へ</ons-button>
+    <ons-button id="next-btn">次へ</ons-button>
   </footer>
 </ons-page>
 </ons-template>
