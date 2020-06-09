@@ -21,9 +21,8 @@
     document.addEventListener('init', function(event) {
       var page = event.target;
       
-      // これって処理をまとめられたりするのかな？
-      // できればしたいな？？？
       // 本当は全部英語で書くんやできっと…英語できないとダメやで…
+      // 余裕があれば下の処理を時代別にするのではなくて1つにまとめる！！！
 
       // 学習モードトップ⇔弥生時代
       if (page.matches('#st-top-page')) {
@@ -44,7 +43,11 @@
       // 学習モードトップ⇔飛鳥時代
       if (page.matches('#st-top-page')) {
         page.querySelector('#asuka-btn').onclick = function() {
-          document.querySelector('#navigator').pushPage('asuka.html');
+          document.querySelector('#navigator').pushPage('asuka.html',{
+            data: {
+              時代: "飛鳥"
+            }
+          });
         };
       } else if (page.matches('#asuka-page')) {
         page.querySelector('#st-top-btn').onclick = function() {
@@ -55,7 +58,11 @@
       // 学習モードトップ⇔奈良時代
       if (page.matches('#st-top-page')) {
         page.querySelector('#nara-btn').onclick = function() {
-          document.querySelector('#navigator').pushPage('nara.html');
+          document.querySelector('#navigator').pushPage('nara.html', {
+            data: {
+              時代: "奈良"
+            }
+          });
         };
       } else if (page.matches('#nara-page')) {
         page.querySelector('#st-top-btn').onclick = function() {
@@ -67,64 +74,71 @@
       if (page.matches('#yayoi-page')) {
         page.querySelector('#goro-btn').onclick = function() {
           let age = document.querySelector('#navigator').topPage.data;
-          // ↑「https://onsen.io/v2/api/js/ons-navigator.html#sending-custom-data-to-a-new-page」に書いてあるけど理解できない
+          // ↑「https://onsen.io/v2/api/js/ons-navigator.html#sending-custom-data-to-a-new-page」に書いてある
           // topPage.data で上の'yayoi.html'に渡した"弥生"というデータを受け取る
           age.年号 = "57";
           // ここでさらに"弥生"に"57"というデータを足す(=代入する)
           document.querySelector('#navigator').pushPage('study-list.html', {
             data: age
           });
-          console.log(age);
         };
       } else if (page.matches('#study-list-page')) {
         page.querySelector('#st-top-btn').onclick = function() {
           document.querySelector('#navigator').popPage({times: 2});
         };
       }
+      // ページ開いたらその年号の解説とかが出るようにしたい。↓
+      // 学習ページのJSを書きたい。クラスとインスタンスを使うべき？
+      // ※ querySelector よりも getElementById のほうが高速な処理らしい
+      if (page.matches('#study-list-page')) {
+        let age = document.querySelector('#navigator').topPage.data; //ここで{時代:"弥生", 年号:"57"}を受け取る
+        const foundHistory = history.find((element) => {
+          // historyという配列の中からelementを取り出す
+          return element.年号 === age.年号;
+        });
+        // ↓確認のため表示 ⇒ このモードができたら消す！
+        console.log(foundHistory);
+
+        // 学習ページのJSのID取得→定数で定義
+        const era = document.getElementById('era');
+        const ageNum = document.getElementById('age-num');
+        const nengo = document.getElementById('nengo');
+        const goro = document.getElementById('goro');
+        const explanation = document.getElementById('explanation');
+        const yuru = document.getElementById('yuru');
+        
+        // 押された年号のその他(時代・番号・内容・語呂合わせ・解説)が入るようにして着地先に渡す
+        era.textContent = foundHistory.時代;
+        ageNum.textContent = foundHistory.時代別;
+        nengo.textContent = foundHistory.年号;
+        goro.textContent = foundHistory.ゴロ合わせ;
+        explanation.textContent = foundHistory.内容;
+        yuru.textContent = foundHistory.解説;
+
+        // 全部の年号でこれを実行するにはクラスにしてインスタンスをいっぱいつくるしかない？
+        class HistoryList {
+          constructor (時代, 時代別, 年号, ゴロ合わせ, 内容, 解説) {
+            this.時代 = 時代;
+            this.時代別 = 時代別;
+            this.年号 = 年号;
+            this.ゴロ合わせ = ゴロ合わせ;
+            this.内容 = 内容;
+            this.解説 = 解説;
+          }
+        }
+        // この引数↓に上のfindメソッドで得た引数を入れたら上にそれぞれのインスタンスが生成されるはず
+        const historyList = new HistoryList(foundHistory.時代, foundHistory.時代別, foundHistory.年号, foundHistory.ゴロ合わせ, foundHistory.内容, foundHistory.解説);
+
+        console.log(`${historylist.年号}`);
+    
+      }
     });
+
 
     if (ons.platform.isIPhoneX()) {
       document.documentElement.setAttribute('onsflag-iphonex-portrait', '');
       document.documentElement.setAttribute('onsflag-iphonex-landscape', '');
     }
-
-    // 学習ページのJSのID取得→定数で定義
-    const age = document.getElementById('age');
-    const ageNum = document.getElementById('age-num');
-    const nengo = document.getElementById('nengo');
-    const goro = document.getElementById('goro');
-    const explanation = document.getElementById('explanation');
-    const yuru = document.getElementById('yuru');
-
-// 学習ページのJSを書きたい。
-// 'use strict'のあとにimportやったけどあってるのかな？
-// ※ querySelector よりも getElementById のほうが高速な処理らしい
-    if (page.matches('#study-list-page')) {
-      let age = document.querySelector('#navigator').topPage.data; //ここで{era:"弥生", year:"57"}を受け取る
-      const foundHistory = history.find((element) => {
-        // historyという配列の中からelementを取り出す
-        return element.年号 === age.年号;
-      });
-      console.log(foundHistory);
-    }
-// ページ開いたらその年号の解説とかが出るようにしたい。↓
-    // document.getElementById('goro-btn').addEventListener('click', () =>{
-    //   let age = document.querySelector('#navigator').topPage.data;
-    //   const foundYear =  data.find((年号) => {
-    //     return 年号 === 57;
-    //   });
-      // 全部に通し番号付けているからもう通し番号で判別したほうが早い？→全部に通し番号付けたほうが早い？
-      // 通し番号をつけるためのコードが分からない
-
-
-      // 押された年号のその他(時代・番号・内容・語呂合わせ・解説)が入るようにして着地先に渡す
-    //   age.textContent(history.その番号を取得する.時代);
-    //   ageNum.textContent(history.その番号を取得する.時代別);
-    //   nengo.textContent(history.その番号を取得する.年号);
-    //   goro.textContent(history.その番号を取得する.ゴロ合わせ);
-    //   explanation.textContent(history.その番号を取得する.内容);
-    //   yuru.textContent(history.その番号を取得する.解説);
-    // });
 
 
   </script>
@@ -179,7 +193,9 @@
   <div>
     <ons-list-header>年号選択</ons-list-header>
     <ons-list>
-      <ons-list-item id="goro-btn">57</ons-list-item>
+      <!-- 以下の年代もそうだけどボタンによってリストが付け変わるようにしたい… -->
+      <!-- クラスを使うべきなのか？ -->
+      <ons-list-item class="goro-list" id="goro-btn">57</ons-list-item>
       <ons-list-item>239</ons-list-item>
     </ons-list>
   </div>
@@ -255,7 +271,7 @@
     <!-- 語呂合わせ -->
     <!-- どんな仕組みで表示するかイメージが分からないな… -->
   <div>
-    <p id="age"></p>
+    <p id="era"></p>
     <p id="age-num"></p>
     <p id="nengo"></p>
     <p id="goro"></p>
