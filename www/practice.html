@@ -59,7 +59,7 @@
           } 
           
           else if (range === "random") {
-            // ドットインストール・フィッシャーイェーツのアルゴリズムのコード
+            // ドットインストールのフィッシャー・イェーツのアルゴリズムのコード
             const shuffledHistoryObj = function shuffle(findEra) {
               for(let i = findEra.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -71,9 +71,22 @@
             }
             console.log(shuffledHistoryObj); 
             // ↑上のコードがそのまま出る…エラーじゃないから順調？
+            // ここでシャッフルしているだけ？なんでコードがそのまま出るんだろうシャッフルさせたってことはオブジェクトの中身が全部入れ替わると思っていたんだけどな…
 
             // const shuffledHistoryObj = findEra('shuffle-array');
             // console.log(shuffledHistoryObj);
+            let currentNum = 0;
+
+            // ドットインストールのやつたぶんこれを見るべきなんだろうけど意味が分からないので11日やる。頭が元気な時に。
+            const shuffledObj = shuffle([...quizSet[currentNum].c]); // これってなんだ
+            shuffledObj.forEach(choice => {
+              const li = document.createElement('li');
+              li.textContent = choice;
+              li.addEventListener('click', () => {
+                checkAnswer(li);
+              });
+              choices.appendChild(li);
+            });
 
           }
         }
@@ -162,7 +175,7 @@
   <ons-template id="pra.html">
     <ons-page id="pra-page">
       <ons-toolbar>
-        <div class="center">第〇問</div>
+        <div class="center">第<span id=qNum>〇</span>問</div>
       </ons-toolbar>
   
       <!-- オブジェクトに合わせて配列historyの画像部分が表示されるようにする -->
