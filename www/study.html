@@ -151,6 +151,97 @@
           document.querySelector('#navigator').popPage({times: 2});
         };
       }
+      if (page.matches('#asuka-page')) {
+        page.querySelector('#goro-btn7').onclick = function() {
+          let age = document.querySelector('#navigator').topPage.data;
+          age.年号 = "607"; 
+          document.querySelector('#navigator').pushPage('study-list.html', {
+            data: age
+          });
+        };
+      } else if (page.matches('#study-list-page')) {
+        page.querySelector('#st-top-btn').onclick = function() {
+          document.querySelector('#navigator').popPage({times: 2});
+        };
+      }
+      if (page.matches('#asuka-page')) {
+        page.querySelector('#goro-btn8').onclick = function() {
+          let age = document.querySelector('#navigator').topPage.data;
+          age.年号 = "645"; 
+          document.querySelector('#navigator').pushPage('study-list.html', {
+            data: age
+          });
+        };
+      } else if (page.matches('#study-list-page')) {
+        page.querySelector('#st-top-btn').onclick = function() {
+          document.querySelector('#navigator').popPage({times: 2});
+        };
+      }
+      if (page.matches('#asuka-page')) {
+        page.querySelector('#goro-btn9').onclick = function() {
+          let age = document.querySelector('#navigator').topPage.data;
+          age.年号 = "663"; 
+          document.querySelector('#navigator').pushPage('study-list.html', {
+            data: age
+          });
+        };
+      } else if (page.matches('#study-list-page')) {
+        page.querySelector('#st-top-btn').onclick = function() {
+          document.querySelector('#navigator').popPage({times: 2});
+        };
+      }
+      if (page.matches('#asuka-page')) {
+        page.querySelector('#goro-btn10').onclick = function() {
+          let age = document.querySelector('#navigator').topPage.data;
+          age.年号 = "672"; 
+          document.querySelector('#navigator').pushPage('study-list.html', {
+            data: age
+          });
+        };
+      } else if (page.matches('#study-list-page')) {
+        page.querySelector('#st-top-btn').onclick = function() {
+          document.querySelector('#navigator').popPage({times: 2});
+        };
+      }
+      if (page.matches('#asuka-page')) {
+        page.querySelector('#goro-btn11').onclick = function() {
+          let age = document.querySelector('#navigator').topPage.data;
+          age.年号 = "701"; 
+          document.querySelector('#navigator').pushPage('study-list.html', {
+            data: age
+          });
+        };
+      } else if (page.matches('#study-list-page')) {
+        page.querySelector('#st-top-btn').onclick = function() {
+          document.querySelector('#navigator').popPage({times: 2});
+        };
+      }
+      if (page.matches('#nara-page')) {
+        page.querySelector('#goro-btn12').onclick = function() {
+          let age = document.querySelector('#navigator').topPage.data;
+          age.年号 = "710"; 
+          document.querySelector('#navigator').pushPage('study-list.html', {
+            data: age
+          });
+        };
+      } else if (page.matches('#study-list-page')) {
+        page.querySelector('#st-top-btn').onclick = function() {
+          document.querySelector('#navigator').popPage({times: 2});
+        };
+      }
+      if (page.matches('#nara-page')) {
+        page.querySelector('#goro-btn13').onclick = function() {
+          let age = document.querySelector('#navigator').topPage.data;
+          age.年号 = "743"; 
+          document.querySelector('#navigator').pushPage('study-list.html', {
+            data: age
+          });
+        };
+      } else if (page.matches('#study-list-page')) {
+        page.querySelector('#st-top-btn').onclick = function() {
+          document.querySelector('#navigator').popPage({times: 2});
+        };
+      }
       // ここまで力技で各学習ページを出しています。できればまとめよう。
 
       // ページ開いたらその年号の解説とかが出るようにしたい。↓
@@ -250,7 +341,7 @@
         <ons-list-item id="yayoi-btn">弥生</ons-list-item>
         <ons-list-item id="asuka-btn">飛鳥</ons-list-item>
         <ons-list-item id="nara-btn">奈良</ons-list-item>
-        <ons-list-item>平安</ons-list-item>
+        <!-- <ons-list-item>平安</ons-list-item>
         <ons-list-item>鎌倉</ons-list-item>
         <ons-list-item>室町</ons-list-item>
         <ons-list-item>安土桃山</ons-list-item>
@@ -258,7 +349,7 @@
         <ons-list-item>明治</ons-list-item>
         <ons-list-item>大正</ons-list-item>
         <ons-list-item>昭和(戦前)</ons-list-item>
-        <ons-list-item>昭和(戦後)</ons-list-item>
+        <ons-list-item>昭和(戦後)</ons-list-item> -->
       </ons-list>
     </div>
   
@@ -311,11 +402,11 @@
       <ons-list-item id="goro-btn4">593</ons-list-item>
       <ons-list-item id="goro-btn5">603</ons-list-item>
       <ons-list-item id="goro-btn6">604</ons-list-item>
-      <ons-list-item>607</ons-list-item>
-      <ons-list-item>645</ons-list-item>
-      <ons-list-item>663</ons-list-item>
-      <ons-list-item>697</ons-list-item>
-      <ons-list-item>701</ons-list-item>
+      <ons-list-item id="goro-btn7">607</ons-list-item>
+      <ons-list-item id="goro-btn8">645</ons-list-item>
+      <ons-list-item id="goro-btn9">663</ons-list-item>
+      <ons-list-item id="goro-btn10">697</ons-list-item>
+      <ons-list-item id="goro-btn11">701</ons-list-item>
     </ons-list>
   </div>
 
@@ -338,8 +429,8 @@
   <div>
     <ons-list-header>年号選択</ons-list-header>
     <ons-list>
-      <ons-list-item>710</ons-list-item>
-      <ons-list-item>743</ons-list-item>
+      <ons-list-item id="goro-btn12">710</ons-list-item>
+      <ons-list-item id="goro-btn13">743</ons-list-item>
     </ons-list>
   </div>
 

@@ -17,8 +17,6 @@
   <script type="module">
     // Page init event
 
-    import shuffle from 'shuffle-array';
-
     if (ons.platform.isIPhoneX()) {
       document.documentElement.setAttribute('onsflag-iphonex-portrait', '');
       document.documentElement.setAttribute('onsflag-iphonex-landscape', '');
@@ -49,10 +47,11 @@
             
             // 全時代からやるなら順番に出題を選択できないようにしてランダムのみ選択できるようにしたい
             if (range === "orderBy") {
-
+              
             } else if (range === "random") {
-              const result = shuffle(findEra);
-              console.log(result);
+              const randomEra = history.filter((element) => {
+              return element.通し;
+            });
             }
 
           } else if (format === "yayoi-era") {
