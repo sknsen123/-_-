@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
   <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
   <script src="components/loader.js"></script>
-  <script src="js/app.js"></script>
+  <!-- <script src="js/app.js"></script> -->
   <script src="lib/onsenui/js/onsenui.min.js"></script>
 
   <link rel="stylesheet" href="components/loader.css">
@@ -14,8 +14,10 @@
   <link rel="stylesheet" href="css/style.css">
   <script src="css/history.js"></script>
 
-  <script>
+  <script type="module">
     // Page init event
+
+    import shuffle from 'shuffle-array';
 
     if (ons.platform.isIPhoneX()) {
       document.documentElement.setAttribute('onsflag-iphonex-portrait', '');
@@ -28,6 +30,48 @@
       if (page.matches('#pra-top-page')) {
         page.querySelector('#pra-start').onclick = function() {
           document.querySelector('#navigator').pushPage('pra.html');
+
+          // セレクトボックスで選択した値を取得する↓
+          const questionNum = document.getElementById("questionNum").value;
+          const format = document.getElementById("format").value;
+          const range = document.getElementById("range").value;
+
+          console.log(questionNum, format, range);
+          // ↑ここまでは順調。
+
+          // 下にずらずら条件分岐を書きます
+          // 参考「http://lifelog.main.jp/wordpress/?p=2557」
+          if (format === "all-era") {
+            const findEra = history.filter((element) => {
+              return element.時代;
+            });
+            // console.log(findEra);
+            
+            // 全時代からやるなら順番に出題を選択できないようにしてランダムのみ選択できるようにしたい
+            if (range === "orderBy") {
+
+            } else if (range === "random") {
+              const result = shuffle(findEra);
+              console.log(result);
+            }
+
+          } else if (format === "yayoi-era") {
+            const findEra = history.filter((element) => {
+              return element.時代 === "弥生";
+            });
+            console.log(findEra);
+          } else if (format === "asuka-era") {
+            const findEra = history.filter((element) => {
+              return element.時代 === "飛鳥";
+            });
+            console.log(findEra);
+          } else if (format === "nara-era") {
+            const findEra = history.filter((element) => {
+              return element.時代 === "奈良";
+            });
+            console.log(findEra);
+          }
+
         };
       } else if (page.matches('#pra-page')) {
         page.querySelector('#pra-top-btn').onclick = function() {
@@ -36,26 +80,6 @@
       }
 
     });
-
-    // 「editSelects」って何？→イベントハンドラーのこと
-    // 下のJavaScript全体的にわからない
-    // 「https://onsen.io/v2/api/js/ons-select.html#select-input」ここそのままコピペした
-    function editSelects(event) {
-      document.getElementById('choose-sel').removeAttribute('modifier');
-      // 「event.target.value」＝イベントが発生した部分のvalue値
-      if (event.target.value == '30' || event.target.value == '50') {
-        document.getElementById('choose-sel').setAttribute('modifier', event.target.value);
-      } 
-    }
-    function addOption(event) {
-      const option = document.createElement('option');
-      // そんなIDはどこにある？ addOptionイベントが全体的にわからん
-      var text = document.getElementById('optionLabel').value;
-      option.innerText = text;
-      // .innerText ⇒ オブジェクト内の文字列ってこと
-      text = '';
-      document.getElementById('dynamic-sel').appendChild(option);
-    }
 
   </script>
 </head>
@@ -71,27 +95,28 @@
       <img src="css/picture/ヘタリア_プロイセン.jpg" height="200">
     
       <!-- 「https://itsakura.com/js-selectbox」selectボックスの値の習得の仕方。役立ちそう -->
-      <h3>問題数</h3>
+      <p>問題数</p>
       <ons-form>
-        <ons-select id="choose-sel" modifier="material" onchange="editSelects(event)">
+        <ons-select id="questionNum">
           <option value="10">10問</option>
           <option value="30">30問</option>
           <option value="50">50問</option>
         </ons-select>
       </ons-form>
   
-      <h3>問題方式</h3>
+      <p>出題範囲</p>
       <ons-form>
-        <ons-select id="choose-sel" modifier="material" onchange="editSelects(event)">
-          <option value="all">全ての範囲から出題</option>
+        <ons-select id="format">
+          <option value="all-era">全ての範囲から出題</option>
           <option value="yayoi-era">弥生時代から出題</option>
           <option value="asuka-era">飛鳥時代から出題</option>
+          <option value="nara-era">奈良時代から出題</option>
         </ons-select>
       </ons-form>
   
-      <h3>出題順</h3>
+      <p>出題形式</p>
       <ons-form>
-        <ons-select id="choose-sel" modifier="material" onchange="editSelects(event)">
+        <ons-select id="range">
           <option value="orderBy">順番に出題</option>
           <option value="random">ランダムに出題</option>
         </ons-select>
@@ -113,7 +138,7 @@
       </ons-toolbar>
   
       <!-- オブジェクトに合わせて配列historyの画像部分が表示されるようにする -->
-      <img src="css/ヘタリア_イギリス.jpg" height="200">
+      <img src="css/picture/ヘタリア_イギリス.jpg" height="200">
   
       <p>配列historyの「内容」部分を問題として書く</p>
   
