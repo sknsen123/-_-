@@ -51,6 +51,11 @@
 }
 /* ↑これはふざけているので、完成させるときには違う画像を入れてください */
 
+/* 演習モード */
+.practice {
+  text-align: center;
+}
+
 .select-mode {
   text-align: center;
   display: block;
