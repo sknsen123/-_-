@@ -16,6 +16,7 @@
 
   <script type="module">
     // Page init event
+    import shuffle from 'shuffle-array';
 
     if (ons.platform.isIPhoneX()) {
       document.documentElement.setAttribute('onsflag-iphonex-portrait', '');
@@ -49,9 +50,8 @@
             if (range === "orderBy") {
               
             } else if (range === "random") {
-              const randomEra = history.filter((element) => {
-              return element.通し;
-            });
+              const shuffleHistoryObj = shuffle(findEra);
+              console.log(shuffleHistoryObj);
             }
 
           } else if (format === "yayoi-era") {
