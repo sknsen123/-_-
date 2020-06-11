@@ -87,7 +87,7 @@
             // ☆指定された問題数を配列で抜き取る
             // ①10問
             if (questionNum === "10") {
-              var question = shuffledObj(findEra).slice(0, 10);
+              var question = shuffledObj(findEra).slice(0, 3);
               console.log(question);
             } 
             // ②30問
@@ -192,7 +192,6 @@
 
         page.querySelector('#pra-top-btn').onclick = function() {
           document.querySelector('#navigator').popPage();
-          // ↓処理を消す？なかったことにする？ための命令をここに
         }
       }
 
@@ -210,10 +209,10 @@
 
           // 最後の問題だったら結果画面に遷移させる処理
           if (i === question.length - 1) {
-            document.querySelector("#ans-btn").onclick = function() {
+            // すでにonclickが発火しているので、ここではonclickを設定しなくて良い！
               document.querySelector('#navigator').pushPage('pra-score.html');
-            };
-          }
+              return;
+            }
           
           i += 1;
           praPic.src = question[i].画像;
@@ -260,6 +259,8 @@
         });   
       }
 
+      // ☆結果表示ページの処理
+
     });
 
   </script>
@@ -277,6 +278,7 @@
     
       <!-- 「https://itsakura.com/js-selectbox」selectボックスの値の習得の仕方。役立ちそう -->
       <p>問題数</p>
+      <p>10問のところ、暫定で3問だけにしてるよ</p>
       <ons-form>
         <ons-select id="questionNum">
           <option value="10">10問</option>
@@ -341,12 +343,11 @@
   <ons-template id="pra-score.html">
     <ons-page id="pra-score-page">
       <ons-toolbar>
-        <!-- ↓インデックス番号 + 1 で表せそうかな？ -->
         <div class="center">結果</div>
       </ons-toolbar>
   
-      <!-- オブジェクトに合わせて配列historyの画像部分が表示されるようにする -->
       <p id="pra-score">〇問中〇問正解！！！</p>
+      <p id="pra-comment">コメント</p>
   
       <div id="pra-score-explanation">解説
         <img id="praScorePic" height="200">
