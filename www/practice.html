@@ -191,21 +191,38 @@
 
         page.querySelector('#pra-top-btn').onclick = function() {
           document.querySelector('#navigator').popPage();
+          // ↓処理を消す？なかったことにする？ための命令をここに
         }
       }
 
       // ☆ひな形に入れ込んでいく部分
       if (page.matches('#pra-page')) {
-        for (let i = 0; i < question.length; i++) {
+        // for (let i = 0; i < question.length; i++) {
+        //   const praPic = document.getElementById('praPic');
+        //   const praExplanation = document.getElementById('praExplanation');
+  
+        //   praPic.src = question[i].画像;
+        //   praExplanation.textContent = question[i].内容;
+
+        //   console.log(question[i].画像, question[i].内容)
+        // }
+
+        question.forEach((element) => {
           const praPic = document.getElementById('praPic');
           const praExplanation = document.getElementById('praExplanation');
-  
-          praPic.src = question[i].画像;
-          praExplanation.textContent = question[i].内容;
-        }
 
+          praPic.src = element.画像;
+          praExplanation.textContent = element.内容;
+
+          console.log(element.画像, element.内容)
+        });
+
+        // 次の問題を表示したい
+        // ⇒上のfor文で次の要素を表示するための繰り返し処理をしている
+        // ⇒次へボタンを押したときに次の要素を表示させればよい…
         document.getElementById('next-pra-btn').addEventListener('click', () => {
           // ここに何らかの処理を入れる必要がある
+          
           
 
           praPic.src = question[i].画像;
