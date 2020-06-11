@@ -207,14 +207,33 @@
           // ↓inputの中身を消去
           var answerForm = document.getElementById("answer");
           answerForm.value = '';
+
+          // 最後の問題だったら結果画面に遷移させる処理
+          if (i === question.length - 1) {
+            page.querySelector('#pra-page').onclick = function() {
+              document.querySelector('#navigator').pushPage('pra-score.html');
+            }
+          }
           
           i += 1;
           praPic.src = question[i].画像;
           praExplanation.textContent = question[i].内容;
+
+          document.getElementById('ans-btn').disabled = true;
         }
 
         praPic.src = question[i].画像;
         praExplanation.textContent = question[i].内容;
+
+        // 1文字以上入力しないとボタンが押せないようにする処理
+        document.getElementById('ans-btn').disabled = true;
+        document.getElementById('answer').addEventListener('keyup', function() {
+          if (this.value.length < 1) {
+            document.getElementById('ans-btn').disabled = true;
+          } else {
+            document.getElementById('ans-btn').disabled = false;
+          }
+        });
 
         // クリックしたら次の問題が表示されるようにしている
         document.getElementById('ans-btn').addEventListener('click', () => {
@@ -222,15 +241,13 @@
           
           // ☆正誤判定
           if (String(answer) === question[i].年号) {
-            // 何問正解かだけでいいので情報を保持しておきたい
-            // あとで結果表示の時に数字だけ使いたい
+            // 何問正解かだけでいいので情報を保持して、結果表示のところで数字を使う
             // できれば〇！とか×！の画像を表示したい
 
             // ◎仏教伝来、538か552のどちらかを入れたらOKということにしないと使い物にならんこれ
             score++;
           } else {
-            // 間違えた問題を保持したい
-            // 空の配列を用意して間違えたやつを入れていく
+            // 間違えた問題を保持するため、空の配列を用意して間違えたやつを入れていく
             wrongAnswer.push(question[i]);
           }
           console.log(wrongAnswer, score);
@@ -309,11 +326,11 @@
   
       <!-- ons-inputよく分かっていないので必要になったらちゃんと見る -->
       <p>
-        <ons-input id="answer" name="answer" type="number" value="" modifier="underbar" placeholder="年号を入力" float>入力欄</ons-input>
+        <ons-input id="answer" name="answer" type="number" value="" modifier="underbar" placeholder="年号を入力" autocomplete="off" float>入力欄</ons-input>
       </p>
   
       <footer>
-        <ons-button id="ans-btn">解答する</ons-button>
+        <ons-button id="ans-btn" onclick="disabled = true;" disabled>解答する</ons-button>
         <ons-button id="pra-top-btn">練習モードTOPへ戻る</ons-button>
       </footer>
   
