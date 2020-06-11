@@ -56,15 +56,15 @@
           // 全時代からやるなら順番に出題を選択できないようにしてランダムのみ選択できるようにしたい
           if (range === "orderBy") {
             if (questionNum === "10") {
-              let question = shuffledObj(findEra).slice(0, 10);
+              var question = findEra.slice(0, 10);
               console.log(question);
             } 
             else if (questionNum === "30") {
-              let question = shuffledObj(findEra).slice(0, 30);
+              var question = findEra.slice(0, 30);
               console.log(question);
             } 
             else if (questionNum === "50") {
-              let question = shuffledObj(findEra).slice(0, 50);
+              var question = findEra.slice(0, 50);
               console.log(question);
             }
           } 
@@ -86,17 +86,17 @@
             // ☆指定された問題数を配列で抜き取る
             // ①10問
             if (questionNum === "10") {
-              let question = shuffledObj(findEra).slice(0, 10);
+              var question = shuffledObj(findEra).slice(0, 10);
               console.log(question);
             } 
             // ②30問
             else if (questionNum === "30") {
-              let question = shuffledObj(findEra).slice(0, 30);
+              var question = shuffledObj(findEra).slice(0, 30);
               console.log(question);
             } 
             // ③50問
             else if (questionNum === "50") {
-              let question = shuffledObj(findEra).slice(0, 50);
+              var question = shuffledObj(findEra).slice(0, 50);
               console.log(question);
             }
           }
@@ -110,18 +110,10 @@
           console.log(findEra);
 
           if (range === "orderBy") {
-            if (questionNum === "10") {
-              let question = shuffledObj(findEra).slice(0, 10);
+            if (questionNum === "10" || "30" || "50") {
+              var question = findEra.slice(0, 10);
               console.log(question);
             } 
-            else if (questionNum === "30") {
-              let question = shuffledObj(findEra).slice(0, 30);
-              console.log(question);
-            } 
-            else if (questionNum === "50") {
-              let question = shuffledObj(findEra).slice(0, 50);
-              console.log(question);
-            }
           } else if (range === "random") {
             const shuffledObj = ([...findEra]) => {
               for (let i = findEra.length - 1; i >= 0; i--) {
@@ -131,18 +123,11 @@
               return findEra;
             }
             console.log(shuffledObj(findEra)); 
-            if (questionNum === "10") {
-              let question = shuffledObj(findEra).slice(0, 10);
+
+            if (questionNum === "10" || "30" || "50") {
+              var question = shuffledObj(findEra).slice(0, 10);
               console.log(question);
             } 
-            else if (questionNum === "30") {
-              let question = shuffledObj(findEra).slice(0, 30);
-              console.log(question);
-            } 
-            else if (questionNum === "50") {
-              let question = shuffledObj(findEra).slice(0, 50);
-              console.log(question);
-            }
           }
         } 
 
@@ -154,18 +139,10 @@
           console.log(findEra);
 
           if (range === "orderBy") {
-            if (questionNum === "10") {
-              let question = shuffledObj(findEra).slice(0, 10);
+            if (questionNum === "10" || "30" || "50") {
+              var question = findEra.slice(0, 10);
               console.log(question);
             } 
-            else if (questionNum === "30") {
-              let question = shuffledObj(findEra).slice(0, 30);
-              console.log(question);
-            } 
-            else if (questionNum === "50") {
-              let question = shuffledObj(findEra).slice(0, 50);
-              console.log(question);
-            }
           } else if (range === "random") {
             const shuffledObj = ([...findEra]) => {
               for (let i = findEra.length - 1; i >= 0; i--) {
@@ -175,18 +152,11 @@
               return findEra;
             }
             console.log(shuffledObj(findEra)); 
-            if (questionNum === "10") {
-              let question = shuffledObj(findEra).slice(0, 10);
+
+            if (questionNum === "10" || "30" || "50") {
+              var question = shuffledObj(findEra).slice(0, 10);
               console.log(question);
             } 
-            else if (questionNum === "30") {
-              let question = shuffledObj(findEra).slice(0, 30);
-              console.log(question);
-            } 
-            else if (questionNum === "50") {
-              let question = shuffledObj(findEra).slice(0, 50);
-              console.log(question);
-            }
           }
         } 
 
@@ -198,18 +168,10 @@
           console.log(findEra);
 
           if (range === "orderBy") {
-            if (questionNum === "10") {
-              let question = shuffledObj(findEra).slice(0, 10);
+            if (questionNum === "10" || "30" || "50") {
+              var question = findEra.slice(0, 10);
               console.log(question);
             } 
-            else if (questionNum === "30") {
-              let question = shuffledObj(findEra).slice(0, 30);
-              console.log(question);
-            } 
-            else if (questionNum === "50") {
-              let question = shuffledObj(findEra).slice(0, 50);
-              console.log(question);
-            }
           } else if (range === "random") {
             const shuffledObj = ([...findEra]) => {
               for (let i = findEra.length - 1; i >= 0; i--) {
@@ -219,18 +181,11 @@
               return findEra;
             }
             console.log(shuffledObj(findEra)); 
-            if (questionNum === "10") {
-              let question = shuffledObj(findEra).slice(0, 10);
+
+            if (questionNum === "10" || "30" || "50") {
+              var question = shuffledObj(findEra).slice(0, 10);
               console.log(question);
             } 
-            else if (questionNum === "30") {
-              let question = shuffledObj(findEra).slice(0, 30);
-              console.log(question);
-            } 
-            else if (questionNum === "50") {
-              let question = shuffledObj(findEra).slice(0, 50);
-              console.log(question);
-            }
           }
         }
 
@@ -238,7 +193,26 @@
           document.querySelector('#navigator').popPage();
         }
       }
-    
+
+      // ☆ひな形に入れ込んでいく部分
+      if (page.matches('#pra-page')) {
+        for (let i = 0; i < question.length; i++) {
+          const praPic = document.getElementById('praPic');
+          const praExplanation = document.getElementById('praExplanation');
+  
+          praPic.src = question[i].画像;
+          praExplanation.textContent = question[i].内容;
+        }
+
+        document.getElementById('next-pra-btn').addEventListener('click', () => {
+          // ここに何らかの処理を入れる必要がある
+          
+
+          praPic.src = question[i].画像;
+          praExplanation.textContent = question[i].内容;
+        });   
+      }
+
     });
 
   </script>
@@ -294,13 +268,14 @@
   <ons-template id="pra.html">
     <ons-page id="pra-page">
       <ons-toolbar>
-        <div class="center">第<span id=qNum>〇</span>問</div>
+        <!-- ↓インデックス番号 + 1 で表せそうかな？ -->
+        <div class="center">第<span id=qNum></span>問</div>
       </ons-toolbar>
   
       <!-- オブジェクトに合わせて配列historyの画像部分が表示されるようにする -->
-      <img src="css/picture/ヘタリア_イギリス.jpg" height="200">
+      <img id="praPic" height="200">
   
-      <p>配列historyの「内容」部分を問題として書く</p>
+      <p id="praExplanation"></p>
   
       <!-- ons-inputよく分かっていないので必要になったらちゃんと見る -->
       <p>
