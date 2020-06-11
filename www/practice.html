@@ -44,10 +44,11 @@
 
         // 下にずらずら条件分岐を書きます
         // 長すぎるのでまとめたいー…。
+        // 携帯で表示されないのはなぜ？
         // 配列のフィルタリング参考「http://lifelog.main.jp/wordpress/?p=2557」
         // ☆全問題から出題
         if (format === "all-era") {
-          const findEra = history.filter((element) => {
+          const findEra = history.filter(function(element) {
             return element.時代;
           });
           console.log(findEra); 
@@ -104,7 +105,7 @@
 
         // ☆時代別…弥生
         else if (format === "yayoi-era") {
-          const findEra = history.filter((element) => {
+          const findEra = history.filter(function(element) {
             return element.時代 === "弥生";
           });
           console.log(findEra);
@@ -133,7 +134,7 @@
 
         // ☆時代別…飛鳥
         else if (format === "asuka-era") {
-          const findEra = history.filter((element) => {
+          const findEra = history.filter(function(element) {
             return element.時代 === "飛鳥";
           });
           console.log(findEra);
@@ -162,7 +163,7 @@
 
         // ☆時代別…奈良
         else if (format === "nara-era") {
-          const findEra = history.filter((element) => {
+          const findEra = history.filter(function(element) {
             return element.時代 === "奈良";
           });
           console.log(findEra);
@@ -197,34 +198,39 @@
 
       // ☆ひな形に入れ込んでいく部分
       if (page.matches('#pra-page')) {
-        // for (let i = 0; i < question.length; i++) {
-        //   const praPic = document.getElementById('praPic');
-        //   const praExplanation = document.getElementById('praExplanation');
-  
-        //   praPic.src = question[i].画像;
-        //   praExplanation.textContent = question[i].内容;
+        const praPic = document.getElementById('praPic');
+        const praExplanation = document.getElementById('praExplanation');
+        let i = 0;
+        let score = 0;
+        var wrongAnswer = [];
 
-        //   console.log(question[i].画像, question[i].内容)
-        // }
+        praPic.src = question[i].画像;
+        praExplanation.textContent = question[i].内容;
 
-        question.forEach((element) => {
-          const praPic = document.getElementById('praPic');
-          const praExplanation = document.getElementById('praExplanation');
-
-          praPic.src = element.画像;
-          praExplanation.textContent = element.内容;
-
-          console.log(element.画像, element.内容)
-        });
-
-        // 次の問題を表示したい
-        // ⇒上のfor文で次の要素を表示するための繰り返し処理をしている
-        // ⇒次へボタンを押したときに次の要素を表示させればよい…
-        document.getElementById('next-pra-btn').addEventListener('click', () => {
-          // ここに何らかの処理を入れる必要がある
+        // クリックしたら次の問題が表示されるようにしている
+        document.getElementById('ans-btn').addEventListener('click', () => {
+          const answer = document.getElementById("answer").value;
           
+          // ☆正誤判定
+          if (String(answer) === question[i].年号) {
+            // 何問正解かだけでいいので情報を保持しておきたい
+            // あとで結果表示の時に数字だけ使いたい
+            // できれば〇！とか×！の画像を表示したい
+            score++;
+          } else {
+            // 間違えた問題を保持したい
+            // 空の配列を用意して間違えたやつを入れていけばいい？
+            wrongAnswer[i].push(question[i]);
+          }
+          console.log(wrongAnswer);
           
-
+          // inputの中身を消去…サイトにはこう書いてあったんだけどな？
+          function clearAnswer() {
+            var anserForm = document.getElementById("answer");
+            answerForm.value = '';
+          }
+          
+          i += 1;
           praPic.src = question[i].画像;
           praExplanation.textContent = question[i].内容;
         });   
@@ -296,11 +302,11 @@
   
       <!-- ons-inputよく分かっていないので必要になったらちゃんと見る -->
       <p>
-        <ons-inputmodifier="underbar" placeholder="Username" float>入力欄</ons-input>
+        <ons-input id="answer" name="answer" type="number" value="" modifier="underbar" placeholder="年号を入力" float>入力欄</ons-input>
       </p>
   
       <footer>
-        <ons-button id="next-pra-btn">次の問題へ進む</ons-button>
+        <ons-button id="ans-btn">解答する</ons-button>
         <ons-button id="pra-top-btn">練習モードTOPへ戻る</ons-button>
       </footer>
   
