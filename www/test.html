@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
   <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
   <script src="components/loader.js"></script>
-  <script src="js/app.js"></script>
+  <!-- <script src="js/app.js"></script> -->
   <script src="lib/onsenui/js/onsenui.min.js"></script>
 
   <link rel="stylesheet" href="components/loader.css">
@@ -17,22 +17,61 @@
   <script>
     // Page init event
 
-    // 主な構造は演習モードと同じにしたい
-    // ただこれpractice同様分からぬ↓↓↓
-    function editSelects(event) {
-      document.getElementById('choose-sel').removeAttribute('modifier');
-      if (event.target.value == 'material' || event.target.value == 'underbar') {
-        document.getElementById('choose-sel').setAttribute('modifier', event.target.value);
-      } 
-    }
+    document.addEventListener('init', function(event) {
+      var page = event.target;
 
-    function addOption(event) {
-      const option = document.createElement('option');
-      var text = document.getElementById('optionLabel').value;
-      option.innerText = text;
-      text = '';
-      document.getElementById('dynamic-sel').appendChild(option);
-    }
+      // ☆学習モード選択画面にいるとき
+      if (page.matches('#pra-top-page')) {
+        page.querySelector('#pra-start').onclick = function() {
+          document.querySelector('#navigator').pushPage('pra.html');
+        }
+      }
+      
+      // ☆問題を解く画面に来たとき
+      else if (page.matches('#pra-page')) {
+
+        // ☆セレクトボックスで選択した値を取得する
+        const questionNum = document.getElementById("questionNum").value;
+        const format = document.getElementById("format").value;
+        const range = document.getElementById("range").value;
+
+        console.log(questionNum, format, range);
+
+        // 下にずらずら条件分岐を書きます
+        // 長すぎるのでまとめたいー…。
+        // 配列のフィルタリング参考「http://lifelog.main.jp/wordpress/?p=2557」
+        // ☆全問題から出題
+        if (format === "all-era") {
+          const findEra = history.filter((element) => {
+            return element.時代;
+          });
+          console.log(findEra); 
+          // ↑これで取得してるのは配列
+          
+          if (range === "random") {
+            const shuffledObj = ([...findEra]) => {
+              for (let i = findEra.length - 1; i >= 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [findEra[i], findEra[j]] = [findEra[j], findEra[i]]
+              }
+              return findEra;
+            }
+            console.log(shuffledObj(findEra)); 
+
+            // ☆指定された問題数を配列で抜き取る（50問）
+            if (questionNum === "50") {
+              let question = shuffledObj(findEra).slice(0, 50);
+              console.log(question);
+            }
+          }
+        }
+
+        page.querySelector('#pra-top-btn').onclick = function() {
+          document.querySelector('#navigator').popPage();
+        }
+      }
+    
+    });
 
     if (ons.platform.isIPhoneX()) {
       document.documentElement.setAttribute('onsflag-iphonex-portrait', '');
@@ -41,85 +80,69 @@
   </script>
 </head>
 <body>
-  <ons-page>
-    <ons-toolbar>
-      <div class="center">テストモード・モード選択</div>
-    </ons-toolbar>
+  <ons-navigator id="navigator" page="pra-top.html"></ons-navigator>
 
-    <img src="css/picture/ヘタリア_プロイセン.jpg" height="200">
-  
-    <!-- もはやこれ下3つ全部固定だからoptionとかいらなくて普通に書くだけでいいのでは？ -->
-    <h3>問題数</h3>
-    <ons-form>
-      <ons-select id="choose-sel" onchange="editSelects(event)">
-        <option value="50">50問</option>
-      </ons-select>
-    </ons-form>
-
-    <h3>問題方式</h3>
-    <ons-select id="choose-sel" onchange="editSelects(event)">
-      <option value="all">全ての範囲から出題</option>
-    </ons-select>
-
-    <h3>出題順</h3>
-    <ons-select id="choose-sel" onchange="editSelects(event)">
-      <option value="random">ランダムに出題</option>
-    </ons-select>
-
-    <footer>
-      <ons-button id="">スタート</ons-button>
-      <br>
-      <a href="index.html">TOPへ戻る</a>
-    </footer>
-  </ons-page>
-  
-  <!-- <ons-navigator id="navigator" page="page1.html"></ons-navigator>
-
-  <ons-template id="page1.html">
-    <ons-page id="first-page">
+  <ons-template id="pra-top.html">
+    <ons-page id="pra-top-page" class="practice">
       <ons-toolbar>
-        <div class="center"><span>テストにとんだぜ！飛鳥</span>時代 第<span>３</span>問</div>
+        <div class="center">テストモード</div>
       </ons-toolbar>
-
-      <div class="content">
-        <p>問題！問題！問題！問題！問題！問題！問題！問題！</p>
-        <img class="komachi" src="css/小野小町.png">
-        <p>解説！解説！解説！解説！解説！解説！解説！解説！</p>
-        <p>ゆるゆる！ゆるゆる！ゆるゆる！ゆるゆる！ゆるゆる！</p>
-        <div class="btn">
-          <ons-button id="push-button">1</ons-button>
-        </div>    
+  
+      <img src="css/picture/ヘタリア_プロイセン.jpg" height="200">
+    
+      <p>問題数</p>
+      <ons-form>
+        <ons-select id="questionNum">
+          <option value="50">50問</option>
+        </ons-select>
+      </ons-form>
+  
+      <p>出題範囲</p>
+      <ons-form>
+        <ons-select id="format">
+          <option value="all-era">全ての範囲から出題</option>
+        </ons-select>
+      </ons-form>
+  
+      <p>出題形式</p>
+      <ons-form>
+        <ons-select id="range">
+          <option value="random">ランダムに出題</option>
+        </ons-select>
+      </ons-form>
+  
+      <footer>
+        <ons-button id="pra-start">スタート</ons-button>
+        <br>
+        <a href="index.html">TOPへ戻る</a>
+      </footer>
     </ons-page>
   </ons-template>
 
-  <ons-template id="page2.html">
-    <ons-page id="second-page">
+  <!-- 練習ページ（問題）ひな形 -->
+  <ons-template id="pra.html">
+    <ons-page id="pra-page">
       <ons-toolbar>
-        <div class="left"><ons-back-button>Page 1</ons-back-button></div>
-        <div class="center">Page 2</div>
+        <div class="center">第<span id=qNum>〇</span>問</div>
       </ons-toolbar>
-
-      <div class="content" style="text-align: center">
-        <p>This is the second page.</p>
-        <ons-button id="pop-button">Pop page</ons-button>
-        <ons-button id="push-button">Push page</ons-button>
-      </div>
+  
+      <!-- オブジェクトに合わせて配列historyの画像部分が表示されるようにする -->
+      <img src="css/picture/ヘタリア_イギリス.jpg" height="200">
+  
+      <p>配列historyの「内容」部分を問題として書く</p>
+  
+      <!-- ons-inputよく分かっていないので必要になったらちゃんと見る -->
+      <p>
+        <ons-inputmodifier="underbar" placeholder="Username" float>入力欄</ons-input>
+      </p>
+  
+      <footer>
+        <ons-button id="next-pra-btn">次の問題へ進む</ons-button>
+        <ons-button id="pra-top-btn">練習モードTOPへ戻る</ons-button>
+      </footer>
+  
     </ons-page>
   </ons-template>
-
-  <ons-template id="page3.html">
-    <ons-page id="third-page">
-      <ons-toolbar>
-        <div class="left"><ons-back-button>Page 2</ons-back-button></div>
-        <div class="center">Page 3</div>
-      </ons-toolbar>
-
-      <div class="content" style="text-align: center">
-        <p>あれあれあれやで</p>
-        <ons-button id="pop-button">Pop page</ons-button>
-        <ons-button id="push-button">Topへ</ons-button>
-      </div>
-    </ons-page>
-  </ons-template> -->
+  
 </body>
 </html>

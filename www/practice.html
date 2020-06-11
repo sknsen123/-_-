@@ -16,7 +16,6 @@
 
   <script type="module">
     // Page init event
-    // import shuffle from '../package.json/shuffle-array';
 
     if (ons.platform.isIPhoneX()) {
       document.documentElement.setAttribute('onsflag-iphonex-portrait', '');
@@ -36,58 +35,70 @@
       // ☆問題を解く画面に来たとき
       else if (page.matches('#pra-page')) {
 
-        // セレクトボックスで選択した値を取得する↓
+        // ☆セレクトボックスで選択した値を取得する
         const questionNum = document.getElementById("questionNum").value;
         const format = document.getElementById("format").value;
         const range = document.getElementById("range").value;
 
         console.log(questionNum, format, range);
-        // ↑ここまでは順調。
 
         // 下にずらずら条件分岐を書きます
-        // 参考「http://lifelog.main.jp/wordpress/?p=2557」
+        // 長すぎるのでまとめたいー…。
+        // 配列のフィルタリング参考「http://lifelog.main.jp/wordpress/?p=2557」
         // ☆全問題から出題
         if (format === "all-era") {
           const findEra = history.filter((element) => {
             return element.時代;
           });
-          console.log(findEra);
+          console.log(findEra); 
+          // ↑これで取得してるのは配列
           
           // 全時代からやるなら順番に出題を選択できないようにしてランダムのみ選択できるようにしたい
           if (range === "orderBy") {
-            // まだ特に書くこと無し
+            if (questionNum === "10") {
+              let question = shuffledObj(findEra).slice(0, 10);
+              console.log(question);
+            } 
+            else if (questionNum === "30") {
+              let question = shuffledObj(findEra).slice(0, 30);
+              console.log(question);
+            } 
+            else if (questionNum === "50") {
+              let question = shuffledObj(findEra).slice(0, 50);
+              console.log(question);
+            }
           } 
           
           else if (range === "random") {
             // ドットインストールのフィッシャー・イェーツのアルゴリズムのコード
-            const shuffledHistoryObj = function shuffle(findEra) {
-              for(let i = findEra.length - 1; i > 0; i--) {
+            // ⇒解説「https://qiita.com/may88seiji/items/69d5b05dff2c9d059155」
+            const shuffledObj = ([...findEra]) => {
+              for (let i = findEra.length - 1; i >= 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
-                // なぜ分割代入を使うの？
-                // ⇒解説「https://qiita.com/may88seiji/items/69d5b05dff2c9d059155」
-                [findEra[j], findEra[i]] = [findEra[i], findEra[j]];
+                [findEra[i], findEra[j]] = [findEra[j], findEra[i]]
               }
               return findEra;
             }
-            console.log(shuffledHistoryObj); 
-            // ↑上のコードがそのまま出る…エラーじゃないから順調？
-            // ここでシャッフルしているだけ？なんでコードがそのまま出るんだろうシャッフルさせたってことはオブジェクトの中身が全部入れ替わると思っていたんだけどな…
+            // フィッシャー・イェーツのアルゴリズム、表示参考「https://www.nxworld.net/tips/js-array-shuffle.html」
+            console.log(shuffledObj(findEra)); 
+            // ↑このshuffleObj(findEra)って何を指してるんだ？
 
-            // const shuffledHistoryObj = findEra('shuffle-array');
-            // console.log(shuffledHistoryObj);
-            let currentNum = 0;
-
-            // ドットインストールのやつたぶんこれを見るべきなんだろうけど意味が分からないので11日やる。頭が元気な時に。
-            const shuffledObj = shuffle([...quizSet[currentNum].c]); // これってなんだ
-            shuffledObj.forEach(choice => {
-              const li = document.createElement('li');
-              li.textContent = choice;
-              li.addEventListener('click', () => {
-                checkAnswer(li);
-              });
-              choices.appendChild(li);
-            });
-
+            // ☆指定された問題数を配列で抜き取る
+            // ①10問
+            if (questionNum === "10") {
+              let question = shuffledObj(findEra).slice(0, 10);
+              console.log(question);
+            } 
+            // ②30問
+            else if (questionNum === "30") {
+              let question = shuffledObj(findEra).slice(0, 30);
+              console.log(question);
+            } 
+            // ③50問
+            else if (questionNum === "50") {
+              let question = shuffledObj(findEra).slice(0, 50);
+              console.log(question);
+            }
           }
         }
 
@@ -97,6 +108,42 @@
             return element.時代 === "弥生";
           });
           console.log(findEra);
+
+          if (range === "orderBy") {
+            if (questionNum === "10") {
+              let question = shuffledObj(findEra).slice(0, 10);
+              console.log(question);
+            } 
+            else if (questionNum === "30") {
+              let question = shuffledObj(findEra).slice(0, 30);
+              console.log(question);
+            } 
+            else if (questionNum === "50") {
+              let question = shuffledObj(findEra).slice(0, 50);
+              console.log(question);
+            }
+          } else if (range === "random") {
+            const shuffledObj = ([...findEra]) => {
+              for (let i = findEra.length - 1; i >= 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [findEra[i], findEra[j]] = [findEra[j], findEra[i]]
+              }
+              return findEra;
+            }
+            console.log(shuffledObj(findEra)); 
+            if (questionNum === "10") {
+              let question = shuffledObj(findEra).slice(0, 10);
+              console.log(question);
+            } 
+            else if (questionNum === "30") {
+              let question = shuffledObj(findEra).slice(0, 30);
+              console.log(question);
+            } 
+            else if (questionNum === "50") {
+              let question = shuffledObj(findEra).slice(0, 50);
+              console.log(question);
+            }
+          }
         } 
 
         // ☆時代別…飛鳥
@@ -105,6 +152,42 @@
             return element.時代 === "飛鳥";
           });
           console.log(findEra);
+
+          if (range === "orderBy") {
+            if (questionNum === "10") {
+              let question = shuffledObj(findEra).slice(0, 10);
+              console.log(question);
+            } 
+            else if (questionNum === "30") {
+              let question = shuffledObj(findEra).slice(0, 30);
+              console.log(question);
+            } 
+            else if (questionNum === "50") {
+              let question = shuffledObj(findEra).slice(0, 50);
+              console.log(question);
+            }
+          } else if (range === "random") {
+            const shuffledObj = ([...findEra]) => {
+              for (let i = findEra.length - 1; i >= 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [findEra[i], findEra[j]] = [findEra[j], findEra[i]]
+              }
+              return findEra;
+            }
+            console.log(shuffledObj(findEra)); 
+            if (questionNum === "10") {
+              let question = shuffledObj(findEra).slice(0, 10);
+              console.log(question);
+            } 
+            else if (questionNum === "30") {
+              let question = shuffledObj(findEra).slice(0, 30);
+              console.log(question);
+            } 
+            else if (questionNum === "50") {
+              let question = shuffledObj(findEra).slice(0, 50);
+              console.log(question);
+            }
+          }
         } 
 
         // ☆時代別…奈良
@@ -113,6 +196,42 @@
             return element.時代 === "奈良";
           });
           console.log(findEra);
+
+          if (range === "orderBy") {
+            if (questionNum === "10") {
+              let question = shuffledObj(findEra).slice(0, 10);
+              console.log(question);
+            } 
+            else if (questionNum === "30") {
+              let question = shuffledObj(findEra).slice(0, 30);
+              console.log(question);
+            } 
+            else if (questionNum === "50") {
+              let question = shuffledObj(findEra).slice(0, 50);
+              console.log(question);
+            }
+          } else if (range === "random") {
+            const shuffledObj = ([...findEra]) => {
+              for (let i = findEra.length - 1; i >= 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [findEra[i], findEra[j]] = [findEra[j], findEra[i]]
+              }
+              return findEra;
+            }
+            console.log(shuffledObj(findEra)); 
+            if (questionNum === "10") {
+              let question = shuffledObj(findEra).slice(0, 10);
+              console.log(question);
+            } 
+            else if (questionNum === "30") {
+              let question = shuffledObj(findEra).slice(0, 30);
+              console.log(question);
+            } 
+            else if (questionNum === "50") {
+              let question = shuffledObj(findEra).slice(0, 50);
+              console.log(question);
+            }
+          }
         }
 
         page.querySelector('#pra-top-btn').onclick = function() {
@@ -183,7 +302,7 @@
   
       <p>配列historyの「内容」部分を問題として書く</p>
   
-      <!-- ons-inputよく分かっていないので後でちゃんと見る -->
+      <!-- ons-inputよく分かっていないので必要になったらちゃんと見る -->
       <p>
         <ons-inputmodifier="underbar" placeholder="Username" float>入力欄</ons-input>
       </p>
