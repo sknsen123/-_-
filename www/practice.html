@@ -204,16 +204,16 @@
         var wrongAnswer = [];
         function nextQuestion() {
           // ↓inputの中身を消去
-          var answerForm = document.getElementById("answer");
+          var answerForm = document.getElementById('answer');
           answerForm.value = '';
 
           // 最後の問題だったら結果画面に遷移させる処理
           if (i === question.length - 1) {
             // すでにonclickが発火しているので、ここではonclickを設定しなくて良い！
-              document.querySelector('#navigator').pushPage('pra-score.html');
-              return;
-            }
-          
+            document.querySelector('#navigator').pushPage('pra-score.html');
+            return;
+          }
+
           i += 1;
           praPic.src = question[i].画像;
           praExplanation.textContent = question[i].内容;
@@ -221,6 +221,9 @@
           document.getElementById('ans-btn').disabled = true;
         }
 
+        // 第〇問を変えたい⇒インデックス番号+1でいいのでは？⇒詰んだ
+        let qNum = document.getElementById('qNum');
+        qNum.textContent = i++;
         praPic.src = question[i].画像;
         praExplanation.textContent = question[i].内容;
 
@@ -318,7 +321,7 @@
     <ons-page id="pra-page">
       <ons-toolbar>
         <!-- ↓インデックス番号 + 1 で表せそうかな？ -->
-        <div class="center">第<span id=qNum></span>問</div>
+        <div class="center">第 <span id=qNum></span> 問</div>
       </ons-toolbar>
   
       <!-- オブジェクトに合わせて配列historyの画像部分が表示されるようにする -->
