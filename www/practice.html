@@ -210,9 +210,9 @@
 
           // 最後の問題だったら結果画面に遷移させる処理
           if (i === question.length - 1) {
-            page.querySelector('#pra-page').onclick = function() {
+            document.querySelector("#ans-btn").onclick = function() {
               document.querySelector('#navigator').pushPage('pra-score.html');
-            }
+            };
           }
           
           i += 1;
