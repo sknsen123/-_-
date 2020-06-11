@@ -203,6 +203,15 @@
         let i = 0;
         let score = 0;
         var wrongAnswer = [];
+        function nextQuestion() {
+          // ↓inputの中身を消去
+          var answerForm = document.getElementById("answer");
+          answerForm.value = '';
+          
+          i += 1;
+          praPic.src = question[i].画像;
+          praExplanation.textContent = question[i].内容;
+        }
 
         praPic.src = question[i].画像;
         praExplanation.textContent = question[i].内容;
@@ -216,23 +225,21 @@
             // 何問正解かだけでいいので情報を保持しておきたい
             // あとで結果表示の時に数字だけ使いたい
             // できれば〇！とか×！の画像を表示したい
+
+            // ◎仏教伝来、538か552のどちらかを入れたらOKということにしないと使い物にならんこれ
             score++;
           } else {
             // 間違えた問題を保持したい
-            // 空の配列を用意して間違えたやつを入れていけばいい？
-            wrongAnswer[i].push(question[i]);
+            // 空の配列を用意して間違えたやつを入れていく
+            wrongAnswer.push(question[i]);
           }
-          console.log(wrongAnswer);
+          console.log(wrongAnswer, score);
           
-          // inputの中身を消去…サイトにはこう書いてあったんだけどな？
-          function clearAnswer() {
-            var anserForm = document.getElementById("answer");
-            answerForm.value = '';
-          }
+          // 1秒後に次の問題へ進める
+          setTimeout(() => {
+            nextQuestion();
+          }, 1000);
           
-          i += 1;
-          praPic.src = question[i].画像;
-          praExplanation.textContent = question[i].内容;
         });   
       }
 
@@ -307,6 +314,31 @@
   
       <footer>
         <ons-button id="ans-btn">解答する</ons-button>
+        <ons-button id="pra-top-btn">練習モードTOPへ戻る</ons-button>
+      </footer>
+  
+    </ons-page>
+  </ons-template>
+
+  <!-- 結果表示ページ ひな形 -->
+  <ons-template id="pra-score.html">
+    <ons-page id="pra-score-page">
+      <ons-toolbar>
+        <!-- ↓インデックス番号 + 1 で表せそうかな？ -->
+        <div class="center">結果</div>
+      </ons-toolbar>
+  
+      <!-- オブジェクトに合わせて配列historyの画像部分が表示されるようにする -->
+      <p id="pra-score">〇問中〇問正解！！！</p>
+  
+      <div id="pra-score-explanation">解説
+        <img id="praScorePic" height="200">
+        <p id="praScoreNengo">年号</p>
+        <p id="praScoreExplanation">内容</p>
+        <p id="praScoreYuru">ゆる説明</p>
+      </div>
+  
+      <footer>
         <ons-button id="pra-top-btn">練習モードTOPへ戻る</ons-button>
       </footer>
   
