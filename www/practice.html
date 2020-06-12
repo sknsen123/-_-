@@ -48,11 +48,6 @@
 
         console.log(questionNum, format, range);
 
-        
-
-        // 下にずらずら条件分岐を書きます
-        // 長すぎるのでまとめたいー…。
-        // 携帯で表示されないのはなぜ？
         // 配列のフィルタリング参考「http://lifelog.main.jp/wordpress/?p=2557」
         // ☆全問題から出題
         if (format === "all-era") {
@@ -63,6 +58,7 @@
           // ↑これで取得してるのは配列
           
           // 全時代からやるなら順番に出題を選択できないようにしてランダムのみ選択できるようにしたい
+          // ⇒これは余裕があったらやるやつ
           if (range === "orderBy") {
             if (questionNum === "10") {
               question = findEra.slice(0, 10);
@@ -94,7 +90,7 @@
             // ☆指定された問題数を配列で抜き取る
             // ①10問
             if (questionNum === "10") {
-              question = shuffledObj(findEra).slice(0, 10);
+              question = shuffledObj(findEra).slice(0, 3);
               console.log(question);
             } 
             // ②30問
@@ -199,6 +195,8 @@
 
         page.querySelector('#pra-top-btn').onclick = function() {
           document.querySelector('#navigator').popPage();
+          score = 0;
+          wrongAnswer = [];
         }
       }
 
@@ -273,34 +271,44 @@
       if (page.matches('#pra-score-page')) {
         // 〇正答数表示
         const praScore = document.querySelector('#pra-score');
+        const scorePic = document.querySelector('#scorePic');
         praScore.textContent = `${score} / ${question.length}`;
 
         // 〇正解数に応じたコメントをつける
-        // jsの除法は小数点以下までちゃんと出してくれるみたいだからこれにしました。
+        // jsの除法は小数点以下までちゃんと出してくれるみたいだからこれにしました。改行させたい。調べる。
         const praComment = document.getElementById('pra-comment');
         if (score / question.length === 1) {
-          praComment.innerHTML = "Perfect!!! \n これで君もゴロ合わせは完璧だ！ \n 忘れないように復習しよう！"
+          praComment.textContent = "Perfect!!! \n これで君もゴロ合わせは完璧だ！ \n 忘れないように復習しよう！"
+          scorePic.src = "css/picture/ヘタリア_日本.jpg";
         } else if (score / question.length >= 0.8) {
-          praComment.innerHTML = "Excellent!!! \n もう少しでパーフェクト！ \n 覚えるまでやりこもう！"
+          praComment.textContent = "Excellent!!! \n もう少しでパーフェクト！ \n 覚えるまでやりこもう！"
         } else if (score / question.length >= 0.6) {
-          praComment.innerHTML = "Great!! \n すごいすごい！いい調子！ \n 全問正解目指して頑張ろう！"
+          praComment.textContent = "Great!! \n すごいすごい！いい調子！ \n 全問正解目指して頑張ろう！"
         } else if (score / question.length >= 0.4) {
-          praComment.innerHTML = "Good! \n 少し覚えてきたね！ \n いい調子だよ、頑張ろう！"
+          praComment.textContent = "Good! \n 少し覚えてきたね！ \n いい調子だよ、頑張ろう！"
         } else {
-          praComment.innerHTML = "Ok! \n まだまだこれからだね！ \n 少しずつ頑張っていこう！"
+          praComment.textContent = "OK! \n まだまだこれからだね！ \n 少しずつ頑張っていこう！"
         }
 
-        var praScorePic = document.getElementById('praScorePic');
-        var praScoreNengo = document.getElementById('praScoreNengo');
-        var praScoreExplanation = document.getElementById('praScoreExplanation');
-        var praScoreYuru = document.getElementById('praScoreYuru');
-
+        
         // 〇間違えた問題の解説
         wrongAnswer.forEach((wrongElement) => {
-          praScorePic.src = wrongElement.画像;
-          praScoreNengo.textContent = wrongElement.年号;
-          praScoreExplanation.textContent = wrongElement.内容;
-          praScoreYuru.textContent = wrongElement.解説;
+
+          var praScorePic = document.createElement('img');
+          var praScoreNengo = document.createElement('p');
+          var praScoreExplanation = document.createElement('p');
+          var praScoreYuru = document.createElement('p');
+
+          document.getElementById('praScorePic').src = wrongElement.画像;
+          document.getElementById('praScoreNengo').textContent = wrongElement.年号;
+          document.getElementById('praScoreExplanation').textContent = wrongElement.内容;
+          document.getElementById('praScoreYuru').textContent = wrongElement.解説;
+
+          document.getElementById('scoreExplanation').appendChild(praScorePic);
+          document.getElementById('scoreExplanation').appendChild(praScoreNengo);
+          document.getElementById('scoreExplanation').appendChild(praScoreExplanation);
+          document.getElementById('scoreExplanation').appendChild(praScoreYuru);
+
         });
 
         // 練習モードtopに戻るボタンの有効化
@@ -391,14 +399,15 @@
         <div class="center">結果</div>
       </ons-toolbar>
   
-      <p id="pra-score">〇問中〇問正解！！！</p>
-      <p id="pra-comment">コメント</p>
+      <p id="pra-score"></p>
+      <p id="pra-comment"></p>
+      <img id="scorePic" height="200">
   
-      <div id="pra-score-explanation">解説
+      <div id=scoreExplanation>
         <img id="praScorePic" height="200">
-        <p id="praScoreNengo">年号</p>
-        <p id="praScoreExplanation">内容</p>
-        <p id="praScoreYuru">ゆる説明</p>
+        <p id="praScoreNengo"></p>
+        <p id="praScoreExplanation"></p>
+        <p id="praScoreYuru"></p>
       </div>
   
       <footer>

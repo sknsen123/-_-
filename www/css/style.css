@@ -1,5 +1,10 @@
 /**/
 /* トップページ */
+.top {
+  /* 表示されませーんはーあなんやねーん */
+  background-image: url("picture/goro-top.jpeg"); 
+}
+
 .top-page {
   text-align: center;
   margin-top: 50px;
