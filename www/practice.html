@@ -267,9 +267,10 @@
       }
 
       // ☆結果表示ページの処理
+      // スコープ問題が解決したら全部うまくいくと思いたいんだけどな
+      // 使いたい配列、①question、②score、③wrongAnswer …全部すぐ上のif文で定義してる
       if (page.matches('#pra-score-page')) {
-        // 正答数表示
-        // スコープの範囲外だからダメなんだな…
+        // 〇正答数表示
         // …ん？なんで配列questionは上のif文で定義されてるわけじゃないのに上のif文で使えるんだ？
         // ⇒ questionをletで定義したら使えなかったので、varで定義したら使えた
         const praScore = document.querySelector('#pra-score');
@@ -277,7 +278,8 @@
         // varのスコープはif文の外で宣言された場合、if文の中でも使えるらしい…今日はスコープ問題がのしかかりそうだ
         praScore.textContent = `${question.length} 問中 ${score} 問正解！`;
 
-        // 正解数に応じたコメントをつけたい ※上の問題が解決したらこれも解決すると思う
+        // 〇正解数に応じたコメントをつける
+        // ※上の問題が解決したらこれも解決すると思う
         // jsの除法は小数点以下までちゃんと出してくれるみたいだからこれにしました。
         const praComment = document.getElementById('pra-comment');
         if (score / question.length === 1) {
@@ -297,7 +299,7 @@
         var praScoreExplanation = document.getElementById('praScoreExplanation');
         var praScoreYuru = document.getElementById('praScoreYuru');
 
-        // 間違えた問題の解説
+        // 〇間違えた問題の解説 …オブジェクトを含む配列でうまくできるか分からないからスコープ問題が解決したらとりあえずやってみること
         // ＊配列「wrongAnswer」ここに間違えた問題が入っている
         wrongAnswer.forEach((wrongElement) => {
           praScorePic.src = wrongElement.画像;
