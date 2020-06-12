@@ -14,39 +14,39 @@
   <link rel="stylesheet" href="css/style.css">
   <script src="css/history.js"></script>
 
-  <script>
+  <script type="module">
     // Page init event
+    // 演習モードとほぼ同じ
+
+    if (ons.platform.isIPhoneX()) {
+      document.documentElement.setAttribute('onsflag-iphonex-portrait', '');
+      document.documentElement.setAttribute('onsflag-iphonex-landscape', '');
+    }
+
+    var question;
+    var score = 0;
+    var wrongAnswer = [];
 
     document.addEventListener('init', function(event) {
       var page = event.target;
 
-      // ☆学習モード選択画面にいるとき
-      if (page.matches('#pra-top-page')) {
-        page.querySelector('#pra-start').onclick = function() {
-          document.querySelector('#navigator').pushPage('pra.html');
+      if (page.matches('#test-top-page')) {
+        page.querySelector('#test-start').onclick = function() {
+          document.querySelector('#navigator').pushPage('test.html');
         }
       }
-      
-      // ☆問題を解く画面に来たとき
-      else if (page.matches('#pra-page')) {
 
-        // ☆セレクトボックスで選択した値を取得する
+      else if (page.matches('#test-page')) {
+
         const questionNum = document.getElementById("questionNum").value;
         const format = document.getElementById("format").value;
         const range = document.getElementById("range").value;
 
-        console.log(questionNum, format, range);
-
-        // 下にずらずら条件分岐を書きます
-        // 長すぎるのでまとめたいー…。
-        // 配列のフィルタリング参考「http://lifelog.main.jp/wordpress/?p=2557」
         // ☆全問題から出題
         if (format === "all-era") {
-          const findEra = history.filter((element) => {
+          const findEra = history.filter(function(element) {
             return element.時代;
           });
-          console.log(findEra); 
-          // ↑これで取得してるのは配列
           
           if (range === "random") {
             const shuffledObj = ([...findEra]) => {
@@ -56,34 +56,118 @@
               }
               return findEra;
             }
-            console.log(shuffledObj(findEra)); 
-
-            // ☆指定された問題数を配列で抜き取る（50問）
             if (questionNum === "50") {
-              let question = shuffledObj(findEra).slice(0, 50);
-              console.log(question);
+              question = shuffledObj(findEra).slice(0, 3);
             }
           }
         }
-
-        page.querySelector('#pra-top-btn').onclick = function() {
-          document.querySelector('#navigator').popPage();
-        }
       }
-    
+
+      if (page.matches('#test-page')) {
+        const testPic = document.getElementById('testPic');
+        const testExplanation = document.getElementById('testExplanation');
+        let i = 0;
+
+        function nextQuestion() {
+          var answerForm = document.getElementById('answer');
+          answerForm.value = '';
+
+          if (i === question.length - 1) {
+            document.querySelector('#navigator').pushPage('test-score.html');
+            return;
+          }
+
+          i ++;
+          qNum.innerHTML = i + 1;
+          testPic.src = question[i].画像;
+          testExplanation.textContent = question[i].内容;
+          
+          document.getElementById('ans-btn').disabled = true;
+        }
+        
+        qNum.innerHTML = i + 1;
+        testPic.src = question[i].画像;
+        testExplanation.textContent = question[i].内容;
+
+        document.getElementById('ans-btn').disabled = true;
+        document.getElementById('answer').addEventListener('keyup', function() {
+          if (this.value.length < 2) {
+            document.getElementById('ans-btn').disabled = true;
+          } else {
+            document.getElementById('ans-btn').disabled = false;
+          }
+        });
+
+        document.getElementById('ans-btn').addEventListener('click', () => {
+          const answer = document.getElementById("answer").value;
+
+          if (String(answer) === question[i].年号) {
+            score++;
+          } else {
+            wrongAnswer.push(question[i]);
+          }
+          setTimeout(() => {
+            nextQuestion();
+          }, 500);
+          
+        });   
+      }
+
+      if (page.matches('#test-score-page')) {
+        const testScore = document.querySelector('#test-score');
+        // const scorePic = document.querySelector('#scorePic');
+        testScore.textContent = `${score} / ${question.length}`;
+        
+        const testComment = document.getElementById('test-comment');
+        if (score / question.length === 1) {
+          testComment.textContent = "Perfect!!! \n これで君もゴロ合わせは完璧だ！ \n 忘れないように復習しよう！"
+          // scorePic.src = "css/picture/ヘタリア_日本.jpg";
+        } else if (score / question.length >= 0.8) {
+          testComment.textContent = "Excellent!!! \n もう少しでパーフェクト！ \n 覚えるまでやりこもう！"
+        } else if (score / question.length >= 0.6) {
+          testComment.textContent = "Great!! \n すごいすごい！いい調子！ \n 全問正解目指して頑張ろう！"
+        } else if (score / question.length >= 0.4) {
+          testComment.textContent = "Good! \n 少し覚えてきたね！ \n いい調子だよ、頑張ろう！"
+        } else {
+          testComment.textContent = "OK! \n まだまだこれからだね！ \n 少しずつ頑張っていこう！"
+        }
+
+        wrongAnswer.forEach((wrongElement) => {
+
+          var testScorePic = document.createElement('img');
+          var testScoreNengo = document.createElement('p');
+          var testScoreExplanation = document.createElement('p');
+          var testScoreYuru = document.createElement('p');
+
+          testScorePic.src = wrongElement.画像;
+          testScorePic.height = 200;
+          testScoreNengo.textContent = wrongElement.年号;
+          testScoreExplanation.textContent = wrongElement.内容;
+          testScoreYuru.textContent = wrongElement.解説;
+
+          document.getElementById('scoreExplanation').appendChild(testScorePic);
+          document.getElementById('scoreExplanation').appendChild(testScoreNengo);
+          document.getElementById('scoreExplanation').appendChild(testScoreExplanation);
+          document.getElementById('scoreExplanation').appendChild(testScoreYuru);
+
+        });
+
+        page.querySelector('#test-top-btn').onclick = function() {
+          document.querySelector('#navigator').popPage({times: 2});
+          score = 0;
+          wrongAnswer = [];
+        };
+      }
+
     });
 
-    if (ons.platform.isIPhoneX()) {
-      document.documentElement.setAttribute('onsflag-iphonex-portrait', '');
-      document.documentElement.setAttribute('onsflag-iphonex-landscape', '');
-    }
   </script>
 </head>
 <body>
-  <ons-navigator id="navigator" page="pra-top.html"></ons-navigator>
+  <ons-navigator id="navigator" page="test-top.html"></ons-navigator>
 
-  <ons-template id="pra-top.html">
-    <ons-page id="pra-top-page" class="practice">
+  <ons-template id="test-top.html">
+    <ons-page id="test-top-page" class="practice">
       <ons-toolbar>
         <div class="center">テストモード</div>
       </ons-toolbar>
@@ -112,7 +196,7 @@
       </ons-form>
   
       <footer>
-        <ons-button id="pra-start">スタート</ons-button>
+        <ons-button id="test-start">スタート</ons-button>
         <br>
         <a href="index.html">TOPへ戻る</a>
       </footer>
@@ -120,29 +204,45 @@
   </ons-template>
 
   <!-- 練習ページ（問題）ひな形 -->
-  <ons-template id="pra.html">
-    <ons-page id="pra-page">
+  <ons-template id="test.html">
+    <ons-page id="test-page">
       <ons-toolbar>
-        <div class="center">第<span id=qNum>〇</span>問</div>
+        <div class="center">第 <span id=qNum></span> 問</div>
       </ons-toolbar>
   
-      <!-- オブジェクトに合わせて配列historyの画像部分が表示されるようにする -->
-      <img src="css/picture/ヘタリア_イギリス.jpg" height="200">
-  
-      <p>配列historyの「内容」部分を問題として書く</p>
-  
-      <!-- ons-inputよく分かっていないので必要になったらちゃんと見る -->
+      <img id="testPic" height="200" alt="画像">
+      <p id="testExplanation"></p>
       <p>
-        <ons-inputmodifier="underbar" placeholder="Username" float>入力欄</ons-input>
+        <ons-input id="answer" name="answer" type="number" value="" modifier="underbar" placeholder="年号を入力" autocomplete="off" float>入力欄</ons-input>
       </p>
   
       <footer>
-        <ons-button id="next-pra-btn">次の問題へ進む</ons-button>
-        <ons-button id="pra-top-btn">練習モードTOPへ戻る</ons-button>
+        <ons-button id="ans-btn" onclick="disabled = true;" disabled>解答する</ons-button>
       </footer>
   
     </ons-page>
   </ons-template>
+
+  <!-- 結果表示ページ ひな形 -->
+  <ons-template id="test-score.html">
+    <ons-page id="test-score-page">
+      <ons-toolbar>
+        <div class="center">結果</div>
+      </ons-toolbar>
+  
+      <p id="test-score"></p>
+      <p id="test-comment"></p>
+      <!-- <img id="scorePic" height="200"> -->
+  
+      <div id=scoreExplanation></div>
+  
+      <footer>
+        <ons-button id="test-top-btn">テストモードTOPへ戻る</ons-button>
+      </footer>
+  
+    </ons-page>
+  </ons-template>
+
   
 </body>
 </html>

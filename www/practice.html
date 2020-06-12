@@ -90,7 +90,7 @@
             // ☆指定された問題数を配列で抜き取る
             // ①10問
             if (questionNum === "10") {
-              question = shuffledObj(findEra).slice(0, 3);
+              question = shuffledObj(findEra).slice(0, 10);
               console.log(question);
             } 
             // ②30問
@@ -271,7 +271,7 @@
       if (page.matches('#pra-score-page')) {
         // 〇正答数表示
         const praScore = document.querySelector('#pra-score');
-        const scorePic = document.querySelector('#scorePic');
+        // const scorePic = document.querySelector('#scorePic');
         praScore.textContent = `${score} / ${question.length}`;
 
         // 〇正解数に応じたコメントをつける
@@ -279,7 +279,8 @@
         const praComment = document.getElementById('pra-comment');
         if (score / question.length === 1) {
           praComment.textContent = "Perfect!!! \n これで君もゴロ合わせは完璧だ！ \n 忘れないように復習しよう！"
-          scorePic.src = "css/picture/ヘタリア_日本.jpg";
+          // 全問正解の時だけ何もないのつまらないから画像が表示されるようにしたい
+          // scorePic.src = "css/picture/ヘタリア_日本.jpg";
         } else if (score / question.length >= 0.8) {
           praComment.textContent = "Excellent!!! \n もう少しでパーフェクト！ \n 覚えるまでやりこもう！"
         } else if (score / question.length >= 0.6) {
@@ -299,10 +300,11 @@
           var praScoreExplanation = document.createElement('p');
           var praScoreYuru = document.createElement('p');
 
-          document.getElementById('praScorePic').src = wrongElement.画像;
-          document.getElementById('praScoreNengo').textContent = wrongElement.年号;
-          document.getElementById('praScoreExplanation').textContent = wrongElement.内容;
-          document.getElementById('praScoreYuru').textContent = wrongElement.解説;
+          praScorePic.src = wrongElement.画像;
+          praScorePic.height = 200;
+          praScoreNengo.textContent = wrongElement.年号;
+          praScoreExplanation.textContent = wrongElement.内容;
+          praScoreYuru.textContent = wrongElement.解説;
 
           document.getElementById('scoreExplanation').appendChild(praScorePic);
           document.getElementById('scoreExplanation').appendChild(praScoreNengo);
@@ -401,14 +403,9 @@
   
       <p id="pra-score"></p>
       <p id="pra-comment"></p>
-      <img id="scorePic" height="200">
+      <!-- <img id="scorePic" height="200"> -->
   
-      <div id=scoreExplanation>
-        <img id="praScorePic" height="200">
-        <p id="praScoreNengo"></p>
-        <p id="praScoreExplanation"></p>
-        <p id="praScoreYuru"></p>
-      </div>
+      <div id=scoreExplanation></div>
   
       <footer>
         <ons-button id="pra-top-btn">練習モードTOPへ戻る</ons-button>

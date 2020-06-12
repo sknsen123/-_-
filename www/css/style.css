@@ -1,8 +1,7 @@
 /**/
 /* トップページ */
-.top {
-  /* 表示されませーんはーあなんやねーん */
-  background-image: url("picture/goro-top.jpeg"); 
+div.page__background {
+  background-image: url(""); 
 }
 
 .top-page {
