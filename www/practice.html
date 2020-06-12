@@ -82,7 +82,6 @@
             }
             // フィッシャー・イェーツのアルゴリズム、表示参考「https://www.nxworld.net/tips/js-array-shuffle.html」
             console.log(shuffledObj(findEra)); 
-            // ↑このshuffleObj(findEra)って何を指してるんだ？
 
             // ☆指定された問題数を配列で抜き取る
             // ①10問
@@ -195,15 +194,18 @@
         }
       }
 
+      var score = 0;
+
       // ☆ひな形に入れ込んでいく部分
       if (page.matches('#pra-page')) {
         const praPic = document.getElementById('praPic');
         const praExplanation = document.getElementById('praExplanation');
         let i = 0;
-        let score = 0;
         var wrongAnswer = [];
+        // let qNum = document.getElementById('qNum');
+
         function nextQuestion() {
-          // ↓inputの中身を消去
+          // ↓input(=入力欄)の中身を消去
           var answerForm = document.getElementById('answer');
           answerForm.value = '';
 
@@ -214,23 +216,24 @@
             return;
           }
 
-          i += 1;
+          // 第〇問のところどうにかしたくていじった ⇒ 上のscoreをvarで定義しないとうまくいかなくなる
+          i ++;
+          qNum.innerHTML = i + 1;
           praPic.src = question[i].画像;
           praExplanation.textContent = question[i].内容;
-
+          
           document.getElementById('ans-btn').disabled = true;
         }
-
-        // 第〇問を変えたい⇒インデックス番号+1でいいのでは？⇒詰んだ
-        let qNum = document.getElementById('qNum');
-        qNum.textContent = i++;
+        
+        // 第〇問の部分を変える
+        qNum.innerHTML = i + 1;
         praPic.src = question[i].画像;
         praExplanation.textContent = question[i].内容;
 
-        // 1文字以上入力しないとボタンが押せないようにする処理
+        // 2文字以上入力しないとボタンが押せないようにする処理
         document.getElementById('ans-btn').disabled = true;
         document.getElementById('answer').addEventListener('keyup', function() {
-          if (this.value.length < 1) {
+          if (this.value.length < 2) {
             document.getElementById('ans-btn').disabled = true;
           } else {
             document.getElementById('ans-btn').disabled = false;
@@ -244,7 +247,7 @@
           // ☆正誤判定
           if (String(answer) === question[i].年号) {
             // 何問正解かだけでいいので情報を保持して、結果表示のところで数字を使う
-            // できれば〇！とか×！の画像を表示したい
+            // できれば〇！とか×！の画像を表示したい⇒あとで。
 
             // ◎仏教伝来、538か552のどちらかを入れたらOKということにしないと使い物にならんこれ
             score++;
@@ -257,12 +260,27 @@
           // 1秒後に次の問題へ進める
           setTimeout(() => {
             nextQuestion();
-          }, 1000);
+          }, 500);
           
         });   
       }
 
       // ☆結果表示ページの処理
+      if (page.matches('#pra-score-page')) {
+        // 正答数表示
+        // スコープの範囲外だからダメなんだな…
+        // …ん？なんで配列questionは上のif文で定義されてるわけじゃないのに上のif文で使えるんだ？
+        // ⇒ questionをletで定義したら使えなかったので、varで定義したら使えた
+        const praScore = document.querySelector('#pra-score');
+        // うーんわからんな…
+        // varのスコープはif文の外で宣言された場合、if文の中でも使えるらしい…今日はスコープ問題がのしかかりそうだ
+        praScore.textContent = `${question.length} 問中 ${score} 問正解！`;
+
+        // 練習モードtopに戻るボタンの有効化⇒これはうまくいった。
+        page.querySelector('#pra-top-btn').onclick = function() {
+          document.querySelector('#navigator').popPage({times: 2});
+        };
+      }
 
     });
 
@@ -325,7 +343,7 @@
       </ons-toolbar>
   
       <!-- オブジェクトに合わせて配列historyの画像部分が表示されるようにする -->
-      <img id="praPic" height="200">
+      <img id="praPic" height="200" alt="画像">
   
       <p id="praExplanation"></p>
   
