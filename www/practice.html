@@ -22,6 +22,12 @@
       document.documentElement.setAttribute('onsflag-iphonex-landscape', '');
     }
 
+
+    // 学習トップに戻った時に
+    var question;
+    var score = 0;
+    var wrongAnswer = [];
+
     document.addEventListener('init', function(event) {
       var page = event.target;
 
@@ -42,6 +48,8 @@
 
         console.log(questionNum, format, range);
 
+        
+
         // 下にずらずら条件分岐を書きます
         // 長すぎるのでまとめたいー…。
         // 携帯で表示されないのはなぜ？
@@ -57,15 +65,15 @@
           // 全時代からやるなら順番に出題を選択できないようにしてランダムのみ選択できるようにしたい
           if (range === "orderBy") {
             if (questionNum === "10") {
-              var question = findEra.slice(0, 10);
+              question = findEra.slice(0, 10);
               console.log(question);
             } 
             else if (questionNum === "30") {
-              var question = findEra.slice(0, 30);
+              question = findEra.slice(0, 30);
               console.log(question);
             } 
             else if (questionNum === "50") {
-              var question = findEra.slice(0, 50);
+              question = findEra.slice(0, 50);
               console.log(question);
             }
           } 
@@ -86,17 +94,17 @@
             // ☆指定された問題数を配列で抜き取る
             // ①10問
             if (questionNum === "10") {
-              var question = shuffledObj(findEra).slice(0, 3);
+              question = shuffledObj(findEra).slice(0, 10);
               console.log(question);
             } 
             // ②30問
             else if (questionNum === "30") {
-              var question = shuffledObj(findEra).slice(0, 30);
+              question = shuffledObj(findEra).slice(0, 30);
               console.log(question);
             } 
             // ③50問
             else if (questionNum === "50") {
-              var question = shuffledObj(findEra).slice(0, 50);
+              question = shuffledObj(findEra).slice(0, 50);
               console.log(question);
             }
           }
@@ -111,7 +119,7 @@
 
           if (range === "orderBy") {
             if (questionNum === "10" || "30" || "50") {
-              var question = findEra.slice(0, 10);
+              question = findEra.slice(0, 10);
               console.log(question);
             } 
           } else if (range === "random") {
@@ -125,7 +133,7 @@
             console.log(shuffledObj(findEra)); 
 
             if (questionNum === "10" || "30" || "50") {
-              var question = shuffledObj(findEra).slice(0, 10);
+              question = shuffledObj(findEra).slice(0, 10);
               console.log(question);
             } 
           }
@@ -140,7 +148,7 @@
 
           if (range === "orderBy") {
             if (questionNum === "10" || "30" || "50") {
-              var question = findEra.slice(0, 10);
+              question = findEra.slice(0, 10);
               console.log(question);
             } 
           } else if (range === "random") {
@@ -154,7 +162,7 @@
             console.log(shuffledObj(findEra)); 
 
             if (questionNum === "10" || "30" || "50") {
-              var question = shuffledObj(findEra).slice(0, 10);
+              question = shuffledObj(findEra).slice(0, 10);
               console.log(question);
             } 
           }
@@ -169,7 +177,7 @@
 
           if (range === "orderBy") {
             if (questionNum === "10" || "30" || "50") {
-              var question = findEra.slice(0, 10);
+              question = findEra.slice(0, 10);
               console.log(question);
             } 
           } else if (range === "random") {
@@ -183,7 +191,7 @@
             console.log(shuffledObj(findEra)); 
 
             if (questionNum === "10" || "30" || "50") {
-              var question = shuffledObj(findEra).slice(0, 10);
+              question = shuffledObj(findEra).slice(0, 10);
               console.log(question);
             } 
           }
@@ -194,14 +202,11 @@
         }
       }
 
-      var score = 0;
-
       // ☆ひな形に入れ込んでいく部分
       if (page.matches('#pra-page')) {
         const praPic = document.getElementById('praPic');
         const praExplanation = document.getElementById('praExplanation');
         let i = 0;
-        var wrongAnswer = [];
         // let qNum = document.getElementById('qNum');
 
         function nextQuestion() {
@@ -249,11 +254,9 @@
             // 何問正解かだけでいいので情報を保持して、結果表示のところで数字を使う
             // できれば〇！とか×！の画像を表示したい⇒あとで。
 
-            // ◎仏教伝来、538か552のどちらかを入れたらOKということにしないと使い物にならんこれ
-            // ⇒とりあえず538を表示するようにした
             score++;
           } else {
-            // 間違えた問題を保持するため、空の配列を用意して間違えたやつを入れていく
+            // 間違えた問題を保持
             wrongAnswer.push(question[i]);
           }
           console.log(wrongAnswer, score);
@@ -267,19 +270,12 @@
       }
 
       // ☆結果表示ページの処理
-      // スコープ問題が解決したら全部うまくいくと思いたいんだけどな
-      // 使いたい配列、①question、②score、③wrongAnswer …全部すぐ上のif文で定義してる
       if (page.matches('#pra-score-page')) {
         // 〇正答数表示
-        // …ん？なんで配列questionは上のif文で定義されてるわけじゃないのに上のif文で使えるんだ？
-        // ⇒ questionをletで定義したら使えなかったので、varで定義したら使えた
         const praScore = document.querySelector('#pra-score');
-        // うーんわからんな…
-        // varのスコープはif文の外で宣言された場合、if文の中でも使えるらしい…今日はスコープ問題がのしかかりそうだ
-        praScore.textContent = `${question.length} 問中 ${score} 問正解！`;
+        praScore.textContent = `${score} / ${question.length}`;
 
         // 〇正解数に応じたコメントをつける
-        // ※上の問題が解決したらこれも解決すると思う
         // jsの除法は小数点以下までちゃんと出してくれるみたいだからこれにしました。
         const praComment = document.getElementById('pra-comment');
         if (score / question.length === 1) {
@@ -287,7 +283,7 @@
         } else if (score / question.length >= 0.8) {
           praComment.innerHTML = "Excellent!!! \n もう少しでパーフェクト！ \n 覚えるまでやりこもう！"
         } else if (score / question.length >= 0.6) {
-          praComment.innerHTML = "Great!! \n 頑張っているね！ \n 半分はできてるよ！この調子！"
+          praComment.innerHTML = "Great!! \n すごいすごい！いい調子！ \n 全問正解目指して頑張ろう！"
         } else if (score / question.length >= 0.4) {
           praComment.innerHTML = "Good! \n 少し覚えてきたね！ \n いい調子だよ、頑張ろう！"
         } else {
@@ -299,8 +295,7 @@
         var praScoreExplanation = document.getElementById('praScoreExplanation');
         var praScoreYuru = document.getElementById('praScoreYuru');
 
-        // 〇間違えた問題の解説 …オブジェクトを含む配列でうまくできるか分からないからスコープ問題が解決したらとりあえずやってみること
-        // ＊配列「wrongAnswer」ここに間違えた問題が入っている
+        // 〇間違えた問題の解説
         wrongAnswer.forEach((wrongElement) => {
           praScorePic.src = wrongElement.画像;
           praScoreNengo.textContent = wrongElement.年号;
@@ -308,9 +303,11 @@
           praScoreYuru.textContent = wrongElement.解説;
         });
 
-        // 練習モードtopに戻るボタンの有効化⇒これはうまくいった。
+        // 練習モードtopに戻るボタンの有効化
         page.querySelector('#pra-top-btn').onclick = function() {
           document.querySelector('#navigator').popPage({times: 2});
+          score = 0;
+          wrongAnswer = [];
         };
       }
 
