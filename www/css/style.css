@@ -1,36 +1,57 @@
 /**/
 /* トップページ */
-div.page__background {
-  background-image: url(""); 
-}
 
 .top-page {
   text-align: center;
-  margin-top: 50px;
+  /* margin-top: 50px; */
+  background-image: url("picture/姫路城.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
+.top-page > h1 {
+  margin : 0 auto;
+  padding: 100px 0 50px 0;
+  font-weight: bold;
+  font-family: sans-serif;
 }
 
 .top-btn {
   display: block;
   margin: 20px auto;
-  background: #0076ff;
-  color: white;
+  background: #00a3af;
+  color: #f8fbf8;
   cursor: pointer;
   border-radius: 3px;
   font-size: 17px;
-  width: 300px;
+  width: 250px;
   height: 30px;
   line-height: 30px;
   user-select: none;
   text-decoration: none;
+  padding: 8px;
+  font-family: sans-serif;
 }
 
 .komachi {
   display: block;
-  margin:30px auto;
+  margin: 30px auto 50px;
   max-width: 50%;
 }
 
 /* 学習モード */
+.st-top {
+  background-image: url("picture/市松.jpg");
+}
+
+.st-list {
+  width: 300px;
+  display: block;
+  margin: 0 auto;
+}
+
 .st-container {
   background: white;
   text-align: center;
@@ -39,6 +60,10 @@ div.page__background {
 .st-toptop > h1 {
   color: red;
   font-weight: bold;
+}
+
+footer > .goTop {
+  margin: 30px auto;
 }
 
 /* 練習モード 問題選択画面 */
