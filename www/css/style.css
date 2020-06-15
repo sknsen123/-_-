@@ -2,21 +2,33 @@
 /* トップページ */
 
 body {
-  background-color: #f8fbf8!important;
   font-family: sans-serif;
 }
 
-.top-page {
+.page__background {
+  background-color: white; 
+ }
+
+ .toolbar.toolbar--material {
+   background-color: #00a3af;
+ }
+
+.btn {
+  background-color: #00a3af;
+  color: white;
+  cursor: pointer;
+  border-radius: 3px;
+  user-select: none;
+  text-decoration: none;
+}
+
+.top {
   text-align: center;
-  margin: 30px;
-  /* background-position: center center;
-  background-repeat: no-repeat; */
-  background-size: cover;
-  /* height: 100vh; */
+  margin: 65px 30px 30px 30px;
   border: 2px solid #00a3af;
 }
 
-.top-page > h1 {
+.top > h1 {
   margin : 0 auto;
   padding: 100px 0 50px 0;
   font-weight: bold;
@@ -25,39 +37,37 @@ body {
 .top-btn {
   display: block;
   margin: 20px auto;
-  background: #00a3af;
-  color: #f8fbf8;
-  cursor: pointer;
-  border-radius: 3px;
   font-size: 17px;
   width: 250px;
   height: 30px;
   line-height: 30px;
-  user-select: none;
-  text-decoration: none;
   padding: 8px;
-  font-family: sans-serif;
 }
 
-.komachi {
+
+.titlePic {
   display: block;
-  margin: 30px auto 50px;
-  max-width: 50%;
+  margin: 10px auto 50px;
+  max-width: 90%;
 }
 
 /* 学習モード */
-.st-top {
-  background-image: url("picture/市松.jpg");
-}
+/* .study-top {
+  display: block;
+  margin: 50px auto 20px;
+  font-size: 17px;
+  width: 250px;
+  height: 30px;
+  line-height: 30px;
+  padding: 8px;
+} */
 
 .st-list {
-  width: 300px;
   display: block;
   margin: 0 auto;
 }
 
 .st-container {
-  background: white;
   text-align: center;
 }
 
@@ -66,23 +76,30 @@ body {
   font-weight: bold;
 }
 
-footer > .goTop {
-  margin: 30px auto;
+.st-btn {
+  margin-top: 30px;
+}
+
+.stuPic {
+  display: inline-block;
+  margin: 10px auto;
+  width: 100%;
 }
 
 /* 練習モード 問題選択画面 */
-.heta {
-  display: block;
-  margin: 20px auto;
-  height: 200px;
+.toolbar {
+  background-color: white;
+  padding-top: 0;
 }
 
-.gil {
-  display: block;
-  margin: 20px auto;
-  height: 200px;
+.center.toolbar__center.toolbar__title {
+  background-color: #00a3af;
+  color: white;
+  font-weight: bold;
+  text-align: center;
 }
-/* ↑これはふざけているので、完成させるときには違う画像を入れてください */
+
+.
 
 /* 演習モード */
 .practice {
@@ -96,14 +113,6 @@ footer > .goTop {
 
 .mode {
   margin-bottom: 20px;
-}
-
-.st-btn {
-  display: block;
-  margin: 0 auto;
-  background: #0076ff;
-  cursor: pointer;
-  color: white;
 }
 
 /* 成績表示ページ */
