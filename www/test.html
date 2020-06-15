@@ -167,45 +167,47 @@
   <ons-navigator id="navigator" page="test-top.html"></ons-navigator>
 
   <ons-template id="test-top.html">
-    <ons-page id="test-top-page" class="practice">
+    <ons-page id="test-top-page"  class="top">
       <ons-toolbar>
         <div class="center">テストモード</div>
       </ons-toolbar>
   
-      <img src="css/picture/ヘタリア_プロイセン.jpg" height="200">
+      <img class="titlePic" src="css/picture/テストタイトル.png">
     
-      <p>問題数</p>
-      <ons-form>
-        <ons-select id="questionNum">
-          <option value="50">50問</option>
-        </ons-select>
-      </ons-form>
-  
-      <p>出題範囲</p>
-      <ons-form>
-        <ons-select id="format">
-          <option value="all-era">全ての範囲から出題</option>
-        </ons-select>
-      </ons-form>
-  
-      <p>出題形式</p>
-      <ons-form>
-        <ons-select id="range">
-          <option value="random">ランダムに出題</option>
-        </ons-select>
-      </ons-form>
+      <div  class="question">
+        <p class="questionOption">問題数</p>
+        <ons-form>
+          <ons-select id="questionNum">
+            <option value="50">50問</option>
+          </ons-select>
+        </ons-form>
+    
+        <p class="questionOption">出題範囲</p>
+        <ons-form>
+          <ons-select id="format">
+            <option value="all-era">全ての範囲から出題</option>
+          </ons-select>
+        </ons-form>
+    
+        <p class="questionOption">出題形式</p>
+        <ons-form>
+          <ons-select id="range">
+            <option value="random">ランダムに出題</option>
+          </ons-select>
+        </ons-form>
+      </div>
   
       <footer>
-        <ons-button id="test-start">スタート</ons-button>
+        <ons-button id="test-start" class="btn">スタート</ons-button>
         <br>
-        <a href="index.html">TOPへ戻る</a>
+        <a href="index.html" class="top-btn btn">TOPへ戻る</a>
       </footer>
     </ons-page>
   </ons-template>
 
   <!-- 練習ページ（問題）ひな形 -->
   <ons-template id="test.html">
-    <ons-page id="test-page">
+    <ons-page id="test-page" class="top">
       <ons-toolbar>
         <div class="center">第 <span id=qNum></span> 問</div>
       </ons-toolbar>
@@ -225,7 +227,7 @@
 
   <!-- 結果表示ページ ひな形 -->
   <ons-template id="test-score.html">
-    <ons-page id="test-score-page">
+    <ons-page id="test-score-page" class="top">
       <ons-toolbar>
         <div class="center">結果</div>
       </ons-toolbar>

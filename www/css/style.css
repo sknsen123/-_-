@@ -56,7 +56,8 @@ body {
 .titlePic {
   display: block;
   margin: 30px auto;
-  max-width: 90%;
+  width: 100%;
+  height: auto;
 }
 
 /* 学習モード */
@@ -120,9 +121,21 @@ body {
   font-size: 20px;
 }
 
+.questionOption {
+  margin: 40px auto 10px;
+}
+
 .select-input.select-input--material {
   width: 250px;
-  text-align: center;
+  font-size: 18px;
+}
+
+#pra-start, #test-start {
+  padding: 0;
+  width: 266px;
+  height: 46px;
+  margin: 40px auto 0;
+  line-height: 46px;
   font-size: 18px;
 }
 
@@ -137,6 +150,49 @@ body {
 
 .mode {
   margin-bottom: 20px;
+}
+
+/* テストモード、演習モード解答ボタンシリーズ */
+#ans-btn, #pra-top-btn {
+  padding: 0;
+  width: 266px;
+  height: 46px;
+  margin: 20px auto 0;
+  line-height: 46px;
+  font-size: 18px;
+  background-color: #00a3af;
+}
+
+#praPic, #testPic {
+  margin: 30px 0 20px;
+}
+
+.questionPage {
+  border: 1px dashed #00a3af;
+  margin: 10px 10px 30px;
+  font-size: 18px;
+}
+.questionPage > p{
+  margin: 5px;
+}
+
+.text-input.text-input--underbar {
+  margin-top: 10px;
+}
+
+/* 結果表示 */
+#pra-score {
+  color: red;
+  font-weight: bold;
+  border-bottom: 3px double red;
+  width: 150px;
+  margin: 16.8px auto;
+}
+
+#scoreExplanation {
+  border: 2px dashed #00a3af;
+  padding: 5px;
+  margin: 0 5px;
 }
 
 /* 成績表示ページ */

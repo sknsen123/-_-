@@ -293,6 +293,7 @@
 
         
         // 〇間違えた問題の解説
+        // それぞれをボーダーで囲みたいんだけどできるかしら、明日以降やる
         wrongAnswer.forEach((wrongElement) => {
 
           var praScorePic = document.createElement('img');
@@ -338,18 +339,18 @@
     
       <!-- 「https://itsakura.com/js-selectbox」selectボックスの値の習得の仕方。役立ちそう -->
       <div class="question">
-        <p>問題数</p>
+        <p class="questionOption">問題数</p>
         <ons-form>
-          <ons-select id="questionNum" class="questionOption">
+          <ons-select id="questionNum" >
             <option value="10">10問</option>
             <option value="30">30問</option>
             <option value="50">50問</option>
           </ons-select>
         </ons-form>
     
-        <p>出題範囲</p>
+        <p class="questionOption">出題範囲</p>
         <ons-form>
-          <ons-select id="format" class="questionOption">
+          <ons-select id="format">
             <option value="all-era">全ての範囲から出題</option>
             <option value="yayoi-era">弥生時代から出題</option>
             <option value="asuka-era">飛鳥時代から出題</option>
@@ -357,9 +358,9 @@
           </ons-select>
         </ons-form>
     
-        <p>出題形式</p>
+        <p class="questionOption">出題形式</p>
         <ons-form>
-          <ons-select id="range" class="questionOption">
+          <ons-select id="range">
             <option value="orderBy">順番に出題</option>
             <option value="random">ランダムに出題</option>
           </ons-select>
@@ -367,7 +368,7 @@
       </div>
   
       <footer>
-        <ons-button id="pra-start" class="top-btn btn">スタート</ons-button>
+        <ons-button id="pra-start" class="btn">スタート</ons-button>
         <br>
         <a href="index.html" class="top-btn btn">TOPへ戻る</a>
       </footer>
@@ -376,15 +377,18 @@
 
   <!-- 練習ページ（問題）ひな形 -->
   <ons-template id="pra.html">
-    <ons-page id="pra-page">
+    <ons-page id="pra-page" class="top">
       <ons-toolbar>
         <div class="center">第 <span id=qNum></span> 問</div>
       </ons-toolbar>
   
       <img id="praPic" height="200" alt="画像">
-      <p id="praExplanation"></p>
+      <div class="questionPage">
+        <p>&lt; 問題 &gt;</p>
+        <p id="praExplanation"></p>
+      </div>
       <p>
-        <ons-input id="answer" name="answer" type="number" value="" modifier="underbar" placeholder="年号を入力" autocomplete="off" float>入力欄</ons-input>
+        <ons-input id="answer" name="answer" type="number" value="" modifier="underbar" placeholder="年号を入力" autocomplete="off" float>&lt; 入力欄 &gt;</ons-input>
       </p>
   
       <footer>
@@ -397,16 +401,18 @@
 
   <!-- 結果表示ページ ひな形 -->
   <ons-template id="pra-score.html">
-    <ons-page id="pra-score-page">
+    <ons-page id="pra-score-page" class="top">
       <ons-toolbar>
         <div class="center">結果</div>
       </ons-toolbar>
   
-      <p id="pra-score"></p>
+      <!-- 得点表示 -->
+      <h1 id="pra-score"></h1>
+      <!-- コメント表示 -->
       <p id="pra-comment"></p>
-      <!-- <img id="scorePic" height="200"> -->
   
-      <div id=scoreExplanation></div>
+      <!-- その他もろもろの解説 -->
+      <div id="scoreExplanation"></div>
   
       <footer>
         <ons-button id="pra-top-btn">練習モードTOPへ戻る</ons-button>
