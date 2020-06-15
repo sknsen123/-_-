@@ -1,21 +1,25 @@
 /**/
 /* トップページ */
 
+body {
+  background-color: #f8fbf8!important;
+  font-family: sans-serif;
+}
+
 .top-page {
   text-align: center;
-  /* margin-top: 50px; */
-  background-image: url("picture/姫路城.jpg");
-  background-position: center center;
-  background-repeat: no-repeat;
+  margin: 30px;
+  /* background-position: center center;
+  background-repeat: no-repeat; */
   background-size: cover;
-  height: 100vh;
+  /* height: 100vh; */
+  border: 2px solid #00a3af;
 }
 
 .top-page > h1 {
   margin : 0 auto;
   padding: 100px 0 50px 0;
   font-weight: bold;
-  font-family: sans-serif;
 }
 
 .top-btn {
