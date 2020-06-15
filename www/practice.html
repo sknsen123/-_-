@@ -329,46 +329,47 @@
   <ons-navigator id="navigator" page="pra-top.html"></ons-navigator>
 
   <ons-template id="pra-top.html">
-    <ons-page id="pra-top-page" class="practice">
+    <ons-page id="pra-top-page" class="top">
       <ons-toolbar>
         <div class="center">演習モード・モード選択</div>
       </ons-toolbar>
   
-      <img src="css/picture/ヘタリア_プロイセン.jpg" height="200">
+      <img class="titlePic" src="css/picture/練習タイトル.png">
     
       <!-- 「https://itsakura.com/js-selectbox」selectボックスの値の習得の仕方。役立ちそう -->
-      <p>問題数</p>
-      <p>10問のところ、暫定で3問だけにしてるよ</p>
-      <ons-form>
-        <ons-select id="questionNum">
-          <option value="10">10問</option>
-          <option value="30">30問</option>
-          <option value="50">50問</option>
-        </ons-select>
-      </ons-form>
-  
-      <p>出題範囲</p>
-      <ons-form>
-        <ons-select id="format">
-          <option value="all-era">全ての範囲から出題</option>
-          <option value="yayoi-era">弥生時代から出題</option>
-          <option value="asuka-era">飛鳥時代から出題</option>
-          <option value="nara-era">奈良時代から出題</option>
-        </ons-select>
-      </ons-form>
-  
-      <p>出題形式</p>
-      <ons-form>
-        <ons-select id="range">
-          <option value="orderBy">順番に出題</option>
-          <option value="random">ランダムに出題</option>
-        </ons-select>
-      </ons-form>
+      <div class="question">
+        <p>問題数</p>
+        <ons-form>
+          <ons-select id="questionNum" class="questionOption">
+            <option value="10">10問</option>
+            <option value="30">30問</option>
+            <option value="50">50問</option>
+          </ons-select>
+        </ons-form>
+    
+        <p>出題範囲</p>
+        <ons-form>
+          <ons-select id="format" class="questionOption">
+            <option value="all-era">全ての範囲から出題</option>
+            <option value="yayoi-era">弥生時代から出題</option>
+            <option value="asuka-era">飛鳥時代から出題</option>
+            <option value="nara-era">奈良時代から出題</option>
+          </ons-select>
+        </ons-form>
+    
+        <p>出題形式</p>
+        <ons-form>
+          <ons-select id="range" class="questionOption">
+            <option value="orderBy">順番に出題</option>
+            <option value="random">ランダムに出題</option>
+          </ons-select>
+        </ons-form>
+      </div>
   
       <footer>
-        <ons-button id="pra-start">スタート</ons-button>
+        <ons-button id="pra-start" class="top-btn btn">スタート</ons-button>
         <br>
-        <a href="index.html">TOPへ戻る</a>
+        <a href="index.html" class="top-btn btn">TOPへ戻る</a>
       </footer>
     </ons-page>
   </ons-template>

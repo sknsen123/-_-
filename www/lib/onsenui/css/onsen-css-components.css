@@ -7108,7 +7108,7 @@ ons-fab.fab--bottom__center, button.fab--bottom__center, .speed-dial.fab--bottom
   html[onsflag-iphonex-portrait] .toolbar {
     top: 0;
     box-sizing: content-box;
-    padding-top: 44px;
+    padding-top: 0;
   }
   /* Non-outermost */
   html[onsflag-iphonex-portrait] .dialog .toolbar, /* if wrapped with dialogs */
@@ -7164,7 +7164,7 @@ ons-fab.fab--bottom__center, button.fab--bottom__center, .speed-dial.fab--bottom
   /* Outermost page__content with a toolbar */
   html[onsflag-iphonex-portrait] .toolbar:not(.toolbar--cover-content)+.page__background,
   html[onsflag-iphonex-portrait] .toolbar:not(.toolbar--cover-content)+.page__background+.page__content {
-    top: 88px;
+    top: 44px;
     padding-top: 0;
   }
   /* Non-outermost */

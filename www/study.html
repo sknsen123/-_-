@@ -334,13 +334,13 @@
         
       <img class="titlePic" src="css/picture/タイトル2.png">
 
-      <div>
+      <div class="st-list">
         <ons-list-header>時代選択</ons-list-header>
         <ons-list inset>
-          <ons-list-item id="yayoi-btn list">弥生</ons-list-item>
-          <ons-list-item id="asuka-btn list">飛鳥</ons-list-item>
-          <ons-list-item id="nara-btn list">奈良</ons-list-item>
-          <ons-list-item>平安</ons-list-item>
+          <ons-list-item id="yayoi-btn" class="list">弥生</ons-list-item>
+          <ons-list-item id="asuka-btn" class="list">飛鳥</ons-list-item>
+          <ons-list-item id="nara-btn" class="list">奈良</ons-list-item>
+          <!-- <ons-list-item>平安</ons-list-item>
           <ons-list-item>鎌倉</ons-list-item>
           <ons-list-item>室町</ons-list-item>
           <ons-list-item>安土桃山</ons-list-item>
@@ -348,7 +348,7 @@
           <ons-list-item>明治</ons-list-item>
           <ons-list-item>大正</ons-list-item>
           <ons-list-item>昭和(戦前)</ons-list-item>
-          <ons-list-item>昭和(戦後)</ons-list-item>
+          <ons-list-item>昭和(戦後)</ons-list-item> -->
         </ons-list>
       </div>
   
@@ -372,8 +372,8 @@
     <ons-list inset>
       <!-- 以下の年代もそうだけどボタンによってリストが付け変わるようにしたい… -->
       <!-- クラスを使うべきなのか？ -->
-      <ons-list-item id="goro-btn1 list">57</ons-list-item>
-      <ons-list-item id="goro-btn2 list">239</ons-list-item>
+      <ons-list-item id="goro-btn1" class="list">57</ons-list-item>
+      <ons-list-item id="goro-btn2" class="list">239</ons-list-item>
     </ons-list>
   </div>
 
@@ -395,15 +395,15 @@
   <div>
     <ons-list-header>年号選択</ons-list-header>
     <ons-list>
-      <ons-list-item id="goro-btn3 list">538</ons-list-item>
-      <ons-list-item id="goro-btn4 list">593</ons-list-item>
-      <ons-list-item id="goro-btn5 list">603</ons-list-item>
-      <ons-list-item id="goro-btn6 list">604</ons-list-item>
-      <ons-list-item id="goro-btn7 list">607</ons-list-item>
-      <ons-list-item id="goro-btn8 list">645</ons-list-item>
-      <ons-list-item id="goro-btn9 list">663</ons-list-item>
-      <ons-list-item id="goro-btn10 list">697</ons-list-item>
-      <ons-list-item id="goro-btn11 list">701</ons-list-item>
+      <ons-list-item id="goro-btn3" class="list">538</ons-list-item>
+      <ons-list-item id="goro-btn4" class="list">593</ons-list-item>
+      <ons-list-item id="goro-btn5" class="list">603</ons-list-item>
+      <ons-list-item id="goro-btn6" class="list">604</ons-list-item>
+      <ons-list-item id="goro-btn7" class="list">607</ons-list-item>
+      <ons-list-item id="goro-btn8" class="list">645</ons-list-item>
+      <ons-list-item id="goro-btn9" class="list">663</ons-list-item>
+      <ons-list-item id="goro-btn10" class="list">697</ons-list-item>
+      <ons-list-item id="goro-btn11" class="list">701</ons-list-item>
     </ons-list>
   </div>
 
@@ -425,8 +425,8 @@
   <div>
     <ons-list-header>年号選択</ons-list-header>
     <ons-list>
-      <ons-list-item id="goro-btn12 list">710</ons-list-item>
-      <ons-list-item id="goro-btn13 list">743</ons-list-item>
+      <ons-list-item id="goro-btn12" class="list">710</ons-list-item>
+      <ons-list-item id="goro-btn13" class="list">743</ons-list-item>
     </ons-list>
   </div>
 
@@ -438,7 +438,7 @@
 
 <!-- 学習ページひな形 -->
 <ons-template id="study-list.html">
-  <ons-page id="study-list-page" class="st-container">
+  <ons-page id="study-list-page" class="st-container top">
     <ons-toolbar>
       <div class="center"><span id="era"></span>時代 <span id="age-num"></span></div>
     </ons-toolbar>
@@ -452,7 +452,7 @@
 
   <!-- 写真(イメージなのでちゃんと変更する！) -->
   <!-- まだ写真はデータベースに加えていないので、うまくいったらデータベースに加える…！ -->
-  <img id="stPic" height="200" alt="画像">
+  <img id="stPic" class="stPic" alt="画像">
   <!-- <img id="stPic" class="Arther heta" src="css/ヘタリア_イギリス.jpg"> -->
 
   <p>内容</p>
