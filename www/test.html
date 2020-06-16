@@ -17,7 +17,7 @@
   <script>
     // SDKを利用するためのコード(成績保持のために使う)
     var ncmb = new NCMB("ad3da03c7c0dbd222b0e7f0b7d891e9de2f79acda2dd3cdbf606a92687b13af5","e6b5108ec940908467b82b77bbc622e1c67fba5ca4ccc48202672bf769192839");
-    var APPLICATION_ID = "Gn00hca1AEsKkkLY";
+    // var APPLICATION_ID = "Gn00hca1AEsKkkLY";
 
     // Page init event
     // 演習モードとほぼ同じ
@@ -31,7 +31,7 @@
     var score = [];
     var wrongAnswer = [];
     // うまくフォーカス当たらないんだけどなんでだろう
-    document.getElementById('answer').focus();
+    // document.getElementById('answer').focus();
 
     document.addEventListener('init', function(event) {
       var page = event.target;
@@ -193,28 +193,26 @@
         var naraQuestionNum = question.filter(function(element) {
           return element.時代 === "奈良";
         });
-  
-        // 各時代の正答率をまとめた配列
-        // var correctAnswerRate = [
-        //   {"弥生": Math.round(yayoiScore.length / yayoiQuestionNum.length * 100)},
-        //   {"飛鳥": Math.round(asukaScore.length / asukaQuestionNum.length * 100)},
-        //   {"奈良": Math.round(naraScore.length / naraQuestionNum.length * 100)},
-        // ];
-        // console.log(correctAnswerRate);
 
         // 実施結果をニフクラに流し込む処理 …下のはとりあえず書いてみた的な
         var ScoreRate = ncmb.DataStore("ScoreRate");
         var scoreRate = new ScoreRate();
-  
-        scoreRate.set("弥生", Math.round(yayoiScore.length / yayoiQuestionNum.length * 100))
-        scoreRate.set("飛鳥", Math.round(asukaScore.length / asukaQuestionNum.length * 100))
-        scoreRate.set("奈良", Math.round(naraScore.length / naraQuestionNum.length * 100))
+
+        var y = Math.round(yayoiScore.length / yayoiQuestionNum.length * 100);
+        var a = Math.round(asukaScore.length / asukaQuestionNum.length * 100);
+        var n = Math.round(naraScore.length / naraQuestionNum.length * 100);
+
+        scoreRate.set("yayoi", y);
+        scoreRate.set("asuka", a);
+        scoreRate.set("nara", n);
         scoreRate.save()
-        scoreRate.then(function(scoreRate){
+        .then(function(scoreRate){
         // 保存後の処理
+          console.log("でーたほぞん");
         })
         scoreRate.catch(function(err){
         // エラー処理
+          console.log("しっぱい");
         });
 
       }
