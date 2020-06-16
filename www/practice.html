@@ -7,6 +7,7 @@
   <script src="components/loader.js"></script>
   <!-- <script src="js/app.js"></script> -->
   <script src="lib/onsenui/js/onsenui.min.js"></script>
+  <script src="components/jquery/jquery.min.js"></script>
 
   <link rel="stylesheet" href="components/loader.css">
   <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
@@ -90,7 +91,7 @@
             // ☆指定された問題数を配列で抜き取る
             // ①10問
             if (questionNum === "10") {
-              question = shuffledObj(findEra).slice(0, 3);
+              question = shuffledObj(findEra).slice(0, 10);
               console.log(question);
             } 
             // ②30問
@@ -252,10 +253,16 @@
           if (String(answer) === question[i].年号) {
             // 何問正解かだけでいいので情報を保持して、結果表示のところで数字を使う
             // できれば〇！とか×！の画像を表示したい⇒あとで。
-
+            // $('#judgePic').on('click', function() {
+            //   $('#judgePic').show("css/picture/丸.png");
+            // })
+            // const judgePic = document.getElementById('judgePic');
+            // judgePic.src = ("css/picture/丸.png");
             score++;
           } else {
             // 間違えた問題を保持
+            // const judgePic = document.getElementById('judgePic');
+            // judgePic.src = ("css/picture/バツ.png");
             wrongAnswer.push(question[i]);
           }
           console.log(wrongAnswer, score);
@@ -265,7 +272,8 @@
             nextQuestion();
           }, 500);
           
-        });   
+        });
+
       }
 
       // ☆結果表示ページの処理
@@ -357,7 +365,7 @@
         <p class="questionOption">出題範囲</p>
         <ons-form>
           <ons-select id="format">
-            <option value="all-era">全ての範囲から出題</option>
+            <option value="all-era">全ての時代から出題</option>
             <option value="yayoi-era">弥生時代から出題</option>
             <option value="asuka-era">飛鳥時代から出題</option>
             <option value="nara-era">奈良時代から出題</option>
@@ -393,6 +401,9 @@
         <p>&lt; 問題 &gt;</p>
         <p id="praExplanation"></p>
       </div>
+
+      <img id="judgePic" height="200">
+
       <p>
         <ons-input id="answer" name="answer" type="number" value="" modifier="underbar" placeholder="年号を入力" autocomplete="off" float>&lt; 入力欄 &gt;</ons-input>
       </p>

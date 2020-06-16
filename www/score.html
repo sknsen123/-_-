@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
   <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
   <script src="components/loader.js"></script>
-  <script src="js/app.js"></script>
+  <!-- <script src="js/app.js"></script> -->
   <script src="lib/onsenui/js/onsenui.min.js"></script>
 
   <link rel="stylesheet" href="components/loader.css">
@@ -17,12 +17,25 @@
     // Page init event
     // SDKを利用するためのコード(成績保持のために使う)
     var ncmb = new NCMB("ad3da03c7c0dbd222b0e7f0b7d891e9de2f79acda2dd3cdbf606a92687b13af5","e6b5108ec940908467b82b77bbc622e1c67fba5ca4ccc48202672bf769192839");
-    var APPLICATION_ID = "Gn00hca1AEsKkkLY";
+    // var APPLICATION_ID = "Gn00hca1AEsKkkLY";
 
     document.addEventListener('init', function(event) {
       var page = event.target;
 
-      
+      var scoreRate = ncmb.DataStore("ScoreRate");
+      scoreRate.limit(50)
+              .fetchAll()
+              .then(function(results){
+                  // 結果取得後の処理を書いていく。⇒配列に代入する？
+                  // 全部抜き出す？⇒最新5つ分とすべての平均の％を表示
+                  for (var i = 0; i < results.length; i++) {
+                  var resultAll = results[i];
+                  console.log(resultAll);
+                  }
+                })
+              .catch(function(err){
+                  console.log("テスト結果を取得できませんでした");
+                });
 
       if (page.matches('#first-page')) {
 
@@ -58,7 +71,9 @@
   </script>
 </head>
 <body>
-  <ons-page>
+  <ons-navigator id="navigator" page="score-top.html"></ons-navigator>
+
+  <ons-page id="score-top-page"  class="top">
 
     <ons-toolbar>
       <div class="center">今までの成績</div>
@@ -82,6 +97,9 @@
         </tr>
         <tr>
           <td>飛鳥</td>
+        </tr>
+        <tr>
+          <td>奈良</td>
         </tr>
       </tbody>
     </table>
