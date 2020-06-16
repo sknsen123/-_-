@@ -14,7 +14,11 @@
   <link rel="stylesheet" href="css/style.css">
   <script src="css/history.js"></script>
 
-  <script type="module">
+  <script>
+    // SDKを利用するためのコード(成績保持のために使う)
+    var ncmb = new NCMB("ad3da03c7c0dbd222b0e7f0b7d891e9de2f79acda2dd3cdbf606a92687b13af5","e6b5108ec940908467b82b77bbc622e1c67fba5ca4ccc48202672bf769192839");
+    var APPLICATION_ID = "Gn00hca1AEsKkkLY";
+
     // Page init event
     // 演習モードとほぼ同じ
 
@@ -24,8 +28,10 @@
     }
 
     var question;
-    var score = 0;
+    var score = [];
     var wrongAnswer = [];
+    // うまくフォーカス当たらないんだけどなんでだろう
+    document.getElementById('answer').focus();
 
     document.addEventListener('init', function(event) {
       var page = event.target;
@@ -57,7 +63,9 @@
               return findEra;
             }
             if (questionNum === "50") {
-              question = shuffledObj(findEra).slice(0, 3);
+              question = shuffledObj(findEra).slice(0, 50);
+
+              console.log(question);
             }
           }
         }
@@ -102,7 +110,7 @@
           const answer = document.getElementById("answer").value;
 
           if (String(answer) === question[i].年号) {
-            score++;
+            score.push(question[i]);
           } else {
             wrongAnswer.push(question[i]);
           }
@@ -116,17 +124,17 @@
       if (page.matches('#test-score-page')) {
         const testScore = document.querySelector('#test-score');
         // const scorePic = document.querySelector('#scorePic');
-        testScore.textContent = `${score} / ${question.length}`;
+        testScore.textContent = `${score.length} / ${question.length}`;
         
         const testComment = document.getElementById('test-comment');
-        if (score / question.length === 1) {
+        if (score.length / question.length === 1) {
           testComment.textContent = "Perfect!!! \n これで君もゴロ合わせは完璧だ！ \n 忘れないように復習しよう！"
-          // scorePic.src = "css/picture/ヘタリア_日本.jpg";
-        } else if (score / question.length >= 0.8) {
+          // scorePic.src = "css/picture/入れたい画像…何にしようか";
+        } else if (score.length / question.length >= 0.8) {
           testComment.textContent = "Excellent!!! \n もう少しでパーフェクト！ \n 覚えるまでやりこもう！"
-        } else if (score / question.length >= 0.6) {
+        } else if (score.length / question.length >= 0.6) {
           testComment.textContent = "Great!! \n すごいすごい！いい調子！ \n 全問正解目指して頑張ろう！"
-        } else if (score / question.length >= 0.4) {
+        } else if (score.length / question.length >= 0.4) {
           testComment.textContent = "Good! \n 少し覚えてきたね！ \n いい調子だよ、頑張ろう！"
         } else {
           testComment.textContent = "OK! \n まだまだこれからだね！ \n 少しずつ頑張っていこう！"
@@ -134,29 +142,81 @@
 
         wrongAnswer.forEach((wrongElement) => {
 
-          var testScorePic = document.createElement('img');
-          var testScoreNengo = document.createElement('p');
-          var testScoreExplanation = document.createElement('p');
-          var testScoreYuru = document.createElement('p');
+          var praScoreDiv = document.createElement('div');
+          praScoreDiv.classList.add("praScore-Z")
+          var praScorePic = document.createElement('img');
+          var praScoreNengo = document.createElement('p');
+          var praScoreExplanation = document.createElement('p');
+          var praScoregoro = document.createElement('p');
+          var praScoreYuru = document.createElement('p');
 
-          testScorePic.src = wrongElement.画像;
-          testScorePic.height = 200;
-          testScoreNengo.textContent = wrongElement.年号;
-          testScoreExplanation.textContent = wrongElement.内容;
-          testScoreYuru.textContent = wrongElement.解説;
+          praScorePic.src = wrongElement.画像;
+          praScorePic.height = 200;
+          praScoreNengo.textContent = wrongElement.年号;
+          praScoreExplanation.textContent = wrongElement.内容;
+          praScoregoro.textContent = wrongElement.ゴロ合わせ;
+          praScoreYuru.textContent = wrongElement.解説;
 
-          document.getElementById('scoreExplanation').appendChild(testScorePic);
-          document.getElementById('scoreExplanation').appendChild(testScoreNengo);
-          document.getElementById('scoreExplanation').appendChild(testScoreExplanation);
-          document.getElementById('scoreExplanation').appendChild(testScoreYuru);
+          document.getElementById('scoreExplanation').appendChild(praScoreDiv);
+          praScoreDiv.appendChild(praScorePic);
+          praScoreDiv.appendChild(praScoreNengo);
+          praScoreDiv.appendChild(praScoreExplanation);
+          praScoreDiv.appendChild(praScoregoro);
+          praScoreDiv.appendChild(praScoreYuru);
 
         });
 
         page.querySelector('#test-top-btn').onclick = function() {
           document.querySelector('#navigator').popPage({times: 2});
-          score = 0;
+          score = [];
           wrongAnswer = [];
         };
+
+        // 結果をニフクラに流し込む準備
+        // 余裕があったら実施日も足したいけど後回し
+        var yayoiScore = score.filter(function(element) {
+          return element.時代 === "弥生";
+        });
+        var asukaScore = score.filter(function(element) {
+          return element.時代 === "飛鳥";
+        });
+        var naraScore = score.filter(function(element) {
+          return element.時代 === "奈良";
+        });
+  
+        var yayoiQuestionNum = question.filter(function(element) {
+          return element.時代 === "弥生";
+        });
+        var asukaQuestionNum = question.filter(function(element) {
+          return element.時代 === "飛鳥";
+        });
+        var naraQuestionNum = question.filter(function(element) {
+          return element.時代 === "奈良";
+        });
+  
+        // 各時代の正答率をまとめた配列
+        // var correctAnswerRate = [
+        //   {"弥生": Math.round(yayoiScore.length / yayoiQuestionNum.length * 100)},
+        //   {"飛鳥": Math.round(asukaScore.length / asukaQuestionNum.length * 100)},
+        //   {"奈良": Math.round(naraScore.length / naraQuestionNum.length * 100)},
+        // ];
+        // console.log(correctAnswerRate);
+
+        // 実施結果をニフクラに流し込む処理 …下のはとりあえず書いてみた的な
+        var ScoreRate = ncmb.DataStore("ScoreRate");
+        var scoreRate = new ScoreRate();
+  
+        scoreRate.set("弥生", Math.round(yayoiScore.length / yayoiQuestionNum.length * 100))
+        scoreRate.set("飛鳥", Math.round(asukaScore.length / asukaQuestionNum.length * 100))
+        scoreRate.set("奈良", Math.round(naraScore.length / naraQuestionNum.length * 100))
+        scoreRate.save()
+        scoreRate.then(function(scoreRate){
+        // 保存後の処理
+        })
+        scoreRate.catch(function(err){
+        // エラー処理
+        });
+
       }
 
     });

@@ -152,8 +152,8 @@ body {
   margin-bottom: 20px;
 }
 
-/* テストモード、演習モード解答ボタンシリーズ */
-#ans-btn, #pra-top-btn {
+/* テストモード・演習モード解答ボタンシリーズ */
+#ans-btn, #pra-top-btn, #test-top-btn {
   padding: 0;
   width: 266px;
   height: 46px;
@@ -189,10 +189,10 @@ body {
   margin: 16.8px auto;
 }
 
-#scoreExplanation {
+.praScore-Z {
   border: 2px dashed #00a3af;
   padding: 5px;
-  margin: 0 5px;
+  margin: 0 8px 10px;
 }
 
 /* 成績表示ページ */

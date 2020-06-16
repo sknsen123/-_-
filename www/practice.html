@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="css/style.css">
   <script src="css/history.js"></script>
 
-  <script type="module">
+  <script>
     // Page init event
 
     if (ons.platform.isIPhoneX()) {
@@ -90,7 +90,7 @@
             // ☆指定された問題数を配列で抜き取る
             // ①10問
             if (questionNum === "10") {
-              question = shuffledObj(findEra).slice(0, 10);
+              question = shuffledObj(findEra).slice(0, 3);
               console.log(question);
             } 
             // ②30問
@@ -205,6 +205,7 @@
         const praPic = document.getElementById('praPic');
         const praExplanation = document.getElementById('praExplanation');
         let i = 0;
+        document.getElementById('answer').focus();
         // let qNum = document.getElementById('qNum');
 
         function nextQuestion() {
@@ -291,26 +292,31 @@
           praComment.textContent = "OK! \n まだまだこれからだね！ \n 少しずつ頑張っていこう！"
         }
 
-        
         // 〇間違えた問題の解説
         // それぞれをボーダーで囲みたいんだけどできるかしら、明日以降やる
         wrongAnswer.forEach((wrongElement) => {
 
+          var praScoreDiv = document.createElement('div');
+          praScoreDiv.classList.add("praScore-Z")
           var praScorePic = document.createElement('img');
           var praScoreNengo = document.createElement('p');
           var praScoreExplanation = document.createElement('p');
+          var praScoregoro = document.createElement('p');
           var praScoreYuru = document.createElement('p');
 
           praScorePic.src = wrongElement.画像;
           praScorePic.height = 200;
           praScoreNengo.textContent = wrongElement.年号;
           praScoreExplanation.textContent = wrongElement.内容;
+          praScoregoro.textContent = wrongElement.ゴロ合わせ;
           praScoreYuru.textContent = wrongElement.解説;
 
-          document.getElementById('scoreExplanation').appendChild(praScorePic);
-          document.getElementById('scoreExplanation').appendChild(praScoreNengo);
-          document.getElementById('scoreExplanation').appendChild(praScoreExplanation);
-          document.getElementById('scoreExplanation').appendChild(praScoreYuru);
+          document.getElementById('scoreExplanation').appendChild(praScoreDiv);
+          praScoreDiv.appendChild(praScorePic);
+          praScoreDiv.appendChild(praScoreNengo);
+          praScoreDiv.appendChild(praScoreExplanation);
+          praScoreDiv.appendChild(praScoregoro);
+          praScoreDiv.appendChild(praScoreYuru);
 
         });
 
