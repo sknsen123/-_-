@@ -22,46 +22,63 @@
     document.addEventListener('init', function(event) {
       var page = event.target;
 
-      var scoreRate = ncmb.DataStore("ScoreRate");
-      scoreRate.limit(50)
-              .fetchAll()
-              .then(function(results){
-                  // 結果取得後の処理を書いていく。⇒配列に代入する？
-                  // 全部抜き出す？⇒最新5つ分とすべての平均の％を表示
-                  for (var i = 0; i < results.length; i++) {
-                  var resultAll = results[i];
-                  console.log(resultAll);
-                  }
-                })
-              .catch(function(err){
-                  console.log("テスト結果を取得できませんでした");
-                });
+      var resultYayoi = [];
+      var resultAsuka = [];
+      var resultNara = [];
 
-      if (page.matches('#first-page')) {
+      if (page.matches('#score-top-page')) {
+          var scoreRate = ncmb.DataStore("ScoreRate");
+          scoreRate.limit(50)
+          .fetchAll()
+          .then(function(results){
+            // 結果取得後の処理を書いていく。⇒配列に代入する？
+            // 全部抜き出す？⇒最新5つ分とすべての平均の％を表示
+            for (var i = 0; i < results.length; i++) {
+            resultYayoi.push(results[i].yayoi);
+            resultAsuka.push(results[i].asuka);
+            resultNara.push(results[i].nara);
+            // var resultDate = results[i].createDate;
+            // console.log(resultYayoi, resultAsuka, resultNara);
+            }
+          })
+          .catch(function(err){
+            console.log("テスト結果を取得できませんでした");
+          });
 
-        page.querySelector('#push-button').onclick = function() {
-          document.querySelector('#navigator').pushPage('page2.html');
-        };
+          console.log(resultYayoi, resultAsuka, resultNara);
+          // ここまでは予定通りに出る
 
-      } else if (page.matches('#second-page')) {
+          var allYayoiScore = 0;
+          for (let i=0; i<resultYayoi.length; i++) {
+            allYayoiScore += resultYayoi[i];
+          }
+          console.log(allYayoiScore);
+          // ↑出ない。
+          var yayoiAvg = Math.round(allYayoiScore / resultYayoi.length);
 
-        page.querySelector('#pop-button').onclick = function() {
-          document.querySelector('#navigator').popPage();
-        };
-        page.querySelector('#push-button').onclick = function() {
-          document.querySelector('#navigator').pushPage('page3.html');
-        };
+          var allAsukaScore = 0;
+          for (let i=0; i<resultAsuka.length; i++) {
+            allAsukaScore += resultAsuka[i];
+          }
+          var asukaAvg = Math.round(allAsukaScore / resultAsuka.length);
 
-      } else if (page.matches('#third-page')) {
+          var allNaraScore = 0;
+          for (let i=0; i<resultNara.length; i++) {
+            allNaraScore += resultNara[i];
+          }
+          var naraAvg = Math.round(allNaraScore / resultNara.length);
+          console.log(naraAvg);
+      
+        document.getElementById('yayoiAvg').textContent = yayoiAvg;
+        document.getElementById('asukaAvg').textContent = asukaAvg;
+        document.getElementById('naraAvg').textContent = naraAvg;
 
-        page.querySelector('#pop-button').onclick = function() {
-          document.querySelector('#navigator').popPage();
-        };
-        page.querySelector('#push-button').onclick = function() {
-          document.querySelector('#navigator').pushPage('page1.html');
-        };
+        document.getElementById('yayoiList').textContent = resultYayoi;
+        document.getElementById('asukaList').textContent = resultAsuka;
+        document.getElementById('naraList').textContent = resultNara;
 
       }
+
     });
 
     if (ons.platform.isIPhoneX()) {
@@ -73,41 +90,62 @@
 <body>
   <ons-navigator id="navigator" page="score-top.html"></ons-navigator>
 
-  <ons-page id="score-top-page"  class="top">
-
-    <ons-toolbar>
-      <div class="center">今までの成績</div>
-    </ons-toolbar>
-
-    <table width="200">
-      <thead>
-        <tr>
-          <th></th>
-          <th>1</th>
-          <th>2</th>
-          <th>3</th>
-          <th>4</th>
-          <th>5</th>
-          <th>累計</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>弥生</td>
-        </tr>
-        <tr>
-          <td>飛鳥</td>
-        </tr>
-        <tr>
-          <td>奈良</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <footer>
-      <a href="index.html">TOPへ戻る</a>
-    </footer>
-  </ons-page>
+  <ons-template id="score-top.html">
+    <ons-page id="score-top-page"  class="top">
+  
+      <ons-toolbar>
+        <div class="center">今までの成績</div>
+      </ons-toolbar>
+  
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>1</th>
+            <th>2</th>
+            <th>3</th>
+            <th>4</th>
+            <th>5</th>
+            <th>累計</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>弥生</th>
+            <td id="test1"></td>
+            <td id="test2"></td>
+            <td id="test3"></td>
+            <td id="test4"></td>
+            <td id="test5"></td>
+            <td><span id="yayoiAvg"></span>%</td>
+          </tr>
+          <tr>
+            <th>飛鳥</th>
+            <td id="test1"></td>
+            <td id="test2"></td>
+            <td id="test3"></td>
+            <td id="test4"></td>
+            <td id="test5"></td>
+            <td><span id="asukaAvg"></span>%</td>
+          </tr>
+          <tr>
+            <th>奈良</th>
+            <td id="test1"></td>
+            <td id="test2"></td>
+            <td id="test3"></td>
+            <td id="test4"></td>
+            <td id="test5"></td>
+            <td><span id="naraAvg"></span>%</td>
+          </tr>
+        </tbody>
+      </table>
+  
+      <footer>
+        <a href="index.html">TOPへ戻る</a>
+      </footer>
+    </ons-page>
+  
+   </ons-template>
   
   <!-- <ons-navigator id="navigator" page="page1.html"></ons-navigator>
 

@@ -209,8 +209,25 @@ body {
 
 /* 成績表示ページ */
 table {
-  display: block;
-  margin: 0 auto;
+  margin: 10px auto;
+  width: 90%;
+  border-collapse: collapse;
+  border: solid 1px black;
+}
+
+table th {
+  /* width: 30%; */
+  padding: 20px 10px;
+  border-collapse: collapse;
+  border: solid 1px black;
+}
+
+table td {
+  /* width: 70%; */
+  padding: 20px 10px;
+  border-collapse: collapse;
+  border: solid 1px black;
+  background: rgba(0, 156, 158, 0.5); 
 }
 
 /* フッター */

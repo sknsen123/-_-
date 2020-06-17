@@ -30,8 +30,6 @@
     var question;
     var score = [];
     var wrongAnswer = [];
-    // うまくフォーカス当たらないんだけどなんでだろう
-    // document.getElementById('answer').focus();
 
     document.addEventListener('init', function(event) {
       var page = event.target;
@@ -210,7 +208,7 @@
         // 保存後の処理
           console.log("でーたほぞん");
         })
-        scoreRate.catch(function(err){
+        .catch(function(err){
         // エラー処理
           console.log("しっぱい");
         });
