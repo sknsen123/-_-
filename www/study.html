@@ -443,8 +443,6 @@
       <div class="center"><span id="era"></span>時代 <span id="age-num"></span></div>
     </ons-toolbar>
 
-    <!-- 語呂合わせ -->
-    <!-- どんな仕組みで表示するかイメージが分からないな… -->
   <div class="st-toptop">
     <h1 id="nengo"></h1>
     <p id="goro"></p>
@@ -452,18 +450,21 @@
 
   <img id="stPic" class="stPic" alt="画像">
 
-  <p>内容</p>
-  <p id="explanation"></p>
-  <p>ゆるい解説</p>
-  <p id="yuru"></p>
+  <div class="st-explanation">
+    <p>&lt; 内容 &gt;</p>
+    <p id="explanation"></p>
+  </div>
+  <div class="st-yuruExplanation">
+    <p>&lt; ゆるい解説 &gt;</p>
+    <p id="yuru"></p>
+  </div>
 
-  <!-- これで前の年号に飛びたい -->
   <footer>
-    <ons-button id="prev-btn" class="btn">前へ</ons-button>
-    <!-- 時代一覧に飛ぶ -->
-    <ons-button id="st-top-btn" class="btn">学習モードTOPへ戻る</ons-button>
-    <!-- これで次の年号に飛びたい -->
-    <ons-button id="next-btn" class="btn">次へ</ons-button>
+    <div class="st-toptop-btn">
+      <ons-button id="prev-btn" class="btn">前へ</ons-button>
+      <ons-button id="st-top-btn" class="btn">学習モードTOPへ戻る</ons-button>
+      <ons-button id="next-btn" class="btn">次へ</ons-button>
+    </div>
   </footer>
 
 </ons-page>

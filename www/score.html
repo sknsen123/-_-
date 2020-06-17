@@ -39,34 +39,33 @@
             resultNara.push(results[i].nara);
             // var resultDate = results[i].createDate;
             }
+
+            var allYayoiScore = 0;
+            for (let i=0; i<resultYayoi.length; i++) {
+              allYayoiScore += resultYayoi[i];
+            }
+            console.log(allYayoiScore);
+            
+            var yayoiAvg = Math.round(allYayoiScore / resultYayoi.length);
+  
+            var allAsukaScore = 0;
+            for (let i=0; i<resultAsuka.length; i++) {
+              allAsukaScore += resultAsuka[i];
+            }
+            var asukaAvg = Math.round(allAsukaScore / resultAsuka.length);
+  
+            var allNaraScore = 0;
+            for (let i=0; i<resultNara.length; i++) {
+              allNaraScore += resultNara[i];
+            }
+            var naraAvg = Math.round(allNaraScore / resultNara.length);
+            console.log(naraAvg);
+
           })
           .catch(function(err){
             console.log("テスト結果を取得できませんでした");
           });
 
-          console.log(resultYayoi, resultAsuka, resultNara);
-          // ここまでは予定通りに出る
-
-          var allYayoiScore = 0;
-          for (let i=0; i<resultYayoi.length; i++) {
-            allYayoiScore += resultYayoi[i];
-          }
-          console.log(allYayoiScore);
-          // ↑出ない。
-          var yayoiAvg = Math.round(allYayoiScore / resultYayoi.length);
-
-          var allAsukaScore = 0;
-          for (let i=0; i<resultAsuka.length; i++) {
-            allAsukaScore += resultAsuka[i];
-          }
-          var asukaAvg = Math.round(allAsukaScore / resultAsuka.length);
-
-          var allNaraScore = 0;
-          for (let i=0; i<resultNara.length; i++) {
-            allNaraScore += resultNara[i];
-          }
-          var naraAvg = Math.round(allNaraScore / resultNara.length);
-          console.log(naraAvg);
       
         document.getElementById('yayoiAvg').textContent = yayoiAvg;
         document.getElementById('asukaAvg').textContent = asukaAvg;
