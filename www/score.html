@@ -38,14 +38,14 @@
             resultAsuka.push(results[i].asuka);
             resultNara.push(results[i].nara);
             // var resultDate = results[i].createDate;
-            // console.log(resultYayoi, resultAsuka, resultNara);
+            console.log(resultYayoi, resultAsuka, resultNara);
             }
           })
           .catch(function(err){
             console.log("テスト結果を取得できませんでした");
           });
 
-          console.log(resultYayoi, resultAsuka, resultNara);
+          // console.log(resultYayoi, resultAsuka, resultNara);
           // ここまでは予定通りに出る
 
           var allYayoiScore = 0;
@@ -94,7 +94,7 @@
     <ons-page id="score-top-page"  class="top">
   
       <ons-toolbar>
-        <div class="center">今までの成績</div>
+        <div class="center">これまでの成績</div>
       </ons-toolbar>
   
       <table>
@@ -146,54 +146,5 @@
     </ons-page>
   
    </ons-template>
-  
-  <!-- <ons-navigator id="navigator" page="page1.html"></ons-navigator>
-
-  <ons-template id="page1.html">
-    <ons-page id="first-page">
-      <ons-toolbar>
-        <div class="center"><span>成績にとんだぜ！飛鳥</span>時代 第<span>３</span>問</div>
-      </ons-toolbar>
-
-      <div class="content">
-        <p>問題！問題！問題！問題！問題！問題！問題！問題！</p>
-        <img class="komachi" src="css/小野小町.png">
-        <p>解説！解説！解説！解説！解説！解説！解説！解説！</p>
-        <p>ゆるゆる！ゆるゆる！ゆるゆる！ゆるゆる！ゆるゆる！</p>
-        <div class="btn">
-          <ons-button id="push-button">1</ons-button>
-        </div>    
-    </ons-page>
-  </ons-template>
-
-  <ons-template id="page2.html">
-    <ons-page id="second-page">
-      <ons-toolbar>
-        <div class="left"><ons-back-button>Page 1</ons-back-button></div>
-        <div class="center">Page 2</div>
-      </ons-toolbar>
-
-      <div class="content" style="text-align: center">
-        <p>This is the second page.</p>
-        <ons-button id="pop-button">Pop page</ons-button>
-        <ons-button id="push-button">Push page</ons-button>
-      </div>
-    </ons-page>
-  </ons-template>
-
-  <ons-template id="page3.html">
-    <ons-page id="third-page">
-      <ons-toolbar>
-        <div class="left"><ons-back-button>Page 2</ons-back-button></div>
-        <div class="center">Page 3</div>
-      </ons-toolbar>
-
-      <div class="content" style="text-align: center">
-        <p>あれあれあれやで</p>
-        <ons-button id="pop-button">Pop page</ons-button>
-        <ons-button id="push-button">Topへ</ons-button>
-      </div>
-    </ons-page>
-  </ons-template> -->
 </body>
 </html>
