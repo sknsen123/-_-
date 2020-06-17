@@ -83,6 +83,14 @@ body {
 .st-toptop > h1 {
   color: red;
   font-weight: bold;
+  font-size: 36px;
+  margin-bottom: 5px;
+}
+
+.st-toptop > p {
+  font-size: 18px;
+  margin: 0 auto 10px;
+  
 }
 
 .st-btn {
@@ -220,6 +228,7 @@ table th {
   padding: 20px 10px;
   border-collapse: collapse;
   border: solid 1px black;
+  background: rgba(0, 156, 158, 0.5); 
 }
 
 table td {
@@ -227,7 +236,6 @@ table td {
   padding: 20px 10px;
   border-collapse: collapse;
   border: solid 1px black;
-  background: rgba(0, 156, 158, 0.5); 
 }
 
 /* フッター */
