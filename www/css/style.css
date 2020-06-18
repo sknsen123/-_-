@@ -206,7 +206,19 @@ body {
   margin-top: 10px;
 }
 
-#judgePic {
+#modal-judge {
+  width: 50%;
+  margin: 1.5em auto 0;
+  padding: 10px 20px;
+  border: 2px solid #00a3af;
+  background: #fff;
+  z-index: 100;
+  display: none;
+  position: fixed;
+  height: 200px;
+}
+
+/* #judgePic {
   display: none;
   background: none;
   width: 100%;
@@ -216,7 +228,7 @@ body {
 	left: 0;
 	z-index: 100;
 	overflow: hidden;
-}
+} */
 
 /* 結果表示 */
 #pra-score {

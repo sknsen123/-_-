@@ -47,7 +47,6 @@
         const format = document.getElementById("format").value;
         const range = document.getElementById("range").value;
 
-        console.log(questionNum, format, range);
 
         // 配列のフィルタリング参考「http://lifelog.main.jp/wordpress/?p=2557」
         // ☆全問題から出題
@@ -55,23 +54,18 @@
           const findEra = history.filter(function(element) {
             return element.時代;
           });
-          console.log(findEra); 
-          // ↑これで取得してるのは配列
           
           // 全時代からやるなら順番に出題を選択できないようにしてランダムのみ選択できるようにしたい
           // ⇒これは余裕があったらやるやつ
           if (range === "orderBy") {
             if (questionNum === "10") {
               question = findEra.slice(0, 10);
-              console.log(question);
             } 
             else if (questionNum === "30") {
               question = findEra.slice(0, 30);
-              console.log(question);
             } 
             else if (questionNum === "50") {
               question = findEra.slice(0, 50);
-              console.log(question);
             }
           } 
           
@@ -86,23 +80,19 @@
               return findEra;
             }
             // フィッシャー・イェーツのアルゴリズム、表示参考「https://www.nxworld.net/tips/js-array-shuffle.html」
-            console.log(shuffledObj(findEra)); 
 
             // ☆指定された問題数を配列で抜き取る
             // ①10問
             if (questionNum === "10") {
               question = shuffledObj(findEra).slice(0, 10);
-              console.log(question);
             } 
             // ②30問
             else if (questionNum === "30") {
               question = shuffledObj(findEra).slice(0, 30);
-              console.log(question);
             } 
             // ③50問
             else if (questionNum === "50") {
               question = shuffledObj(findEra).slice(0, 50);
-              console.log(question);
             }
           }
         }
@@ -112,12 +102,10 @@
           const findEra = history.filter(function(element) {
             return element.時代 === "弥生";
           });
-          console.log(findEra);
 
           if (range === "orderBy") {
             if (questionNum === "10" || "30" || "50") {
               question = findEra.slice(0, 10);
-              console.log(question);
             } 
           } else if (range === "random") {
             const shuffledObj = ([...findEra]) => {
@@ -127,11 +115,9 @@
               }
               return findEra;
             }
-            console.log(shuffledObj(findEra)); 
 
             if (questionNum === "10" || "30" || "50") {
               question = shuffledObj(findEra).slice(0, 10);
-              console.log(question);
             } 
           }
         } 
@@ -141,12 +127,10 @@
           const findEra = history.filter(function(element) {
             return element.時代 === "飛鳥";
           });
-          console.log(findEra);
 
           if (range === "orderBy") {
             if (questionNum === "10" || "30" || "50") {
               question = findEra.slice(0, 10);
-              console.log(question);
             } 
           } else if (range === "random") {
             const shuffledObj = ([...findEra]) => {
@@ -156,11 +140,9 @@
               }
               return findEra;
             }
-            console.log(shuffledObj(findEra)); 
 
             if (questionNum === "10" || "30" || "50") {
               question = shuffledObj(findEra).slice(0, 10);
-              console.log(question);
             } 
           }
         } 
@@ -170,12 +152,10 @@
           const findEra = history.filter(function(element) {
             return element.時代 === "奈良";
           });
-          console.log(findEra);
 
           if (range === "orderBy") {
             if (questionNum === "10" || "30" || "50") {
               question = findEra.slice(0, 10);
-              console.log(question);
             } 
           } else if (range === "random") {
             const shuffledObj = ([...findEra]) => {
@@ -185,11 +165,9 @@
               }
               return findEra;
             }
-            console.log(shuffledObj(findEra)); 
 
             if (questionNum === "10" || "30" || "50") {
               question = shuffledObj(findEra).slice(0, 10);
-              console.log(question);
             } 
           }
         }
@@ -210,6 +188,10 @@
         // let qNum = document.getElementById('qNum');
 
         function nextQuestion() {
+          // モーダルを閉じる処理を入れたい
+          $(function(){
+            $('#judgePic').remove();
+          });
           // ↓input(=入力欄)の中身を消去
           var answerForm = document.getElementById('answer');
           answerForm.value = '';
@@ -252,24 +234,26 @@
           // ☆正誤判定
           if (String(answer) === question[i].年号) {
             // 何問正解かだけでいいので情報を保持して、結果表示のところで数字を使う
-            // できれば〇！とか×！の画像を表示したい⇒あとで。
-            // $('#judgePic').on('click', function() {
-            //   $('#judgePic').show("css/picture/丸.png");
-            // })
-            // const judgePic = document.getElementById('judgePic');
-            // judgePic.src = ("css/picture/丸.png");
+            $(function(){
+              $('#ans-btn').on('click', function() {
+                $('#judgePic').show("css/picture/丸.png");
+              });
+            });
             score++;
           } else {
             // 間違えた問題を保持
-            // const judgePic = document.getElementById('judgePic');
-            // judgePic.src = ("css/picture/バツ.png");
+            $(function(){
+              $('#ans-btn').on('click', function() {
+                $('#judgePic').show("css/picture/バツ.png");
+              });
+            });
             wrongAnswer.push(question[i]);
           }
-          console.log(wrongAnswer, score);
           
           // 1秒後に次の問題へ進める
           setTimeout(() => {
             nextQuestion();
+            // この関数の中に上のモーダルを閉じる処理を入れる
           }, 500);
           
         });
@@ -402,7 +386,10 @@
         <p id="praExplanation"></p>
       </div>
 
-      <img id="judgePic" height="200">
+      <div id="modal-jadge">
+        <p>だみい</p>
+        <img id="judgePic">
+      </div>
 
       <p>
         <ons-input id="answer" name="answer" type="number" value="" modifier="underbar" placeholder="年号を入力" autocomplete="off" float>&lt; 入力欄 &gt;</ons-input>
