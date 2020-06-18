@@ -17,65 +17,67 @@
     // Page init event
     // SDKを利用するためのコード(成績保持のために使う)
     var ncmb = new NCMB("ad3da03c7c0dbd222b0e7f0b7d891e9de2f79acda2dd3cdbf606a92687b13af5","e6b5108ec940908467b82b77bbc622e1c67fba5ca4ccc48202672bf769192839");
-    // var APPLICATION_ID = "Gn00hca1AEsKkkLY";
+    var APPLICATION_ID = "Gn00hca1AEsKkkLY";
 
     document.addEventListener('init', function(event) {
       var page = event.target;
 
-      var resultYayoi = [];
+      var resultYayoi = [50, 100, 100, 100, 100, 50, 0, 0, 0, 0, 0];
       var resultAsuka = [];
       var resultNara = [];
 
       if (page.matches('#score-top-page')) {
-          var scoreRate = ncmb.DataStore("ScoreRate");
-          scoreRate.limit(50)
-          .fetchAll()
-          .then(function(results){
-            // 結果取得後の処理を書いていく。⇒配列に代入する？
-            // 全部抜き出す？⇒最新5つ分とすべての平均の％を表示
-            for (var i = 0; i < results.length; i++) {
-            resultYayoi.push(results[i].yayoi);
-            resultAsuka.push(results[i].asuka);
-            resultNara.push(results[i].nara);
-            // var resultDate = results[i].createDate;
-            }
+        var scoreRate = ncmb.DataStore("ScoreRate");
+        scoreRate.limit(50)
+        .fetchAll()
+        .then(function(results){
+          // 結果取得後の処理を書いていく。⇒配列に代入する？
+          // 全部抜き出す？⇒最新5つ分とすべての平均の％を表示
+          for (var i = 0; i < results.length; i++) {
+          resultYayoi.push(results[i].yayoi);
+          resultAsuka.push(results[i].asuka);
+          resultNara.push(results[i].nara);
+          // var resultDate = results[i].createDate;
+          }
 
-            var allYayoiScore = 0;
-            for (let i=0; i<resultYayoi.length; i++) {
-              allYayoiScore += resultYayoi[i];
-            }
-            console.log(allYayoiScore);
-            
-            var yayoiAvg = Math.round(allYayoiScore / resultYayoi.length);
-  
-            var allAsukaScore = 0;
-            for (let i=0; i<resultAsuka.length; i++) {
-              allAsukaScore += resultAsuka[i];
-            }
-            var asukaAvg = Math.round(allAsukaScore / resultAsuka.length);
-  
-            var allNaraScore = 0;
-            for (let i=0; i<resultNara.length; i++) {
-              allNaraScore += resultNara[i];
-            }
-            var naraAvg = Math.round(allNaraScore / resultNara.length);
-            console.log(naraAvg);
+          // 各時代の平均正答率を出す処理↓
+          var allYayoiScore = 0;
+          for (let i=0; i<resultYayoi.length; i++) {
+            allYayoiScore += resultYayoi[i];
+          }
+          console.log(allYayoiScore);
+          
+          var yayoiAvg = Math.round(allYayoiScore / resultYayoi.length);
 
-          })
-          .catch(function(err){
-            console.log("テスト結果を取得できませんでした");
-          });
+          var allAsukaScore = 0;
+          for (let i=0; i<resultAsuka.length; i++) {
+            allAsukaScore += resultAsuka[i];
+          }
+          var asukaAvg = Math.round(allAsukaScore / resultAsuka.length);
 
-      
+          var allNaraScore = 0;
+          for (let i=0; i<resultNara.length; i++) {
+            allNaraScore += resultNara[i];
+          }
+          var naraAvg = Math.round(allNaraScore / resultNara.length);
+          console.log(naraAvg);
+
+        })
+        .catch(function(err){
+          console.log("テスト結果を取得できませんでした");
+        });
+
         document.getElementById('yayoiAvg').textContent = yayoiAvg;
         document.getElementById('asukaAvg').textContent = asukaAvg;
         document.getElementById('naraAvg').textContent = naraAvg;
+        // 各時代の平均正答率を出す処理↑
 
-        // document.getElementById('yayoiList').textContent = resultYayoi;
-        // document.getElementById('asukaList').textContent = resultAsuka;
-        // document.getElementById('naraList').textContent = resultNara;
+        // 各時代の実施回ごとの正答率を出す処理↓
+        var resultYayoiOrder = resultYayoi.slice(-5);
+        console.log(resultYayoiOrder);
+        // 各時代の実施回ごとの正答率を出す処理↑
 
-      }
+      } 
 
     });
 
@@ -110,29 +112,29 @@
         <tbody>
           <tr>
             <th>弥生</th>
-            <td id="test1"></td>
-            <td id="test2"></td>
-            <td id="test3"></td>
-            <td id="test4"></td>
-            <td id="test5"></td>
+            <td id="Y1"></td>
+            <td id="Y2"></td>
+            <td id="Y3"></td>
+            <td id="Y4"></td>
+            <td id="Y5"></td>
             <td><span id="yayoiAvg"></span>%</td>
           </tr>
           <tr>
             <th>飛鳥</th>
-            <td id="test1"></td>
-            <td id="test2"></td>
-            <td id="test3"></td>
-            <td id="test4"></td>
-            <td id="test5"></td>
+            <td id="A1"></td>
+            <td id="A2"></td>
+            <td id="A3"></td>
+            <td id="A4"></td>
+            <td id="A5"></td>
             <td><span id="asukaAvg"></span>%</td>
           </tr>
           <tr>
             <th>奈良</th>
-            <td id="test1"></td>
-            <td id="test2"></td>
-            <td id="test3"></td>
-            <td id="test4"></td>
-            <td id="test5"></td>
+            <td id="N1"></td>
+            <td id="N2"></td>
+            <td id="N3"></td>
+            <td id="N4"></td>
+            <td id="N5"></td>
             <td><span id="naraAvg"></span>%</td>
           </tr>
         </tbody>
