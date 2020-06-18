@@ -22,7 +22,7 @@
     document.addEventListener('init', function(event) {
       var page = event.target;
 
-      var resultYayoi = [50, 100, 100, 100, 100, 50, 0, 0, 0, 0, 0];
+      var resultYayoi = [];
       var resultAsuka = [];
       var resultNara = [];
 
@@ -62,20 +62,43 @@
           var naraAvg = Math.round(allNaraScore / resultNara.length);
           console.log(naraAvg);
 
+          document.getElementById('yAvg').textContent = yayoiAvg;
+          document.getElementById('aAvg').textContent = asukaAvg;
+          document.getElementById('nAvg').textContent = naraAvg;
+          // 各時代の平均正答率を出す処理↑
+
+          // 各時代の実施回ごとの正答率を出す処理↓
+          // 正答率の配列の最新5個を出力
+          var resultYayoiOrder = resultYayoi.slice(-5);
+          var resultAsukaOrder = resultAsuka.slice(-5);
+          var resultNaraOrder = resultNara.slice(-5);
+
+          // 弥生時代を表に入れる
+          document.getElementById('Y1').textContent = resultYayoiOrder[4];
+          document.getElementById('Y2').textContent = resultYayoiOrder[3];
+          document.getElementById('Y3').textContent = resultYayoiOrder[2];
+          document.getElementById('Y4').textContent = resultYayoiOrder[1];
+          document.getElementById('Y5').textContent = resultYayoiOrder[0];
+          
+          // 飛鳥時代を表に入れる
+          document.getElementById('A1').textContent = resultAsukaOrder[4];
+          document.getElementById('A2').textContent = resultAsukaOrder[3];
+          document.getElementById('A3').textContent = resultAsukaOrder[2];
+          document.getElementById('A4').textContent = resultAsukaOrder[1];
+          document.getElementById('A5').textContent = resultAsukaOrder[0];
+
+          // 奈良時代を表に入れる
+          document.getElementById('N1').textContent = resultNaraOrder[4];
+          document.getElementById('N2').textContent = resultNaraOrder[3];
+          document.getElementById('N3').textContent = resultNaraOrder[2];
+          document.getElementById('N4').textContent = resultNaraOrder[1];
+          document.getElementById('N5').textContent = resultNaraOrder[0];
+          // 各時代の実施回ごとの正答率を出す処理↑
         })
         .catch(function(err){
           console.log("テスト結果を取得できませんでした");
         });
 
-        document.getElementById('yAvg').textContent = yayoiAvg;
-        document.getElementById('aAvg').textContent = asukaAvg;
-        document.getElementById('nAvg').textContent = naraAvg;
-        // 各時代の平均正答率を出す処理↑
-
-        // 各時代の実施回ごとの正答率を出す処理↓
-        var resultYayoiOrder = resultYayoi.slice(-5);
-        console.log(resultYayoiOrder);
-        // 各時代の実施回ごとの正答率を出す処理↑
 
       } 
 
@@ -112,29 +135,29 @@
         <tbody>
           <tr>
             <th>弥生</th>
-            <td id="Y1"></td>
-            <td id="Y2"></td>
-            <td id="Y3"></td>
-            <td id="Y4"></td>
-            <td id="Y5"></td>
+            <td><span id="Y1"></span>%</td>
+            <td><span id="Y2"></span>%</td>
+            <td><span id="Y3"></span>%</td>
+            <td><span id="Y4"></span>%</td>
+            <td><span id="Y5"></span>%</td>
             <td><span id="yAvg"></span>%</td>
           </tr>
           <tr>
             <th>飛鳥</th>
-            <td id="A1"></td>
-            <td id="A2"></td>
-            <td id="A3"></td>
-            <td id="A4"></td>
-            <td id="A5"></td>
+            <td><span id="A1"></span>%</td>
+            <td><span id="A2"></span>%</td>
+            <td><span id="A3"></span>%</td>
+            <td><span id="A4"></span>%</td>
+            <td><span id="A5"></span>%</td>
             <td><span id="aAvg"></span>%</td>
           </tr>
           <tr>
             <th>奈良</th>
-            <td id="N1"></td>
-            <td id="N2"></td>
-            <td id="N3"></td>
-            <td id="N4"></td>
-            <td id="N5"></td>
+            <td><span id="N1"></span>%</td>
+            <td><span id="N2"></span>%</td>
+            <td><span id="N3"></span>%</td>
+            <td><span id="N4"></span>%</td>
+            <td><span id="N5"></span>%</td>
             <td><span id="nAvg"></span>%</td>
           </tr>
         </tbody>
