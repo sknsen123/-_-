@@ -7,7 +7,8 @@
   <script src="components/loader.js"></script>
   <!-- <script src="js/app.js"></script> -->
   <script src="lib/onsenui/js/onsenui.min.js"></script>
-  <script src="components/jquery/jquery.min.js"></script>
+  <!-- <script src="components/jquery/jquery.min.js"></script> -->
+  <script src="components/jquery/dist/jquery.min.js"></script>
 
   <link rel="stylesheet" href="components/loader.css">
   <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
@@ -233,22 +234,22 @@
           
           // ☆正誤判定
           if (String(answer) === question[i].年号) {
-            // 何問正解かだけでいいので情報を保持して、結果表示のところで数字を使う
             document.getElementById('judgePic').src = "css/picture/丸.png";
             $(function(){
               $('#ans-btn').on('click', function() {
-                $('#judgePic').show("css/picture/丸.png");
+                $('#judgePic').show();
               });
             });
+            // 何問正解かだけでいいので情報を保持して、結果表示のところで数字を使う
             score++;
           } else {
-            // 間違えた問題を保持
             document.getElementById('judgePic').src = "css/picture/バツ.png";
             $(function(){
               $('#ans-btn').on('click', function() {
-                $('#judgePic').show("css/picture/バツ.png");
+                $('#judgePic').show();
               });
             });
+            // 間違えた問題を保持
             wrongAnswer.push(question[i]);
           }
           
@@ -341,7 +342,7 @@
       <div class="question">
         <p class="questionOption">問題数</p>
         <ons-form>
-          <ons-select id="questionNum" >
+          <ons-select id="questionNum" modifier="underbar">
             <option value="10">10問</option>
             <option value="30">30問</option>
             <option value="50">50問</option>
@@ -350,7 +351,7 @@
     
         <p class="questionOption">出題範囲</p>
         <ons-form>
-          <ons-select id="format">
+          <ons-select id="format" modifier="underbar">
             <option value="all-era">全ての時代から出題</option>
             <option value="yayoi-era">弥生時代から出題</option>
             <option value="asuka-era">飛鳥時代から出題</option>
@@ -360,7 +361,7 @@
     
         <p class="questionOption">出題形式</p>
         <ons-form>
-          <ons-select id="range">
+          <ons-select id="range" modifier="underbar">
             <option value="orderBy">順番に出題</option>
             <option value="random">ランダムに出題</option>
           </ons-select>

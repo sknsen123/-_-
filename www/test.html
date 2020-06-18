@@ -7,6 +7,8 @@
   <script src="components/loader.js"></script>
   <!-- <script src="js/app.js"></script> -->
   <script src="lib/onsenui/js/onsenui.min.js"></script>
+  <script src="components/ncmb/ncmb.min.js"></script>
+  <script src="components/jquery/dist/jquery.min.js"></script>
 
   <link rel="stylesheet" href="components/loader.css">
   <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
@@ -62,8 +64,6 @@
             }
             if (questionNum === "50") {
               question = shuffledObj(findEra).slice(0, 50);
-
-              console.log(question);
             }
           }
         }
@@ -75,6 +75,9 @@
         let i = 0;
 
         function nextQuestion() {
+          $(function(){
+            $('#judgePic').hide();
+          });
           var answerForm = document.getElementById('answer');
           answerForm.value = '';
 
@@ -108,8 +111,20 @@
           const answer = document.getElementById("answer").value;
 
           if (String(answer) === question[i].年号) {
+            document.getElementById('judgePic').src = "css/picture/丸.png";
+            $(function(){
+              $('#ans-btn').on('click', function() {
+                $('#judgePic').show();
+              });
+            });
             score.push(question[i]);
           } else {
+            document.getElementById('judgePic').src = "css/picture/バツ.png";
+            $(function(){
+              $('#ans-btn').on('click', function() {
+                $('#judgePic').show();
+              });
+            });
             wrongAnswer.push(question[i]);
           }
           setTimeout(() => {
@@ -192,7 +207,7 @@
           return element.時代 === "奈良";
         });
 
-        // 実施結果をニフクラに流し込む処理 …下のはとりあえず書いてみた的な
+        // 実施結果をニフクラに流し込む処理
         var ScoreRate = ncmb.DataStore("ScoreRate");
         var scoreRate = new ScoreRate();
 
@@ -205,12 +220,10 @@
         scoreRate.set("nara", n);
         scoreRate.save()
         .then(function(scoreRate){
-        // 保存後の処理
-          console.log("でーたほぞん");
         })
         .catch(function(err){
         // エラー処理
-          console.log("しっぱい");
+          console.log("データの保存に失敗しました");
         });
 
       }
@@ -233,21 +246,21 @@
       <div  class="question">
         <p class="questionOption">問題数</p>
         <ons-form>
-          <ons-select id="questionNum">
+          <ons-select id="questionNum" modifier="underbar">
             <option value="50">50問</option>
           </ons-select>
         </ons-form>
     
         <p class="questionOption">出題範囲</p>
         <ons-form>
-          <ons-select id="format">
+          <ons-select id="format" modifier="underbar">
             <option value="all-era">全ての時代から出題</option>
           </ons-select>
         </ons-form>
     
         <p class="questionOption">出題形式</p>
         <ons-form>
-          <ons-select id="range">
+          <ons-select id="range" modifier="underbar">
             <option value="random">ランダムに出題</option>
           </ons-select>
         </ons-form>
@@ -269,7 +282,15 @@
       </ons-toolbar>
   
       <img id="testPic" height="200" alt="画像">
-      <p id="testExplanation"></p>
+      <div class="questionPage">
+        <p>&lt; 問題 &gt;</p>
+        <p id="testExplanation"></p>
+      </div>
+
+      <div id="modal-jadge">
+        <img id="judgePic">
+      </div>
+
       <p>
         <ons-input id="answer" name="answer" type="number" value="" modifier="underbar" placeholder="年号を入力" autocomplete="off" float>入力欄</ons-input>
       </p>
