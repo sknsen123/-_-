@@ -271,20 +271,21 @@
         praScore.textContent = `${score} / ${question.length}`;
 
         // 〇正解数に応じたコメントをつける
-        // jsの除法は小数点以下までちゃんと出してくれるみたいだからこれにしました。改行させたい。調べる。
         const praComment = document.getElementById('pra-comment');
         if (score / question.length === 1) {
-          praComment.textContent = "Perfect!!! \n これで君もゴロ合わせは完璧だ！ \n 忘れないように復習しよう！"
-          // 全問正解の時だけ何もないのつまらないから画像が表示されるようにしたい
-          // scorePic.src = "css/picture/ヘタリア_日本.jpg";
+          praComment.innerHTML = "Perfect!!! <br> これで君もゴロ合わせは完璧だ！ <br> 忘れないように復習しよう！"
+          // document.getElementById('passPic').src = "css/picture/pass.png";
+          //   $(function(){
+          //     $('#passPic').show();
+          //   });
         } else if (score / question.length >= 0.8) {
-          praComment.textContent = "Excellent!!! \n もう少しでパーフェクト！ \n 覚えるまでやりこもう！"
+          praComment.innerHTML = "Excellent!!! <br> もう少しでパーフェクト！ <br> 覚えるまでやりこもう！"
         } else if (score / question.length >= 0.6) {
-          praComment.textContent = "Great!! \n すごいすごい！いい調子！ \n 全問正解目指して頑張ろう！"
+          praComment.innerHTML = "Great!! <br> すごいすごい！良い調子！ <br> 全問正解目指して頑張ろう！"
         } else if (score / question.length >= 0.4) {
-          praComment.textContent = "Good! \n 少し覚えてきたね！ \n いい調子だよ、頑張ろう！"
+          praComment.innerHTML = "Good! <br> 少し覚えてきたね！ <br> いい調子だよ、頑張ろう！"
         } else {
-          praComment.textContent = "OK! \n まだまだこれからだね！ \n 少しずつ頑張っていこう！"
+          praComment.innerHTML = "OK! <br> まだまだこれからだね！ <br> 少しずつ頑張っていこう！"
         }
 
         // 〇間違えた問題の解説
@@ -301,9 +302,9 @@
 
           praScorePic.src = wrongElement.画像;
           praScorePic.height = 200;
-          praScoreNengo.textContent = wrongElement.年号;
-          praScoreExplanation.textContent = wrongElement.内容;
-          praScoregoro.textContent = wrongElement.ゴロ合わせ;
+          praScoreNengo.textContent = "年号 ： " + wrongElement.年号;
+          praScoreExplanation.textContent = "内容 ： " + wrongElement.内容;
+          praScoregoro.textContent = "ゴロ合わせ ： " + wrongElement.ゴロ合わせ;
           praScoreYuru.textContent = wrongElement.解説;
 
           document.getElementById('scoreExplanation').appendChild(praScoreDiv);
@@ -416,6 +417,12 @@
       <h1 id="pra-score"></h1>
       <!-- コメント表示 -->
       <p id="pra-comment"></p>
+
+      <!-- 満点の時だけ表示したい -->
+      <!-- できれば、にしようか。 -->
+      <div id="modal-pass">
+        <img id="passPic">
+      </div>
   
       <!-- その他もろもろの解説 -->
       <div id="scoreExplanation"></div>

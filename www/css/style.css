@@ -206,13 +206,13 @@ body {
   margin-top: 10px;
 }
 
-#modal-judge {
+#modal-judge, #modal-pass {
   margin: 1.5em auto 0;
   padding: 10px 20px;
   display: none;
 }
 
-#judgePic {
+#judgePic, #passPic {
   /* display: none; */
   background: none;
   width: 70%;
@@ -238,27 +238,41 @@ body {
   margin: 0 8px 10px;
 }
 
+#pra-comment {
+  font-size: 18px;
+}
+
 /* 成績表示ページ */
 table {
-  margin: 30px auto;
+  margin: 15px 15px 30px;
   width: 90%;
   border-collapse: collapse;
-  border: solid 1px black;
+  border: solid 1px white;
+}
+
+.scoreTable p {
+  margin-bottom: 0;
 }
 
 table th {
   /* width: 30%; */
-  padding: 20px 10px;
+  color: white;
+  padding: 5px 5px;
   border-collapse: collapse;
-  border: solid 1px black;
-  background: rgba(0, 156, 158, 0.5); 
+  border: solid 1px white;
+  background: rgba(0, 156, 158, 0.95); 
+  font-weight: normal;
+  width: 40px;
 }
 
 table td {
   /* width: 70%; */
-  padding: 20px 10px;
+  padding: 10px 5px;
   border-collapse: collapse;
-  border: solid 1px black;
+  border: solid 1px white;
+  background: rgba(0, 156, 158, 0.15); 
+  width: 30px;
+  height: 90px;
 }
 
 /* フッター */

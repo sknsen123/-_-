@@ -140,17 +140,17 @@
         testScore.textContent = `${score.length} / ${question.length}`;
         
         const testComment = document.getElementById('test-comment');
-        if (score.length / question.length === 1) {
-          testComment.textContent = "Perfect!!! \n これで君もゴロ合わせは完璧だ！ \n 忘れないように復習しよう！"
+        if (score / question.length === 1) {
+          praComment.innerHTML = "Perfect!!! <br> これで君もゴロ合わせは完璧だ！ <br> 忘れないように復習しよう！"
           // scorePic.src = "css/picture/入れたい画像…何にしようか";
-        } else if (score.length / question.length >= 0.8) {
-          testComment.textContent = "Excellent!!! \n もう少しでパーフェクト！ \n 覚えるまでやりこもう！"
-        } else if (score.length / question.length >= 0.6) {
-          testComment.textContent = "Great!! \n すごいすごい！いい調子！ \n 全問正解目指して頑張ろう！"
-        } else if (score.length / question.length >= 0.4) {
-          testComment.textContent = "Good! \n 少し覚えてきたね！ \n いい調子だよ、頑張ろう！"
+        } else if (score / question.length >= 0.8) {
+          praComment.innerHTML = "Excellent!!! <br> もう少しでパーフェクト！ <br> 覚えるまでやりこもう！"
+        } else if (score / question.length >= 0.6) {
+          praComment.innerHTML = "Great!! <br> すごいすごい！良い調子！ <br> 全問正解目指して頑張ろう！"
+        } else if (score / question.length >= 0.4) {
+          praComment.innerHTML = "Good! <br> 少し覚えてきたね！ <br> いい調子だよ、頑張ろう！"
         } else {
-          testComment.textContent = "OK! \n まだまだこれからだね！ \n 少しずつ頑張っていこう！"
+          praComment.innerHTML = "OK! <br> まだまだこれからだね！ <br> 少しずつ頑張っていこう！"
         }
 
         wrongAnswer.forEach((wrongElement) => {
