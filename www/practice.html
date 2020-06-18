@@ -190,7 +190,7 @@
         function nextQuestion() {
           // モーダルを閉じる処理を入れたい
           $(function(){
-            $('#judgePic').remove();
+            $('#judgePic').hide();
           });
           // ↓input(=入力欄)の中身を消去
           var answerForm = document.getElementById('answer');
@@ -234,6 +234,7 @@
           // ☆正誤判定
           if (String(answer) === question[i].年号) {
             // 何問正解かだけでいいので情報を保持して、結果表示のところで数字を使う
+            document.getElementById('judgePic').src = "css/picture/丸.png";
             $(function(){
               $('#ans-btn').on('click', function() {
                 $('#judgePic').show("css/picture/丸.png");
@@ -242,6 +243,7 @@
             score++;
           } else {
             // 間違えた問題を保持
+            document.getElementById('judgePic').src = "css/picture/バツ.png";
             $(function(){
               $('#ans-btn').on('click', function() {
                 $('#judgePic').show("css/picture/バツ.png");
@@ -387,7 +389,6 @@
       </div>
 
       <div id="modal-jadge">
-        <p>だみい</p>
         <img id="judgePic">
       </div>
 
