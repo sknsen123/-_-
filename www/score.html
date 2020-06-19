@@ -26,6 +26,15 @@
       var resultYayoi = [];
       var resultAsuka = [];
       var resultNara = [];
+      var resultHeian = [];
+      var resultKamakura = [];
+      var resultMuromachi = [];
+      var resultMomoyama = [];
+      var resultEdo = [];
+      var resultMeiji = [];
+      var resultTaisyo = [];
+      var resultSenzen = [];
+      var resultSengo = [];
 
       if (page.matches('#score-top-page')) {
         var scoreRate = ncmb.DataStore("ScoreRate");
@@ -38,15 +47,24 @@
           resultYayoi.push(results[i].yayoi);
           resultAsuka.push(results[i].asuka);
           resultNara.push(results[i].nara);
+          resultHeian.push(results[i].heian);
+          resultKamakura.push(results[i].kamakura);
+          resultMuromachi.push(results[i].muromachi);
+          resultMomoyama.push(results[i].momoyama);
+          resultEdo.push(results[i].edo);
+          resultMeiji.push(results[i].meiji);
+          resultTaisyo.push(results[i].taisyo);
+          resultSenzen.push(results[i].senzen);
+          resultSengo.push(results[i].sengo);
           // var resultDate = results[i].createDate;
           }
 
           // 各時代の平均正答率を出す処理↓
+          // 関数にできないのかね？変数だからうまくいかなかったんだけど
           var allYayoiScore = 0;
           for (let i=0; i<resultYayoi.length; i++) {
             allYayoiScore += resultYayoi[i];
           }
-          
           var yayoiAvg = Math.round(allYayoiScore / resultYayoi.length);
 
           var allAsukaScore = 0;
@@ -61,9 +79,72 @@
           }
           var naraAvg = Math.round(allNaraScore / resultNara.length);
 
+          var allHeianScore = 0;
+          for (let i=0; i<resultHeian.length; i++) {
+            allHeianScore += resultHeian[i];
+          }
+          var heianAvg = Math.round(allHeianScore / resultHeian.length);
+
+          var allKamakuraScore = 0;
+          for (let i=0; i<resultKamakura.length; i++) {
+            allKamakuraScore += resultKamakura[i];
+          }
+          var kamakuraAvg = Math.round(allKamakuraScore / resultKamakura.length);
+
+          var allMuromachiScore = 0;
+          for (let i=0; i<resultMuromachi.length; i++) {
+            allMuromachiScore += resultMuromachi[i];
+          }
+          var muromachiAvg = Math.round(allMuromachiScore / resultMuromachi.length);
+
+          var allMomoyamaScore = 0;
+          for (let i=0; i<resultMomoyama.length; i++) {
+            allMomoyamaScore += resultMomoyama[i];
+          }
+          var momoyamaAvg = Math.round(allMomoyamaScore / resultMomoyama.length);
+
+          var allEdoScore = 0;
+          for (let i=0; i<resultEdo.length; i++) {
+            allEdoScore += resultEdo[i];
+          }
+          var edoAvg = Math.round(allEdoScore / resultEdo.length);
+
+          var allMeijiScore = 0;
+          for (let i=0; i<resultMeiji.length; i++) {
+            allMeijiScore += resultMeiji[i];
+          }
+          var meijiAvg = Math.round(allMeijiScore / resultMeiji.length);
+
+          var allTaisyoScore = 0;
+          for (let i=0; i<resultTaisyo.length; i++) {
+            allTaisyoScore += resultTaisyo[i];
+          }
+          var taisyoAvg = Math.round(allTaisyoScore / resultTaisyo.length);
+
+          var allSenzenScore = 0;
+          for (let i=0; i<resultSenzen.length; i++) {
+            allSenzenScore += resultSenzen[i];
+          }
+          var senzenAvg = Math.round(allSenzenScore / resultSenzen.length);
+
+          var allSengoScore = 0;
+          for (let i=0; i<resultSengo.length; i++) {
+            allSengoScore += resultSengo[i];
+          }
+          var sengoAvg = Math.round(allSengoScore / resultSengo.length);
+
           document.getElementById('yAvg').textContent = yayoiAvg;
           document.getElementById('aAvg').textContent = asukaAvg;
           document.getElementById('nAvg').textContent = naraAvg;
+          document.getElementById('hAvg').textContent = heianAvg;
+          document.getElementById('kAvg').textContent = kamakuraAvg;
+          document.getElementById('mrAvg').textContent = muromachiAvg;
+          document.getElementById('amAvg').textContent = momoyamaAvg;
+          document.getElementById('eAvg').textContent = edoAvg;
+          document.getElementById('mjAvg').textContent = meijiAvg;
+          document.getElementById('tAvg').textContent = taisyoAvg;
+          document.getElementById('sbAvg').textContent = senzenAvg;
+          document.getElementById('saAvg').textContent = sengoAvg;
           // 各時代の平均正答率を出す処理↑
 
           // 各時代の実施回ごとの正答率を出す処理↓
@@ -71,6 +152,15 @@
           var resultYayoiOrder = resultYayoi.slice(-5);
           var resultAsukaOrder = resultAsuka.slice(-5);
           var resultNaraOrder = resultNara.slice(-5);
+          var resultHeianOrder = resultHeian.slice(-5);
+          var resultKamakuraOrder = resultKamakura.slice(-5);
+          var resultMuromachiOrder = resultMuromachi.slice(-5);
+          var resultMomoyamaOrder = resultMomoyama.slice(-5);
+          var resultEdoOrder = resultEdo.slice(-5);
+          var resultMeijiOrder = resultMeiji.slice(-5);
+          var resultTaisyoOrder = resultTaisyo.slice(-5);
+          var resultSenzenOrder = resultSenzen.slice(-5);
+          var resultSengoOrder = resultSengo.slice(-5);
 
           // 弥生時代を表に入れる
           document.getElementById('Y1').textContent = resultYayoiOrder[4];
@@ -92,6 +182,69 @@
           document.getElementById('N3').textContent = resultNaraOrder[2];
           document.getElementById('N4').textContent = resultNaraOrder[1];
           document.getElementById('N5').textContent = resultNaraOrder[0];
+
+          // 平安時代を表に入れる
+          document.getElementById('H1').textContent = resultHeianOrder[4];
+          document.getElementById('H2').textContent = resultHeianOrder[3];
+          document.getElementById('H3').textContent = resultHeianOrder[2];
+          document.getElementById('H4').textContent = resultHeianOrder[1];
+          document.getElementById('H5').textContent = resultHeianOrder[0];
+
+          // 鎌倉時代を表に入れる
+          document.getElementById('K1').textContent = resultKamakuraOrder[4];
+          document.getElementById('K2').textContent = resultKamakuraOrder[3];
+          document.getElementById('K3').textContent = resultKamakuraOrder[2];
+          document.getElementById('K4').textContent = resultKamakuraOrder[1];
+          document.getElementById('K5').textContent = resultKamakuraOrder[0];
+
+          // 室町時代を表に入れる
+          document.getElementById('MR1').textContent = resultMuromachiOrder[4];
+          document.getElementById('MR2').textContent = resultMuromachiOrder[3];
+          document.getElementById('MR3').textContent = resultMuromachiOrder[2];
+          document.getElementById('MR4').textContent = resultMuromachiOrder[1];
+          document.getElementById('MR5').textContent = resultMuromachiOrder[0];
+
+          // 安土桃山時代を表に入れる
+          document.getElementById('AM1').textContent = resultMomoyamaOrder[4];
+          document.getElementById('AM2').textContent = resultMomoyamaOrder[3];
+          document.getElementById('AM3').textContent = resultMomoyamaOrder[2];
+          document.getElementById('AM4').textContent = resultMomoyamaOrder[1];
+          document.getElementById('AM5').textContent = resultMomoyamaOrder[0];
+
+          // 江戸時代を表に入れる
+          document.getElementById('E1').textContent = resultEdoOrder[4];
+          document.getElementById('E2').textContent = resultEdoOrder[3];
+          document.getElementById('E3').textContent = resultEdoOrder[2];
+          document.getElementById('E4').textContent = resultEdoOrder[1];
+          document.getElementById('E5').textContent = resultEdoOrder[0];
+
+          // 明治時代を表に入れる
+          document.getElementById('MJ1').textContent = resultMeijiOrder[4];
+          document.getElementById('MJ2').textContent = resultMeijiOrder[3];
+          document.getElementById('MJ3').textContent = resultMeijiOrder[2];
+          document.getElementById('MJ4').textContent = resultMeijiOrder[1];
+          document.getElementById('MJ5').textContent = resultMeijiOrder[0];
+
+          // 大正時代を表に入れる
+          document.getElementById('T1').textContent = resultTaisyoOrder[4];
+          document.getElementById('T2').textContent = resultTaisyoOrder[3];
+          document.getElementById('T3').textContent = resultTaisyoOrder[2];
+          document.getElementById('T4').textContent = resultTaisyoOrder[1];
+          document.getElementById('T5').textContent = resultTaisyoOrder[0];
+
+          // 昭和{戦前)時代を表に入れる
+          document.getElementById('SB1').textContent = resultSenzenOrder[4];
+          document.getElementById('SB2').textContent = resultSenzenOrder[3];
+          document.getElementById('SB3').textContent = resultSenzenOrder[2];
+          document.getElementById('SB4').textContent = resultSenzenOrder[1];
+          document.getElementById('SB5').textContent = resultSenzenOrder[0];
+
+          // 昭和{戦後)時代を表に入れる
+          document.getElementById('SA1').textContent = resultSengoOrder[4];
+          document.getElementById('SA2').textContent = resultSengoOrder[3];
+          document.getElementById('SA3').textContent = resultSengoOrder[2];
+          document.getElementById('SA4').textContent = resultSengoOrder[1];
+          document.getElementById('SA5').textContent = resultSengoOrder[0];
           // 各時代の実施回ごとの正答率を出す処理↑
         })
         .catch(function(err){

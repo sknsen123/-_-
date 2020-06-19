@@ -48,129 +48,91 @@
         const range = document.getElementById("range").value;
 
 
+        // 出題まとめる
         // 配列のフィルタリング参考「http://lifelog.main.jp/wordpress/?p=2557」
-        // ☆全問題から出題
-        if (format === "all-era") {
-          const findEra = history.filter(function(element) {
-            return element.時代;
-          });
-          
-          // 全時代からやるなら順番に出題を選択できないようにしてランダムのみ選択できるようにしたい
-          // ⇒これは余裕があったらやるやつ
-          if (range === "orderBy") {
-            if (questionNum === "10") {
-              question = findEra.slice(0, 3);
+        function selectQuestion (era, eraJap){
+          if (format === "all-era") {
+            const findEra = history.filter(function(element) {
+              return element.時代;
+            });
+            
+            // 全時代からやるなら順番に出題を選択できないようにしてランダムのみ選択できるようにしたい
+            // ⇒これは余裕があったらやるやつ
+            if (range === "orderBy") {
+              if (questionNum === "10") {
+                question = findEra.slice(0, 3);
+              } 
+              else if (questionNum === "30") {
+                question = findEra.slice(0, 30);
+              } 
+              else if (questionNum === "50") {
+                question = findEra.slice(0, 50);
+              }
             } 
-            else if (questionNum === "30") {
-              question = findEra.slice(0, 30);
-            } 
-            else if (questionNum === "50") {
-              question = findEra.slice(0, 50);
+            
+            else if (range === "random") {
+              // ドットインストールのフィッシャー・イェーツのアルゴリズムのコード
+              // ⇒解説「https://qiita.com/may88seiji/items/69d5b05dff2c9d059155」
+              const shuffledObj = ([...findEra]) => {
+                for (let i = findEra.length - 1; i >= 0; i--) {
+                  const j = Math.floor(Math.random() * (i + 1));
+                  [findEra[i], findEra[j]] = [findEra[j], findEra[i]]
+                }
+                return findEra;
+              }
+              // フィッシャー・イェーツのアルゴリズム、表示参考「https://www.nxworld.net/tips/js-array-shuffle.html」
+  
+              // ☆指定された問題数を配列で抜き取る
+              // ①10問
+              if (questionNum === "10") {
+                question = shuffledObj(findEra).slice(0, 3);
+              } 
+              // ②30問
+              else if (questionNum === "30") {
+                question = shuffledObj(findEra).slice(0, 30);
+              } 
+              // ③50問
+              else if (questionNum === "50") {
+                question = shuffledObj(findEra).slice(0, 50);
+              }
+            }
+          }
+          else if (format === era + "-era") {
+            const findEra = history.filter(function(element) {
+              return element.時代 === eraJap;
+            });
+  
+            if (range === "orderBy") {
+              if (questionNum === "10" || "30" || "50") {
+                question = findEra.slice(0, 10);
+              } 
+            } else if (range === "random") {
+              const shuffledObj = ([...findEra]) => {
+                for (let i = findEra.length - 1; i >= 0; i--) {
+                  const j = Math.floor(Math.random() * (i + 1));
+                  [findEra[i], findEra[j]] = [findEra[j], findEra[i]]
+                }
+                return findEra;
+              }
+  
+              if (questionNum === "10" || "30" || "50") {
+                question = shuffledObj(findEra).slice(0, 10);
+              } 
             }
           } 
-          
-          else if (range === "random") {
-            // ドットインストールのフィッシャー・イェーツのアルゴリズムのコード
-            // ⇒解説「https://qiita.com/may88seiji/items/69d5b05dff2c9d059155」
-            const shuffledObj = ([...findEra]) => {
-              for (let i = findEra.length - 1; i >= 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [findEra[i], findEra[j]] = [findEra[j], findEra[i]]
-              }
-              return findEra;
-            }
-            // フィッシャー・イェーツのアルゴリズム、表示参考「https://www.nxworld.net/tips/js-array-shuffle.html」
-
-            // ☆指定された問題数を配列で抜き取る
-            // ①10問
-            if (questionNum === "10") {
-              question = shuffledObj(findEra).slice(0, 3);
-            } 
-            // ②30問
-            else if (questionNum === "30") {
-              question = shuffledObj(findEra).slice(0, 30);
-            } 
-            // ③50問
-            else if (questionNum === "50") {
-              question = shuffledObj(findEra).slice(0, 50);
-            }
-          }
         }
-
-        // ☆時代別…弥生
-        else if (format === "yayoi-era") {
-          const findEra = history.filter(function(element) {
-            return element.時代 === "弥生";
-          });
-
-          if (range === "orderBy") {
-            if (questionNum === "10" || "30" || "50") {
-              question = findEra.slice(0, 10);
-            } 
-          } else if (range === "random") {
-            const shuffledObj = ([...findEra]) => {
-              for (let i = findEra.length - 1; i >= 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [findEra[i], findEra[j]] = [findEra[j], findEra[i]]
-              }
-              return findEra;
-            }
-
-            if (questionNum === "10" || "30" || "50") {
-              question = shuffledObj(findEra).slice(0, 10);
-            } 
-          }
-        } 
-
-        // ☆時代別…飛鳥
-        else if (format === "asuka-era") {
-          const findEra = history.filter(function(element) {
-            return element.時代 === "飛鳥";
-          });
-
-          if (range === "orderBy") {
-            if (questionNum === "10" || "30" || "50") {
-              question = findEra.slice(0, 10);
-            } 
-          } else if (range === "random") {
-            const shuffledObj = ([...findEra]) => {
-              for (let i = findEra.length - 1; i >= 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [findEra[i], findEra[j]] = [findEra[j], findEra[i]]
-              }
-              return findEra;
-            }
-
-            if (questionNum === "10" || "30" || "50") {
-              question = shuffledObj(findEra).slice(0, 10);
-            } 
-          }
-        } 
-
-        // ☆時代別…奈良
-        else if (format === "nara-era") {
-          const findEra = history.filter(function(element) {
-            return element.時代 === "奈良";
-          });
-
-          if (range === "orderBy") {
-            if (questionNum === "10" || "30" || "50") {
-              question = findEra.slice(0, 10);
-            } 
-          } else if (range === "random") {
-            const shuffledObj = ([...findEra]) => {
-              for (let i = findEra.length - 1; i >= 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [findEra[i], findEra[j]] = [findEra[j], findEra[i]]
-              }
-              return findEra;
-            }
-
-            if (questionNum === "10" || "30" || "50") {
-              question = shuffledObj(findEra).slice(0, 10);
-            } 
-          }
-        }
+        selectQuestion ("yayoi", "弥生");
+        selectQuestion ("asuka", "飛鳥");
+        selectQuestion ("nara", "奈良");
+        selectQuestion ("heian", "平安");
+        selectQuestion ("kamakura", "鎌倉");
+        selectQuestion ("muromachi", "室町");
+        selectQuestion ("momoyama", "安土桃山");
+        selectQuestion ("edo", "江戸");
+        selectQuestion ("meiji", "明治");
+        selectQuestion ("taisyo", "大正");
+        selectQuestion ("senzen", "昭和(戦前)");
+        selectQuestion ("sengo", "昭和(戦後)");
 
         page.querySelector('#pra-top-btn').onclick = function() {
           document.querySelector('#navigator').popPage();
@@ -359,6 +321,15 @@
             <option value="yayoi-era">弥生時代から出題</option>
             <option value="asuka-era">飛鳥時代から出題</option>
             <option value="nara-era">奈良時代から出題</option>
+            <option value="heian-era">平安時代から出題</option>
+            <option value="kamakura-era">鎌倉時代から出題</option>
+            <option value="muromachi-era">室町時代から出題</option>
+            <option value="momoyama-era">安土桃山時代から出題</option>
+            <option value="edo-era">江戸時代から出題</option>
+            <option value="meiji-era">明治時代から出題</option>
+            <option value="taisyo-era">大正時代から出題</option>
+            <option value="senzen-era">昭和(戦前)時代から出題</option>
+            <option value="sengo-era">昭和(戦後)時代から出題</option>
           </ons-select>
         </ons-form>
     

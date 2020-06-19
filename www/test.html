@@ -63,7 +63,7 @@
               return findEra;
             }
             if (questionNum === "50") {
-              question = shuffledObj(findEra).slice(0, 50);
+              question = shuffledObj(findEra).slice(0, 10);
             }
           }
         }
@@ -136,17 +136,16 @@
 
       if (page.matches('#test-score-page')) {
         const testScore = document.querySelector('#test-score');
-        // const scorePic = document.querySelector('#scorePic');
         testScore.textContent = `${score.length} / ${question.length}`;
         
         const testComment = document.getElementById('test-comment');
-        if (score / question.length === 1) {
+        if (score.length / question.length === 1) {
           testComment.innerHTML = "Perfect!!! <br> これで君もゴロ合わせは完璧だ！ <br> 忘れないように復習しよう！"
-        } else if (score / question.length >= 0.8) {
+        } else if (score.length / question.length >= 0.8) {
           testComment.innerHTML = "Excellent!!! <br> もう少しでパーフェクト！ <br> 覚えるまでやりこもう！"
-        } else if (score / question.length >= 0.6) {
+        } else if (score.length / question.length >= 0.6) {
           testComment.innerHTML = "Great!! <br> すごいすごい！良い調子！ <br> 全問正解目指して頑張ろう！"
-        } else if (score / question.length >= 0.4) {
+        } else if (score.length / question.length >= 0.4) {
           testComment.innerHTML = "Good! <br> 少し覚えてきたね！ <br> いい調子だよ、頑張ろう！"
         } else {
           testComment.innerHTML = "OK! <br> まだまだこれからだね！ <br> 少しずつ頑張っていこう！"
@@ -195,6 +194,33 @@
         var naraScore = score.filter(function(element) {
           return element.時代 === "奈良";
         });
+        var heianScore = score.filter(function(element) {
+          return element.時代 === "平安";
+        });
+        var kamakuraScore = score.filter(function(element) {
+          return element.時代 === "鎌倉";
+        });
+        var muromachiScore = score.filter(function(element) {
+          return element.時代 === "室町";
+        });
+        var momoyamaScore = score.filter(function(element) {
+          return element.時代 === "安土桃山";
+        });
+        var edoScore = score.filter(function(element) {
+          return element.時代 === "江戸";
+        });
+        var meijiScore = score.filter(function(element) {
+          return element.時代 === "明治";
+        });
+        var taisyoScore = score.filter(function(element) {
+          return element.時代 === "大正";
+        });
+        var senzenScore = score.filter(function(element) {
+          return element.時代 === "昭和(戦前)";
+        });
+        var sengoScore = score.filter(function(element) {
+          return element.時代 === "昭和(戦後)";
+        });
   
         var yayoiQuestionNum = question.filter(function(element) {
           return element.時代 === "弥生";
@@ -205,18 +231,63 @@
         var naraQuestionNum = question.filter(function(element) {
           return element.時代 === "奈良";
         });
-
+        var heianQuestionNum = question.filter(function(element) {
+          return element.時代 === "平安";
+        });
+        var kamakuraQuestionNum = question.filter(function(element) {
+          return element.時代 === "鎌倉";
+        });
+        var muromachiQuestionNum = question.filter(function(element) {
+          return element.時代 === "室町";
+        });
+        var momoyamaQuestionNum = question.filter(function(element) {
+          return element.時代 === "安土桃山";
+        });
+        var edoQuestionNum = question.filter(function(element) {
+          return element.時代 === "江戸";
+        });
+        var meijiQuestionNum = question.filter(function(element) {
+          return element.時代 === "明治";
+        });
+        var taisyoQuestionNum = question.filter(function(element) {
+          return element.時代 === "大正";
+        });
+        var senzenQuestionNum = question.filter(function(element) {
+          return element.時代 === "昭和(戦前)";
+        });
+        var sengoQuestionNum = question.filter(function(element) {
+          return element.時代 === "昭和(戦後)";
+        });
+        
         // 実施結果をニフクラに流し込む処理
         var ScoreRate = ncmb.DataStore("ScoreRate");
         var scoreRate = new ScoreRate();
-
+        
         var y = Math.round(yayoiScore.length / yayoiQuestionNum.length * 100);
         var a = Math.round(asukaScore.length / asukaQuestionNum.length * 100);
         var n = Math.round(naraScore.length / naraQuestionNum.length * 100);
+        var h = Math.round(heianScore.length / heianQuestionNum.length * 100);
+        var k = Math.round(kamakuraScore.length / kamakuraQuestionNum.length * 100);
+        var mr = Math.round(muromachiScore.length / muromachiQuestionNum.length * 100);
+        var am = Math.round(momoyamaScore.length / momoyamaQuestionNum.length * 100);
+        var e = Math.round(edoScore.length / edoQuestionNum.length * 100);
+        var mj = Math.round(meijiScore.length / meijiQuestionNum.length * 100);
+        var t = Math.round(taisyoScore.length / taisyoQuestionNum.length * 100);
+        var sb = Math.round(senzenScore.length / senzenQuestionNum.length * 100);
+        var sa = Math.round(sengoScore.length / sengoQuestionNum.length * 100);
 
         scoreRate.set("yayoi", y);
         scoreRate.set("asuka", a);
         scoreRate.set("nara", n);
+        scoreRate.set("heian", h);
+        scoreRate.set("kamakura", k);
+        scoreRate.set("muromachi", mr);
+        scoreRate.set("momoyama", am);
+        scoreRate.set("edo", e);
+        scoreRate.set("meiji", mj);
+        scoreRate.set("taisyo", t);
+        scoreRate.set("senzen", sb);
+        scoreRate.set("sengo", sa);
         scoreRate.save()
         .then(function(scoreRate){
         })

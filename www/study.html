@@ -19,248 +19,210 @@
     document.addEventListener('init', function(event) {
       var page = event.target;
 
-      // クラスを作って処理をまとめたいんだけどなぁ
-      class StudyHistory {
-        constructor(時代, 年号) {
-          this.時代 = history.時代;
-          this.年号 = history.年号;
+      function selectEra(era, eraJap) {
+        if (page.matches('#st-top-page')) {
+          page.querySelector('#' + era + '-btn').onclick = function() {
+            document.querySelector('#navigator').pushPage(era + '.html', {
+              data: {
+                "時代": eraJap
+              }
+            });
+          };
+        } else if (page.matches('#' + era + '-page')) {
+          page.querySelector('#st-top-btn').onclick = function() {
+            document.querySelector('#navigator').popPage();
+          };
         }
       }
-      const studyHistory = new StudyHistory("弥生", "57");
-
-      // 学習モードトップ⇔弥生時代
-      if (page.matches('#st-top-page')) {
-        page.querySelector('#yayoi-btn').onclick = function() {
-          document.querySelector('#navigator').pushPage('yayoi.html', {
-            // 'yayoi.html'に"弥生"というデータを渡す
-            data: {
-              時代: "弥生"
-            }
-          });
-        };
-      } else if (page.matches('#yayoi-page')) {
-        page.querySelector('#st-top-btn').onclick = function() {
-          document.querySelector('#navigator').popPage();
-        };
-      }
-
-      // 学習モードトップ⇔飛鳥時代
-      if (page.matches('#st-top-page')) {
-        page.querySelector('#asuka-btn').onclick = function() {
-          document.querySelector('#navigator').pushPage('asuka.html',{
-            data: {
-              時代: "飛鳥"
-            }
-          });
-        };
-      } else if (page.matches('#asuka-page')) {
-        page.querySelector('#st-top-btn').onclick = function() {
-          document.querySelector('#navigator').popPage();
-       };
-      }
-
-      // 学習モードトップ⇔奈良時代
-      if (page.matches('#st-top-page')) {
-        page.querySelector('#nara-btn').onclick = function() {
-          document.querySelector('#navigator').pushPage('nara.html', {
-            data: {
-              時代: "奈良"
-            }
-          });
-        };
-      } else if (page.matches('#nara-page')) {
-        page.querySelector('#st-top-btn').onclick = function() {
-          document.querySelector('#navigator').popPage();
-        };
-      }
-
+      selectEra('yayoi', "弥生");
+      selectEra('asuka', "飛鳥");
+      selectEra('nara', "奈良");
+      selectEra('heian', "平安");
+      selectEra('kamakura', "鎌倉");
+      selectEra('muromachi', "室町");
+      selectEra('momoyama', "安土桃山");
+      selectEra('edo', "江戸");
+      selectEra('meiji', "明治");
+      selectEra('taisyo', "大正");
+      selectEra('senzen', "昭和(戦前)");
+      selectEra('sengo', "昭和(戦後)");
+      
       // 年号リスト⇔学習ページ
+      function setOnclick(num) {
+        page.querySelector('#goro-btn' + num).onclick = function() {
+          let age = document.querySelector('#navigator').topPage.data;
+          age.通し = num; 
+          document.querySelector('#navigator').pushPage('study-list.html', {
+            data: age
+          });
+        };
+      }
+
+      // 弥生
       if (page.matches('#yayoi-page')) {
-        page.querySelector('#goro-btn1').onclick = function() {
-          let age = document.querySelector('#navigator').topPage.data;
-          // ↑「https://onsen.io/v2/api/js/ons-navigator.html#sending-custom-data-to-a-new-page」に書いてある
-          // topPage.data で上の'yayoi.html'に渡した"弥生"というデータを受け取る
-          age.年号 = "57"; //←ここを変えなければならない
+        setOnclick(1);
+        setOnclick(2);
+      } 
 
-          // ここでさらに"弥生"に"57"というデータを足す(=代入する)
-          document.querySelector('#navigator').pushPage('study-list.html', {
-            data: age
-          });
-        };
-      } else if (page.matches('#study-list-page')) {
-        page.querySelector('#st-top-btn').onclick = function() {
-          document.querySelector('#navigator').popPage({times: 2});
-        };
-      }
-      if (page.matches('#yayoi-page')) {
-        page.querySelector('#goro-btn2').onclick = function() {
-          let age = document.querySelector('#navigator').topPage.data;
-          age.年号 = "239"; 
-          document.querySelector('#navigator').pushPage('study-list.html', {
-            data: age
-          });
-        };
-      } else if (page.matches('#study-list-page')) {
-        page.querySelector('#st-top-btn').onclick = function() {
-          document.querySelector('#navigator').popPage({times: 2});
-        };
-      }
+      // 飛鳥
       if (page.matches('#asuka-page')) {
-        page.querySelector('#goro-btn3').onclick = function() {
-          let age = document.querySelector('#navigator').topPage.data;
-          age.年号 = "538/552"; 
-          document.querySelector('#navigator').pushPage('study-list.html', {
-            data: age
-          });
-        };
-      } else if (page.matches('#study-list-page')) {
-        page.querySelector('#st-top-btn').onclick = function() {
-          document.querySelector('#navigator').popPage({times: 2});
-        };
-      }
-      if (page.matches('#asuka-page')) {
-        page.querySelector('#goro-btn4').onclick = function() {
-          let age = document.querySelector('#navigator').topPage.data;
-          age.年号 = "593"; 
-          document.querySelector('#navigator').pushPage('study-list.html', {
-            data: age
-          });
-        };
-      } else if (page.matches('#study-list-page')) {
-        page.querySelector('#st-top-btn').onclick = function() {
-          document.querySelector('#navigator').popPage({times: 2});
-        };
-      }
-      if (page.matches('#asuka-page')) {
-        page.querySelector('#goro-btn5').onclick = function() {
-          let age = document.querySelector('#navigator').topPage.data;
-          age.年号 = "603"; 
-          document.querySelector('#navigator').pushPage('study-list.html', {
-            data: age
-          });
-        };
-      } else if (page.matches('#study-list-page')) {
-        page.querySelector('#st-top-btn').onclick = function() {
-          document.querySelector('#navigator').popPage({times: 2});
-        };
-      }
-      if (page.matches('#asuka-page')) {
-        page.querySelector('#goro-btn6').onclick = function() {
-          let age = document.querySelector('#navigator').topPage.data;
-          age.年号 = "604"; 
-          document.querySelector('#navigator').pushPage('study-list.html', {
-            data: age
-          });
-        };
-      } else if (page.matches('#study-list-page')) {
-        page.querySelector('#st-top-btn').onclick = function() {
-          document.querySelector('#navigator').popPage({times: 2});
-        };
-      }
-      if (page.matches('#asuka-page')) {
-        page.querySelector('#goro-btn7').onclick = function() {
-          let age = document.querySelector('#navigator').topPage.data;
-          age.年号 = "607"; 
-          document.querySelector('#navigator').pushPage('study-list.html', {
-            data: age
-          });
-        };
-      } else if (page.matches('#study-list-page')) {
-        page.querySelector('#st-top-btn').onclick = function() {
-          document.querySelector('#navigator').popPage({times: 2});
-        };
-      }
-      if (page.matches('#asuka-page')) {
-        page.querySelector('#goro-btn8').onclick = function() {
-          let age = document.querySelector('#navigator').topPage.data;
-          age.年号 = "645"; 
-          document.querySelector('#navigator').pushPage('study-list.html', {
-            data: age
-          });
-        };
-      } else if (page.matches('#study-list-page')) {
-        page.querySelector('#st-top-btn').onclick = function() {
-          document.querySelector('#navigator').popPage({times: 2});
-        };
-      }
-      if (page.matches('#asuka-page')) {
-        page.querySelector('#goro-btn9').onclick = function() {
-          let age = document.querySelector('#navigator').topPage.data;
-          age.年号 = "663"; 
-          document.querySelector('#navigator').pushPage('study-list.html', {
-            data: age
-          });
-        };
-      } else if (page.matches('#study-list-page')) {
-        page.querySelector('#st-top-btn').onclick = function() {
-          document.querySelector('#navigator').popPage({times: 2});
-        };
-      }
-      if (page.matches('#asuka-page')) {
-        page.querySelector('#goro-btn10').onclick = function() {
-          let age = document.querySelector('#navigator').topPage.data;
-          age.年号 = "672"; 
-          document.querySelector('#navigator').pushPage('study-list.html', {
-            data: age
-          });
-        };
-      } else if (page.matches('#study-list-page')) {
-        page.querySelector('#st-top-btn').onclick = function() {
-          document.querySelector('#navigator').popPage({times: 2});
-        };
-      }
-      if (page.matches('#asuka-page')) {
-        page.querySelector('#goro-btn11').onclick = function() {
-          let age = document.querySelector('#navigator').topPage.data;
-          age.年号 = "701"; 
-          document.querySelector('#navigator').pushPage('study-list.html', {
-            data: age
-          });
-        };
-      } else if (page.matches('#study-list-page')) {
-        page.querySelector('#st-top-btn').onclick = function() {
-          document.querySelector('#navigator').popPage({times: 2});
-        };
-      }
+        setOnclick(3);
+        setOnclick(4);
+        setOnclick(5);
+        setOnclick(6);
+        setOnclick(7);
+        setOnclick(8);
+        setOnclick(9);
+        setOnclick(10);
+        setOnclick(11);
+      } 
+
+      // 奈良
       if (page.matches('#nara-page')) {
-        page.querySelector('#goro-btn12').onclick = function() {
-          let age = document.querySelector('#navigator').topPage.data;
-          age.年号 = "710"; 
-          document.querySelector('#navigator').pushPage('study-list.html', {
-            data: age
-          });
-        };
-      } else if (page.matches('#study-list-page')) {
+        setOnclick(12);
+        setOnclick(13);
+      } 
+
+      // 平安
+      if (page.matches('#heian-page')) {
+        setOnclick(14);
+        setOnclick(15);
+        setOnclick(16);
+        setOnclick(17);
+        setOnclick(18);
+        setOnclick(19);
+        setOnclick(20);
+        setOnclick(21);
+      } 
+
+      // 鎌倉
+      if (page.matches('#kamakura-page')) {
+        setOnclick(22);
+        setOnclick(23);
+        setOnclick(24);
+        setOnclick(25);
+        setOnclick(26);
+      } 
+
+      // 室町
+      if (page.matches('#muromachi-page')) {
+        setOnclick(27);
+        setOnclick(28);
+        setOnclick(29);
+        setOnclick(30);
+        setOnclick(31);
+        setOnclick(32);
+        setOnclick(33);
+        setOnclick(34);
+        setOnclick(35);
+        setOnclick(36);
+        setOnclick(37);
+        setOnclick(38);
+        setOnclick(39);
+      } 
+
+      // 安土桃山
+      if (page.matches('#momoyama-page')) {
+        setOnclick(40);
+        setOnclick(41);
+        setOnclick(42);
+        setOnclick(43);
+        setOnclick(44);
+      } 
+
+      // 江戸
+      if (page.matches('#edo-page')) {
+        setOnclick(45);
+        setOnclick(46);
+        setOnclick(47);
+        setOnclick(48);
+        setOnclick(49);
+        setOnclick(50);
+        setOnclick(51);
+        setOnclick(52);
+        setOnclick(53);
+        setOnclick(54);
+        setOnclick(55);
+        setOnclick(56);
+        setOnclick(57);
+        setOnclick(58);
+        setOnclick(59);
+        setOnclick(60);
+        setOnclick(61);
+        setOnclick(62);
+        setOnclick(63);
+        setOnclick(64);
+        setOnclick(65);
+        setOnclick(66);
+        setOnclick(67);
+        setOnclick(68);
+      } 
+
+      // 明治
+      if (page.matches('#meiji-page')) {
+        setOnclick(69);
+        setOnclick(70);
+        setOnclick(71);
+        setOnclick(72);
+        setOnclick(73);
+        setOnclick(74);
+        setOnclick(75);
+        setOnclick(76);
+        setOnclick(77);
+        setOnclick(78);
+        setOnclick(79);
+        setOnclick(80);
+      }
+
+      // 大正
+      if (page.matches('#taisyo-page')) {
+        setOnclick(81);
+        setOnclick(82);
+        setOnclick(83);
+        setOnclick(84);
+        setOnclick(85);
+        setOnclick(86);
+        setOnclick(87);
+        setOnclick(88);
+        setOnclick(89);
+        setOnclick(90);
+        setOnclick(91);
+        setOnclick(92);
+      }
+
+      // 戦前
+      if (page.matches('#senzen-page')) {
+        setOnclick(93);
+        setOnclick(94);
+        setOnclick(95);
+        setOnclick(96);
+        setOnclick(97);
+        setOnclick(98);
+        setOnclick(99);
+        setOnclick(100);
+        setOnclick(101);
+      }
+
+      // 戦後
+      if (page.matches('#sengo-page')) {
+        setOnclick(102);
+        setOnclick(103);
+        setOnclick(104);
+        setOnclick(105);
+        setOnclick(106);
+        setOnclick(107);
+        setOnclick(108);
+        setOnclick(109);
+        setOnclick(110);
+      }
+
+
+      // 年号リストページから学習トップに戻る処理
+      if (page.matches('#study-list-page')) {
         page.querySelector('#st-top-btn').onclick = function() {
           document.querySelector('#navigator').popPage({times: 2});
         };
       }
-      if (page.matches('#nara-page')) {
-        SetOnClick('#goro-btn13', "743")
-/*           page.querySelector('#goro-btn13').onclick = function() {
-            let age = document.querySelector('#navigator').topPage.data;
-            age.年号 = "743"; 
-            document.querySelector('#navigator').pushPage('study-list.html', {
-              data: age
-            });
-         };*/
-      } else if (page.matches('#study-list-page')) {
-        page.querySelector('#st-top-btn').onclick = function() {
-          document.querySelector('#navigator').popPage({times: 2});
-        };
-      }
-
-      let SetOnclick = function(id, age){
-        page.querySelector(id).onclick = function() {
-          let age = document.querySelector('#navigator').topPage.data;
-          age.年号 = age; 
-          document.querySelector('#navigator').pushPage('study-list.html', {
-            data: age
-          });
- 
-      }
-
-      // ここまで力技で各学習ページを出しています。できればまとめよう。
 
       // ページ開いたらその年号の解説とかが出るようにしたい。↓
       if (page.matches('#study-list-page')) {
@@ -268,7 +230,7 @@
         let age = document.querySelector('#navigator').topPage.data; //ここで{時代:"弥生", 年号:"57"}を受け取る
         let foundHistory = history.find((element) => {
           // historyという配列の中からelementを取り出す
-          return element.年号 === age.年号;
+          return element.通し === age.通し;
         });
 
         // 学習ページのJSのID取得→定数で定義
@@ -293,7 +255,7 @@
         // 横移動だけは「history.js」の「通し」を数値にすればいける
         document.getElementById('next-btn').addEventListener('click', () => {
           let presentGoro = foundHistory.通し;
-          if (foundHistory.通し === 13) {
+          if (foundHistory.通し === 110) {
             return;
           }
           presentGoro ++;
@@ -358,15 +320,15 @@
           <ons-list-item id="yayoi-btn" class="list">弥生</ons-list-item>
           <ons-list-item id="asuka-btn" class="list">飛鳥</ons-list-item>
           <ons-list-item id="nara-btn" class="list">奈良</ons-list-item>
-          <ons-list-item>平安</ons-list-item>
-          <ons-list-item>鎌倉</ons-list-item>
-          <ons-list-item>室町</ons-list-item>
-          <ons-list-item>安土桃山</ons-list-item>
-          <ons-list-item>江戸</ons-list-item>
-          <ons-list-item>明治</ons-list-item>
-          <ons-list-item>大正</ons-list-item>
-          <ons-list-item>昭和(戦前)</ons-list-item>
-          <ons-list-item>昭和(戦後)</ons-list-item>
+          <ons-list-item id="heian-btn" class="list">平安</ons-list-item>
+          <ons-list-item id="kamakura-btn" class="list">鎌倉</ons-list-item>
+          <ons-list-item id="muromachi-btn" class="list">室町</ons-list-item>
+          <ons-list-item id="momoyama-btn" class="list">安土桃山</ons-list-item>
+          <ons-list-item id="edo-btn" class="list">江戸</ons-list-item>
+          <ons-list-item id="meiji-btn" class="list">明治</ons-list-item>
+          <ons-list-item id="taisyo-btn" class="list">大正</ons-list-item>
+          <ons-list-item id="senzen-btn" class="list">昭和(戦前)</ons-list-item>
+          <ons-list-item id="sengo-btn" class="list">昭和(戦後)</ons-list-item>
         </ons-list>
       </div>
   
@@ -388,8 +350,6 @@
   <div>
     <ons-list-header>年号選択</ons-list-header>
     <ons-list inset>
-      <!-- 以下の年代もそうだけどボタンによってリストが付け変わるようにしたい… -->
-      <!-- クラスを使うべきなのか？ -->
       <ons-list-item id="goro-btn1" class="list">57</ons-list-item>
       <ons-list-item id="goro-btn2" class="list">239</ons-list-item>
     </ons-list>
@@ -445,6 +405,292 @@
     <ons-list>
       <ons-list-item id="goro-btn12" class="list">710</ons-list-item>
       <ons-list-item id="goro-btn13" class="list">743</ons-list-item>
+    </ons-list>
+  </div>
+
+  <footer>
+    <ons-button id="st-top-btn" class="st-btn btn">学習モードTOPへ戻る</ons-button>
+  </footer>
+</ons-page>
+</ons-template>
+
+<!-- 平安時代 -->
+<ons-template id="heian.html">
+  <ons-page id="heian-page" class="top">
+    <ons-toolbar>
+      <div class="center">平安</div>
+    </ons-toolbar>
+      
+    <img class="stuPic" src="css/picture/平安時代.jpg">
+
+  <div>
+    <ons-list-header>年号選択</ons-list-header>
+    <ons-list>
+      <ons-list-item id="goro-btn14" class="list">794</ons-list-item>
+      <ons-list-item id="goro-btn15" class="list">797</ons-list-item>
+      <ons-list-item id="goro-btn16" class="list">804</ons-list-item>
+      <ons-list-item id="goro-btn17" class="list">894</ons-list-item>
+      <ons-list-item id="goro-btn18" class="list">939</ons-list-item>
+      <ons-list-item id="goro-btn19" class="list">1016</ons-list-item>
+      <ons-list-item id="goro-btn20" class="list">1086</ons-list-item>
+      <ons-list-item id="goro-btn21" class="list">1167</ons-list-item>
+    </ons-list>
+  </div>
+
+  <footer>
+    <ons-button id="st-top-btn" class="st-btn btn">学習モードTOPへ戻る</ons-button>
+  </footer>
+</ons-page>
+</ons-template>
+
+<!-- 鎌倉時代 -->
+<ons-template id="kamakura.html">
+  <ons-page id="kamakura-page" class="top">
+    <ons-toolbar>
+      <div class="center">鎌倉</div>
+    </ons-toolbar>
+      
+    <img class="stuPic" src="css/picture/鎌倉時代.jpg">
+
+  <div>
+    <ons-list-header>年号選択</ons-list-header>
+    <ons-list>
+      <ons-list-item id="goro-btn22" class="list">1192</ons-list-item>
+      <ons-list-item id="goro-btn23" class="list">1221</ons-list-item>
+      <ons-list-item id="goro-btn24" class="list">1232</ons-list-item>
+      <ons-list-item id="goro-btn25" class="list">1274</ons-list-item>
+      <ons-list-item id="goro-btn26" class="list">1297</ons-list-item>
+    </ons-list>
+  </div>
+
+  <footer>
+    <ons-button id="st-top-btn" class="st-btn btn">学習モードTOPへ戻る</ons-button>
+  </footer>
+</ons-page>
+</ons-template>
+
+<!-- 室町時代 -->
+<ons-template id="muromachi.html">
+  <ons-page id="muromachi-page" class="top">
+    <ons-toolbar>
+      <div class="center">室町</div>
+    </ons-toolbar>
+      
+    <img class="stuPic" src="css/picture/室町時代.jpg">
+
+  <div>
+    <ons-list-header>年号選択</ons-list-header>
+    <ons-list>
+      <ons-list-item id="goro-btn27" class="list">1334</ons-list-item>
+      <ons-list-item id="goro-btn28" class="list">1338</ons-list-item>
+      <ons-list-item id="goro-btn29" class="list">1404</ons-list-item>
+      <ons-list-item id="goro-btn30" class="list">1428</ons-list-item>
+      <ons-list-item id="goro-btn31" class="list">1467</ons-list-item>
+      <ons-list-item id="goro-btn32" class="list">1485</ons-list-item>
+      <ons-list-item id="goro-btn33" class="list">1488</ons-list-item>
+      <ons-list-item id="goro-btn34" class="list">1492</ons-list-item>
+      <ons-list-item id="goro-btn35" class="list">1498</ons-list-item>
+      <ons-list-item id="goro-btn36" class="list">1517</ons-list-item>
+      <ons-list-item id="goro-btn37" class="list">1519</ons-list-item>
+      <ons-list-item id="goro-btn38" class="list">1543</ons-list-item>
+      <ons-list-item id="goro-btn39" class="list">1549</ons-list-item>
+    </ons-list>
+  </div>
+
+  <footer>
+    <ons-button id="st-top-btn" class="st-btn btn">学習モードTOPへ戻る</ons-button>
+  </footer>
+</ons-page>
+</ons-template>
+
+<!-- 安土桃山時代 -->
+<ons-template id="momoyama.html">
+  <ons-page id="momoyama-page" class="top">
+    <ons-toolbar>
+      <div class="center">安土桃山</div>
+    </ons-toolbar>
+      
+    <img class="stuPic" src="css/picture/安土桃山時代.jpg">
+
+  <div>
+    <ons-list-header>年号選択</ons-list-header>
+    <ons-list>
+      <ons-list-item id="goro-btn40" class="list">1560</ons-list-item>
+      <ons-list-item id="goro-btn41" class="list">1575</ons-list-item>
+      <ons-list-item id="goro-btn42" class="list">1582</ons-list-item>
+      <ons-list-item id="goro-btn43" class="list">1588</ons-list-item>
+      <ons-list-item id="goro-btn44" class="list">1600</ons-list-item>
+    </ons-list>
+  </div>
+
+  <footer>
+    <ons-button id="st-top-btn" class="st-btn btn">学習モードTOPへ戻る</ons-button>
+  </footer>
+</ons-page>
+</ons-template>
+
+<!-- 江戸時代 -->
+<ons-template id="edo.html">
+  <ons-page id="edo-page" class="top">
+    <ons-toolbar>
+      <div class="center">江戸</div>
+    </ons-toolbar>
+      
+    <img class="stuPic" src="css/picture/江戸時代.jpg">
+
+  <div>
+    <ons-list-header>年号選択</ons-list-header>
+    <ons-list>
+      <ons-list-item id="goro-btn45" class="list">1603</ons-list-item>
+      <ons-list-item id="goro-btn46" class="list">1615</ons-list-item>
+      <ons-list-item id="goro-btn47" class="list">1635</ons-list-item>
+      <ons-list-item id="goro-btn48" class="list">1637</ons-list-item>
+      <ons-list-item id="goro-btn49" class="list">1639</ons-list-item>
+      <ons-list-item id="goro-btn50" class="list">1642</ons-list-item>
+      <ons-list-item id="goro-btn51" class="list">1680</ons-list-item>
+      <ons-list-item id="goro-btn52" class="list">1688</ons-list-item>
+      <ons-list-item id="goro-btn53" class="list">1709</ons-list-item>
+      <ons-list-item id="goro-btn54" class="list">1716</ons-list-item>
+      <ons-list-item id="goro-btn55" class="list">1765</ons-list-item>
+      <ons-list-item id="goro-btn56" class="list">1772</ons-list-item>
+      <ons-list-item id="goro-btn57" class="list">1775</ons-list-item>
+      <ons-list-item id="goro-btn58" class="list">1787</ons-list-item>
+      <ons-list-item id="goro-btn59" class="list">1789</ons-list-item>
+      <ons-list-item id="goro-btn60" class="list">1837</ons-list-item>
+      <ons-list-item id="goro-btn61" class="list">1840</ons-list-item>
+      <ons-list-item id="goro-btn62" class="list">1841</ons-list-item>
+      <ons-list-item id="goro-btn63" class="list">1853</ons-list-item>
+      <ons-list-item id="goro-btn64" class="list">1854</ons-list-item>
+      <ons-list-item id="goro-btn65" class="list">1858</ons-list-item>
+      <ons-list-item id="goro-btn66" class="list">1860</ons-list-item>
+      <ons-list-item id="goro-btn67" class="list">1861</ons-list-item>
+      <ons-list-item id="goro-btn68" class="list">1867</ons-list-item>
+    </ons-list>
+  </div>
+
+  <footer>
+    <ons-button id="st-top-btn" class="st-btn btn">学習モードTOPへ戻る</ons-button>
+  </footer>
+</ons-page>
+</ons-template>
+
+<!-- 明治時代 -->
+<ons-template id="meiji.html">
+  <ons-page id="meiji-page" class="top">
+    <ons-toolbar>
+      <div class="center">明治</div>
+    </ons-toolbar>
+      
+    <img class="stuPic" src="css/picture/明治時代.jpg">
+
+  <div>
+    <ons-list-header>年号選択</ons-list-header>
+    <ons-list>
+      <ons-list-item id="goro-btn69" class="list">1868</ons-list-item>
+      <ons-list-item id="goro-btn70" class="list">1869</ons-list-item>
+      <ons-list-item id="goro-btn71" class="list">1871</ons-list-item>
+      <ons-list-item id="goro-btn72" class="list">1872</ons-list-item>
+      <ons-list-item id="goro-btn73" class="list">1873(1)</ons-list-item>
+      <ons-list-item id="goro-btn74" class="list">1873(2)</ons-list-item>
+      <ons-list-item id="goro-btn75" class="list">1876</ons-list-item>
+      <ons-list-item id="goro-btn76" class="list">1877</ons-list-item>
+      <ons-list-item id="goro-btn77" class="list">1889</ons-list-item>
+      <ons-list-item id="goro-btn78" class="list">1894</ons-list-item>
+      <ons-list-item id="goro-btn79" class="list">1902</ons-list-item>
+      <ons-list-item id="goro-btn80" class="list">1904</ons-list-item>
+    </ons-list>
+  </div>
+
+  <footer>
+    <ons-button id="st-top-btn" class="st-btn btn">学習モードTOPへ戻る</ons-button>
+  </footer>
+</ons-page>
+</ons-template>
+
+<!-- 大正時代 -->
+<ons-template id="taisyo.html">
+  <ons-page id="taisyo-page" class="top">
+    <ons-toolbar>
+      <div class="center">大正</div>
+    </ons-toolbar>
+      
+    <img class="stuPic" src="css/picture/大正時代.jpg">
+
+  <div>
+    <ons-list-header>年号選択</ons-list-header>
+    <ons-list>
+      <ons-list-item id="goro-btn81" class="list">1910</ons-list-item>
+      <ons-list-item id="goro-btn82" class="list">1914</ons-list-item>
+      <ons-list-item id="goro-btn83" class="list">1915</ons-list-item>
+      <ons-list-item id="goro-btn84" class="list">1917</ons-list-item>
+      <ons-list-item id="goro-btn85" class="list">1918</ons-list-item>
+      <ons-list-item id="goro-btn86" class="list">1919(1)</ons-list-item>
+      <ons-list-item id="goro-btn87" class="list">1919(2)</ons-list-item>
+      <ons-list-item id="goro-btn88" class="list">1919(3)</ons-list-item>
+      <ons-list-item id="goro-btn89" class="list">1920</ons-list-item>
+      <ons-list-item id="goro-btn90" class="list">1923</ons-list-item>
+      <ons-list-item id="goro-btn91" class="list">1925(1)</ons-list-item>
+      <ons-list-item id="goro-btn92" class="list">1925(2)</ons-list-item>
+    </ons-list>
+  </div>
+
+  <footer>
+    <ons-button id="st-top-btn" class="st-btn btn">学習モードTOPへ戻る</ons-button>
+  </footer>
+</ons-page>
+</ons-template>
+
+<!-- 昭和(戦前)時代 -->
+<ons-template id="senzen.html">
+  <ons-page id="senzen-page" class="top">
+    <ons-toolbar>
+      <div class="center">昭和(戦前)</div>
+    </ons-toolbar>
+      
+    <img class="stuPic" src="css/picture/戦前.jpg">
+
+  <div>
+    <ons-list-header>年号選択</ons-list-header>
+    <ons-list>
+      <ons-list-item id="goro-btn93" class="list">1929</ons-list-item>
+      <ons-list-item id="goro-btn94" class="list">1931</ons-list-item>
+      <ons-list-item id="goro-btn95" class="list">1932</ons-list-item>
+      <ons-list-item id="goro-btn96" class="list">1936</ons-list-item>
+      <ons-list-item id="goro-btn97" class="list">1937</ons-list-item>
+      <ons-list-item id="goro-btn98" class="list">1938</ons-list-item>
+      <ons-list-item id="goro-btn99" class="list">1939</ons-list-item>
+      <ons-list-item id="goro-btn100" class="list">1940</ons-list-item>
+      <ons-list-item id="goro-btn101" class="list">1941</ons-list-item>
+    </ons-list>
+  </div>
+
+  <footer>
+    <ons-button id="st-top-btn" class="st-btn btn">学習モードTOPへ戻る</ons-button>
+  </footer>
+</ons-page>
+</ons-template>
+
+<!-- 昭和(戦後)時代 -->
+<ons-template id="sengo.html">
+  <ons-page id="sengo-page" class="top">
+    <ons-toolbar>
+      <div class="center">昭和(戦後)</div>
+    </ons-toolbar>
+      
+    <img class="stuPic" src="css/picture/戦後.jpg">
+
+  <div>
+    <ons-list-header>年号選択</ons-list-header>
+    <ons-list>
+      <ons-list-item id="goro-btn102" class="list">1945</ons-list-item>
+      <ons-list-item id="goro-btn103" class="list">1946</ons-list-item>
+      <ons-list-item id="goro-btn104" class="list">1950</ons-list-item>
+      <ons-list-item id="goro-btn105" class="list">1951</ons-list-item>
+      <ons-list-item id="goro-btn106" class="list">1956</ons-list-item>
+      <ons-list-item id="goro-btn107" class="list">1964</ons-list-item>
+      <ons-list-item id="goro-btn108" class="list">1965</ons-list-item>
+      <ons-list-item id="goro-btn109" class="list">1972</ons-list-item>
+      <ons-list-item id="goro-btn110" class="list">1978</ons-list-item>
     </ons-list>
   </div>
 
