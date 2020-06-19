@@ -61,77 +61,127 @@
 
           // 各時代の平均正答率を出す処理↓
           // 関数にできないのかね？変数だからうまくいかなかったんだけど
+          // nullの数を数えてlengthからひかないと永遠に正答率が低いままになっちゃうな
           var allYayoiScore = 0;
+          let yayoiNum = 0;
           for (let i=0; i<resultYayoi.length; i++) {
+            if (resultYayoi[i] !== null) {
+              yayoiNum++;
+            }
             allYayoiScore += resultYayoi[i];
           }
-          var yayoiAvg = Math.round(allYayoiScore / resultYayoi.length);
+          var yayoiAvg = Math.round(allYayoiScore / yayoiNum);
 
           var allAsukaScore = 0;
+          let asukaNum = 0;
           for (let i=0; i<resultAsuka.length; i++) {
+            if (resultAsuka[i] !== null) {
+              asukaNum++;
+            }
             allAsukaScore += resultAsuka[i];
           }
-          var asukaAvg = Math.round(allAsukaScore / resultAsuka.length);
+          var asukaAvg = Math.round(allAsukaScore / asukaNum);
 
+          // この下も同じように続かせる！
           var allNaraScore = 0;
+          let naraNum = 0;
           for (let i=0; i<resultNara.length; i++) {
+            if (resultNara[i] !== null) {
+              naraNum++;
+            }
             allNaraScore += resultNara[i];
           }
-          var naraAvg = Math.round(allNaraScore / resultNara.length);
+          var naraAvg = Math.round(allNaraScore / naraNum);
 
           var allHeianScore = 0;
+          let heianNum = 0;
           for (let i=0; i<resultHeian.length; i++) {
+            if (resultHeian[i] !== null) {
+              heianNum++;
+            }
             allHeianScore += resultHeian[i];
           }
-          var heianAvg = Math.round(allHeianScore / resultHeian.length);
+          var heianAvg = Math.round(allHeianScore / heianNum);
 
           var allKamakuraScore = 0;
+          let kamakuraNum = 0;
           for (let i=0; i<resultKamakura.length; i++) {
+            if (resultKamakura[i] !== null) {
+              kamakuraNum++;
+            }
             allKamakuraScore += resultKamakura[i];
           }
-          var kamakuraAvg = Math.round(allKamakuraScore / resultKamakura.length);
+          var kamakuraAvg = Math.round(allKamakuraScore / kamakuraNum);
 
           var allMuromachiScore = 0;
+          let muromachiNum = 0;
           for (let i=0; i<resultMuromachi.length; i++) {
+            if (resultMuromachi[i] !== null) {
+              muromachiNum++;
+            }
             allMuromachiScore += resultMuromachi[i];
           }
-          var muromachiAvg = Math.round(allMuromachiScore / resultMuromachi.length);
+          var muromachiAvg = Math.round(allMuromachiScore / muromachiNum);
 
           var allMomoyamaScore = 0;
+          let momoyamaNum = 0;
           for (let i=0; i<resultMomoyama.length; i++) {
+            if (resultMomoyama[i] !== null) {
+              momoyamaNum++;
+            }
             allMomoyamaScore += resultMomoyama[i];
           }
-          var momoyamaAvg = Math.round(allMomoyamaScore / resultMomoyama.length);
+          var momoyamaAvg = Math.round(allMomoyamaScore / momoyamaNum);
 
           var allEdoScore = 0;
+          let edoNum = 0;
           for (let i=0; i<resultEdo.length; i++) {
+            if (resultEdo[i] !== null) {
+              edoNum++;
+            }
             allEdoScore += resultEdo[i];
           }
-          var edoAvg = Math.round(allEdoScore / resultEdo.length);
+          var edoAvg = Math.round(allEdoScore / edoNum);
 
           var allMeijiScore = 0;
+          let meijiNum = 0;
           for (let i=0; i<resultMeiji.length; i++) {
+            if (resultMeiji[i] !== null) {
+              meijiNum++;
+            }
             allMeijiScore += resultMeiji[i];
           }
-          var meijiAvg = Math.round(allMeijiScore / resultMeiji.length);
+          var meijiAvg = Math.round(allMeijiScore / meijiNum);
 
           var allTaisyoScore = 0;
+          let taisyoNum = 0;
           for (let i=0; i<resultTaisyo.length; i++) {
+            if (resultTaisyo[i] !== null) {
+              taisyoNum++;
+            }
             allTaisyoScore += resultTaisyo[i];
           }
-          var taisyoAvg = Math.round(allTaisyoScore / resultTaisyo.length);
+          var taisyoAvg = Math.round(allTaisyoScore / taisyoNum);
 
           var allSenzenScore = 0;
+          let senzenNum = 0;
           for (let i=0; i<resultSenzen.length; i++) {
+            if (resultSenzen[i] !== null) {
+              senzenNum++;
+            }
             allSenzenScore += resultSenzen[i];
           }
-          var senzenAvg = Math.round(allSenzenScore / resultSenzen.length);
+          var senzenAvg = Math.round(allSenzenScore / senzenNum);
 
           var allSengoScore = 0;
+          let sengoNum = 0;
           for (let i=0; i<resultSengo.length; i++) {
+            if (resultSengo[i] !== null) {
+              sengoNum++;
+            }
             allSengoScore += resultSengo[i];
           }
-          var sengoAvg = Math.round(allSengoScore / resultSengo.length);
+          var sengoAvg = Math.round(allSengoScore / sengoNum);
 
           document.getElementById('yAvg').textContent = yayoiAvg;
           document.getElementById('aAvg').textContent = asukaAvg;
