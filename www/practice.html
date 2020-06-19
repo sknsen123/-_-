@@ -7,7 +7,6 @@
   <script src="components/loader.js"></script>
   <!-- <script src="js/app.js"></script> -->
   <script src="lib/onsenui/js/onsenui.min.js"></script>
-  <!-- <script src="components/jquery/jquery.min.js"></script> -->
   <script src="components/jquery/dist/jquery.min.js"></script>
 
   <link rel="stylesheet" href="components/loader.css">
@@ -60,7 +59,7 @@
           // ⇒これは余裕があったらやるやつ
           if (range === "orderBy") {
             if (questionNum === "10") {
-              question = findEra.slice(0, 10);
+              question = findEra.slice(0, 3);
             } 
             else if (questionNum === "30") {
               question = findEra.slice(0, 30);
@@ -85,7 +84,7 @@
             // ☆指定された問題数を配列で抜き取る
             // ①10問
             if (questionNum === "10") {
-              question = shuffledObj(findEra).slice(0, 10);
+              question = shuffledObj(findEra).slice(0, 3);
             } 
             // ②30問
             else if (questionNum === "30") {
@@ -321,6 +320,9 @@
           document.querySelector('#navigator').popPage({times: 2});
           score = 0;
           wrongAnswer = [];
+          // $(function(){
+          //     $('#passPic').hide();
+          // });
         };
       }
 
@@ -420,9 +422,9 @@
 
       <!-- 満点の時だけ表示したい -->
       <!-- できれば、にしようか。 -->
-      <div id="modal-pass">
+      <!-- <div id="modal-pass">
         <img id="passPic">
-      </div>
+      </div> -->
   
       <!-- その他もろもろの解説 -->
       <div id="scoreExplanation"></div>

@@ -18,9 +18,15 @@
     // Page init event
     document.addEventListener('init', function(event) {
       var page = event.target;
-      
-      // 本当は全部英語で書くんやできっと…英語できないとダメやで…
-      // 余裕があれば下の処理を時代別にするのではなくて1つにまとめる！！！
+
+      // クラスを作って処理をまとめたいんだけどなぁ
+      class StudyHistory {
+        constructor(時代, 年号) {
+          this.時代 = history.時代;
+          this.年号 = history.年号;
+        }
+      }
+      const studyHistory = new StudyHistory("弥生", "57");
 
       // 学習モードトップ⇔弥生時代
       if (page.matches('#st-top-page')) {
@@ -230,18 +236,30 @@
         };
       }
       if (page.matches('#nara-page')) {
-        page.querySelector('#goro-btn13').onclick = function() {
-          let age = document.querySelector('#navigator').topPage.data;
-          age.年号 = "743"; 
-          document.querySelector('#navigator').pushPage('study-list.html', {
-            data: age
-          });
-        };
+        SetOnClick('#goro-btn13', "743")
+/*           page.querySelector('#goro-btn13').onclick = function() {
+            let age = document.querySelector('#navigator').topPage.data;
+            age.年号 = "743"; 
+            document.querySelector('#navigator').pushPage('study-list.html', {
+              data: age
+            });
+         };*/
       } else if (page.matches('#study-list-page')) {
         page.querySelector('#st-top-btn').onclick = function() {
           document.querySelector('#navigator').popPage({times: 2});
         };
       }
+
+      let SetOnclick = function(id, age){
+        page.querySelector(id).onclick = function() {
+          let age = document.querySelector('#navigator').topPage.data;
+          age.年号 = age; 
+          document.querySelector('#navigator').pushPage('study-list.html', {
+            data: age
+          });
+ 
+      }
+
       // ここまで力技で各学習ページを出しています。できればまとめよう。
 
       // ページ開いたらその年号の解説とかが出るようにしたい。↓
@@ -340,7 +358,7 @@
           <ons-list-item id="yayoi-btn" class="list">弥生</ons-list-item>
           <ons-list-item id="asuka-btn" class="list">飛鳥</ons-list-item>
           <ons-list-item id="nara-btn" class="list">奈良</ons-list-item>
-          <!-- <ons-list-item>平安</ons-list-item>
+          <ons-list-item>平安</ons-list-item>
           <ons-list-item>鎌倉</ons-list-item>
           <ons-list-item>室町</ons-list-item>
           <ons-list-item>安土桃山</ons-list-item>
@@ -348,7 +366,7 @@
           <ons-list-item>明治</ons-list-item>
           <ons-list-item>大正</ons-list-item>
           <ons-list-item>昭和(戦前)</ons-list-item>
-          <ons-list-item>昭和(戦後)</ons-list-item> -->
+          <ons-list-item>昭和(戦後)</ons-list-item>
         </ons-list>
       </div>
   

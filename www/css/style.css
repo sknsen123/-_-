@@ -212,7 +212,7 @@ body {
   display: none;
 }
 
-#judgePic, #passPic {
+#judgePic {
   /* display: none; */
   background: none;
   width: 70%;
@@ -223,8 +223,18 @@ body {
 	z-index: 100;
 }
 
+/* #passPic {
+  background: none;
+  width: 70%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+	z-index: 100;
+}  */
+
 /* 結果表示 */
-#pra-score {
+#pra-score, #test-score {
   color: red;
   font-weight: bold;
   border-bottom: 3px double red;
@@ -238,7 +248,7 @@ body {
   margin: 0 8px 10px;
 }
 
-#pra-comment {
+#pra-comment, #test-comment {
   font-size: 18px;
 }
 
