@@ -41,8 +41,7 @@
         scoreRate.limit(50)
         .fetchAll()
         .then(function(results){
-          // 結果取得後の処理を書いていく。⇒配列に代入する？
-          // 全部抜き出す？⇒最新5つ分とすべての平均の％を表示
+          // 結果取得後の処理
           for (var i = 0; i < results.length; i++) {
           resultYayoi.push(results[i].yayoi);
           resultAsuka.push(results[i].asuka);
@@ -322,7 +321,8 @@
       </ons-toolbar>
 
       <div class="scoreTable">
-        <p>過去5回分の正答率一覧</p>
+        <p style="font-size: 20px;">過去5回分の正答率一覧</p>
+        <p>自分が弱い時代を探して、<br>集中的に学習しよう！</p>
     
         <table>
           <thead>
