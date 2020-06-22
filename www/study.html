@@ -243,14 +243,14 @@
         const yuru = document.getElementById('yuru');
         
         // 押された年号のその他(時代・番号・内容・語呂合わせ・解説)が入るようにして着地先に渡す
-        era.textContent = foundHistory.時代;
-        ageNum.textContent = foundHistory.時代別;
-        nengo.textContent = foundHistory.年号;
+        era.innerTEXT = foundHistory.時代;
+        ageNum.innerTEXT = foundHistory.時代別;
+        nengo.innerTEXT = foundHistory.年号;
         // 画像の表示の仕方：参考「https://techacademy.jp/magazine/20738」
         stPic.src = foundHistory.画像;
-        goro.textContent = foundHistory.ゴロ合わせ;
-        explanation.textContent = foundHistory.内容;
-        yuru.textContent = foundHistory.解説;
+        goro.innerTEXT = foundHistory.ゴロ合わせ;
+        explanation.innerTEXT = foundHistory.内容;
+        yuru.innerTEXT = foundHistory.解説;
 
         // 横移動だけは「history.js」の「通し」を数値にすればいける
         document.getElementById('next-btn').addEventListener('click', () => {
@@ -263,13 +263,13 @@
             return element.通し === presentGoro;
           });
 
-          era.textContent = foundHistory.時代;
-          ageNum.textContent = foundHistory.時代別;
-          nengo.textContent = foundHistory.年号;
+          era.innerTEXT = foundHistory.時代;
+          ageNum.innerTEXT = foundHistory.時代別;
+          nengo.innerTEXT = foundHistory.年号;
           stPic.src = foundHistory.画像;
-          goro.textContent = foundHistory.ゴロ合わせ;
-          explanation.textContent = foundHistory.内容;
-          yuru.textContent = foundHistory.解説;
+          goro.innerTEXT = foundHistory.ゴロ合わせ;
+          explanation.innerTEXT = foundHistory.内容;
+          yuru.innerTEXT = foundHistory.解説;
         });   
 
         document.getElementById('prev-btn').addEventListener('click', () => {
@@ -282,13 +282,13 @@
             return element.通し === presentGoro;
           });
 
-          era.textContent = foundHistory.時代;
-          ageNum.textContent = foundHistory.時代別;
-          nengo.textContent = foundHistory.年号;
+          era.innerTEXT = foundHistory.時代;
+          ageNum.innerTEXT = foundHistory.時代別;
+          nengo.innerTEXT = foundHistory.年号;
           stPic.src = foundHistory.画像;
-          goro.textContent = foundHistory.ゴロ合わせ;
-          explanation.textContent = foundHistory.内容;
-          yuru.textContent = foundHistory.解説;
+          goro.innerTEXT = foundHistory.ゴロ合わせ;
+          explanation.innerTEXT = foundHistory.内容;
+          yuru.innerTEXT = foundHistory.解説;
         });       
 
        }

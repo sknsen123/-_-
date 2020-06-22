@@ -24,7 +24,7 @@ body {
 
 .top {
   text-align: center;
-  margin: 65px 30px 30px 30px;
+  margin: 65px 30px 25px 30px;
   border: 2px solid #00a3af;
 }
 
@@ -60,6 +60,13 @@ body {
   height: auto;
 }
 
+.topTitle {
+  display: block;
+  margin: 80px auto 50px;
+  width: 100%;
+  height: auto;
+}
+
 /* 学習モード */
 .study-top {
   display: block;
@@ -78,6 +85,10 @@ body {
 
 .st-container {
   text-align: center;
+}
+
+.st-toptop {
+  margin: 0 20px;
 }
 
 .st-toptop > h1 {
@@ -126,6 +137,7 @@ body {
 .stPic {
   height: 200px;
   width: auto;
+  margin: 15px auto;
 }
 
 /* 練習モード 問題選択画面 */
@@ -293,7 +305,9 @@ footer {
 
 .st-toptop-btn {
   position: absolute;
-  bottom: 70px;
+  bottom: 80px;
   width: 100%;
   margin: 15px auto;
 }
+
+/* iPhoneXRできれいに見えるようになっているぜ */
