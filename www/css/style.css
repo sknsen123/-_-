@@ -88,25 +88,25 @@ body {
 }
 
 .st-toptop {
-  margin: 0 20px;
+  margin: 10px auto 20px;
+  font-weight: bold;
 }
 
 .st-toptop > h1 {
   color: red;
-  font-weight: bold;
   font-size: 36px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 .st-toptop > p {
-  font-size: 18px;
-  margin: 0 auto 10px;
+  font-size: 20px;
+  margin: 10px auto;
   
 }
 
 .st-explanation {
   border: 1px dashed #00a3af;
-  margin: 5px 10px 10px;
+  margin: 5px 10px 20px;
 }
 
 .st-explanation p {

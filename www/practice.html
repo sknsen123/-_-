@@ -167,7 +167,7 @@
 
           // 第〇問のところどうにかしたくていじった ⇒ 上のscoreをvarで定義しないとうまくいかなくなる
           i ++;
-          qNum.innerHTML = i + 1;
+          qNum.innerText = i + 1;
           praPic.src = question[i].画像;
           praExplanation.textContent = question[i].内容;
           
@@ -175,7 +175,7 @@
         }
         
         // 第〇問の部分を変える
-        qNum.innerHTML = i + 1;
+        qNum.innerText = i + 1;
         praPic.src = question[i].画像;
         praExplanation.textContent = question[i].内容;
 
@@ -234,19 +234,19 @@
         // 〇正解数に応じたコメントをつける
         const praComment = document.getElementById('pra-comment');
         if (score / question.length === 1) {
-          praComment.innerHTML = "Perfect!!! <br> これで君もゴロ合わせは完璧だ！ <br> 忘れないように復習しよう！"
+          praComment.innerText = "Perfect!!! \n これで君もゴロ合わせは完璧だ！ \n 忘れないように復習しよう！"
           // document.getElementById('passPic').src = "css/picture/pass.png";
           //   $(function(){
           //     $('#passPic').show();
           //   });
         } else if (score / question.length >= 0.8) {
-          praComment.innerHTML = "Excellent!!! <br> もう少しでパーフェクト！ <br> 覚えるまでやりこもう！"
+          praComment.innerText = "Excellent!!! \n もう少しでパーフェクト！ \n 覚えるまでやりこもう！"
         } else if (score / question.length >= 0.6) {
-          praComment.innerHTML = "Great!! <br> すごいすごい！良い調子！ <br> 全問正解目指して頑張ろう！"
+          praComment.innerText = "Great!! \n すごいすごい！良い調子！ \n 全問正解目指して頑張ろう！"
         } else if (score / question.length >= 0.4) {
-          praComment.innerHTML = "Good! <br> 少し覚えてきたね！ <br> いい調子だよ、頑張ろう！"
+          praComment.innerText = "Good! \n 少し覚えてきたね！ \n いい調子だよ、頑張ろう！"
         } else {
-          praComment.innerHTML = "OK! <br> まだまだこれからだね！ <br> 少しずつ頑張っていこう！"
+          praComment.innerText = "OK! \n まだまだこれからだね！ \n 少しずつ頑張っていこう！"
         }
 
         // 〇間違えた問題の解説

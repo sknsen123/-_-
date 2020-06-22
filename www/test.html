@@ -87,14 +87,14 @@
           }
 
           i ++;
-          qNum.innerHTML = i + 1;
+          qNum.innerText = i + 1;
           testPic.src = question[i].画像;
           testExplanation.textContent = question[i].内容;
           
           document.getElementById('ans-btn').disabled = true;
         }
         
-        qNum.innerHTML = i + 1;
+        qNum.innerText = i + 1;
         testPic.src = question[i].画像;
         testExplanation.textContent = question[i].内容;
 
@@ -140,15 +140,15 @@
         
         const testComment = document.getElementById('test-comment');
         if (score.length / question.length === 1) {
-          testComment.innerHTML = "Perfect!!! <br> これで君もゴロ合わせは完璧だ！ <br> 忘れないように復習しよう！"
+          testComment.innerText = "Perfect!!! \n これで君もゴロ合わせは完璧だ！ \n 忘れないように復習しよう！"
         } else if (score.length / question.length >= 0.8) {
-          testComment.innerHTML = "Excellent!!! <br> もう少しでパーフェクト！ <br> 覚えるまでやりこもう！"
+          testComment.innerText = "Excellent!!! \n もう少しでパーフェクト！ \n 覚えるまでやりこもう！"
         } else if (score.length / question.length >= 0.6) {
-          testComment.innerHTML = "Great!! <br> すごいすごい！良い調子！ <br> 全問正解目指して頑張ろう！"
+          testComment.innerText = "Great!! \n すごいすごい！良い調子！ \n 全問正解目指して頑張ろう！"
         } else if (score.length / question.length >= 0.4) {
-          testComment.innerHTML = "Good! <br> 少し覚えてきたね！ <br> いい調子だよ、頑張ろう！"
+          testComment.innerText = "Good! \n 少し覚えてきたね！ \n いい調子だよ、頑張ろう！"
         } else {
-          testComment.innerHTML = "OK! <br> まだまだこれからだね！ <br> 少しずつ頑張っていこう！"
+          testComment.innerText = "OK! \n まだまだこれからだね！ \n 少しずつ頑張っていこう！"
         }
 
         wrongAnswer.forEach((wrongElement) => {
