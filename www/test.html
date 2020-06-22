@@ -185,6 +185,29 @@
 
         // 結果をニフクラに流し込む準備
         // 余裕があったら実施日も足したいけど後回し
+
+        // だめでした。↓
+        // function setData(era, eraJap) {
+        //   var eraScore = score.filter(function(element) {
+        //   return element.時代 === eraJap;
+        //   });
+        //   var eraQuestionNum = question.filter(function(element) {
+        //     return element.時代 === eraJap;
+        //   });
+        // }
+
+        // setData(yayoi, "弥生");
+        // setData(asuka, "飛鳥");
+        // setData(nara, "奈良");
+        // setData(heian, "平安");
+        // setData(kamakura, "鎌倉");
+        // setData(momoyama, "安土桃山");
+        // setData(edo, "江戸");
+        // setData(meiji, "明治");
+        // setData(taisyo, "大正");
+        // setData(senzen, "昭和(戦前)");
+        // setData(sengo, "昭和(戦後)");
+
         var yayoiScore = score.filter(function(element) {
           return element.時代 === "弥生";
         });

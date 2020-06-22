@@ -60,8 +60,6 @@
           }
 
           // 各時代の平均正答率を出す処理↓
-          // 関数にできないのかね？変数だからうまくいかなかったんだけど
-          // nullの数を数えてlengthからひかないと永遠に正答率が低いままになっちゃうな
           var allYayoiScore = 0;
           let yayoiNum = 0;
           for (let i=0; i<resultYayoi.length; i++) {
@@ -295,6 +293,7 @@
           document.getElementById('SA3').textContent = resultSengoOrder[2];
           document.getElementById('SA4').textContent = resultSengoOrder[1];
           document.getElementById('SA5').textContent = resultSengoOrder[0];
+
           // 各時代の実施回ごとの正答率を出す処理↑
         })
         .catch(function(err){

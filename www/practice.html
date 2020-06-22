@@ -169,7 +169,7 @@
           i ++;
           qNum.innerText = i + 1;
           praPic.src = question[i].画像;
-          praExplanation.textContent = question[i].内容;
+          praExplanation.innerText = question[i].内容;
           
           document.getElementById('ans-btn').disabled = true;
         }
@@ -177,7 +177,7 @@
         // 第〇問の部分を変える
         qNum.innerText = i + 1;
         praPic.src = question[i].画像;
-        praExplanation.textContent = question[i].内容;
+        praExplanation.innerText = question[i].内容;
 
         // 2文字以上入力しないとボタンが押せないようにする処理
         document.getElementById('ans-btn').disabled = true;
@@ -229,7 +229,7 @@
         // 〇正答数表示
         const praScore = document.querySelector('#pra-score');
         // const scorePic = document.querySelector('#scorePic');
-        praScore.textContent = `${score} / ${question.length}`;
+        praScore.innerText = `${score} / ${question.length}`;
 
         // 〇正解数に応じたコメントをつける
         const praComment = document.getElementById('pra-comment');
@@ -263,10 +263,10 @@
 
           praScorePic.src = wrongElement.画像;
           praScorePic.height = 200;
-          praScoreNengo.textContent = "年号 ： " + wrongElement.年号;
-          praScoreExplanation.textContent = "内容 ： " + wrongElement.内容;
-          praScoregoro.textContent = "ゴロ合わせ ： " + wrongElement.ゴロ合わせ;
-          praScoreYuru.textContent = wrongElement.解説;
+          praScoreNengo.innerText = "年号 ： " + wrongElement.年号;
+          praScoreExplanation.innerText = "内容 ： " + wrongElement.内容;
+          praScoregoro.innerText = "ゴロ合わせ ： " + wrongElement.ゴロ合わせ;
+          praScoreYuru.innerText = wrongElement.解説;
 
           document.getElementById('scoreExplanation').appendChild(praScoreDiv);
           praScoreDiv.appendChild(praScorePic);
@@ -372,7 +372,7 @@
       </p>
   
       <footer>
-        <ons-button id="ans-btn" onclick="disabled = true;" disabled>解答する</ons-button>
+        <ons-button type="button" id="ans-btn" onclick="disabled = true;" disabled>解答する</ons-button>
         <ons-button id="pra-top-btn">練習モードTOPへ戻る</ons-button>
       </footer>
   

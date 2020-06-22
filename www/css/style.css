@@ -203,6 +203,8 @@ body {
 
 #praPic, #testPic {
   margin: 30px 0 20px;
+  width: auto;
+  height: 200px;
 }
 
 .questionPage {
