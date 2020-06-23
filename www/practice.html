@@ -103,9 +103,13 @@
             });
   
             if (range === "orderBy") {
-              if (questionNum === "10" || "30" || "50") {
+              if (questionNum === "10") {
                 question = findEra.slice(0, 10);
-              } 
+              } else if (questionNum === "30") {
+                question = findEra.slice(0, 30);
+              } else if (questionNum === "50") {
+                question = findEra.slice(0, 50);
+              }
             } else if (range === "random") {
               const shuffledObj = ([...findEra]) => {
                 for (let i = findEra.length - 1; i >= 0; i--) {
@@ -115,8 +119,12 @@
                 return findEra;
               }
   
-              if (questionNum === "10" || "30" || "50") {
+              if (questionNum === "10") {
                 question = shuffledObj(findEra).slice(0, 10);
+              } else if (questionNum === "30") {
+                question = shuffledObj(findEra).slice(0, 30);
+              } else if (questionNum === "50") {
+                question = shuffledObj(findEra).slice(0, 50);
               } 
             }
           } 
@@ -254,8 +262,9 @@
 
           // div要素にその下のimg、pとか入れる
           var praScoreDiv = document.createElement('div');
-          praScoreDiv.classList.add("praScore-Z")
+          praScoreDiv.classList.add("praScore-Z");
           var praScorePic = document.createElement('img');
+          praScorePic.classList.add("praPic-Z");
           var praScoreNengo = document.createElement('p');
           var praScoreExplanation = document.createElement('p');
           var praScoregoro = document.createElement('p');
