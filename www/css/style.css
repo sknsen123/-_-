@@ -57,11 +57,18 @@ body {
   cursor: pointer;
 }
 
-.titlePic {
+.topTitlePic {
   display: block;
   margin: 30px auto;
   max-width: 100%;
   max-height: 250px;
+}
+
+.titlePic {
+  display: block;
+  margin: 30px auto 15px;
+  max-width: 100%;
+  max-height: 200px;
 }
 
 .topTitle {
