@@ -24,7 +24,7 @@ body {
 
 .top {
   text-align: center;
-  margin: 65px 30px 25px 30px;
+  margin: 65px 30px 40px 30px;
   border: 2px solid #00a3af;
 }
 
@@ -32,6 +32,10 @@ body {
   margin : 0 auto;
   padding: 100px 0 0;
   font-weight: bold;
+}
+
+.top-btn.studybtn {
+  margin-top: 40px;
 }
 
 .top-btn {
@@ -56,8 +60,8 @@ body {
 .titlePic {
   display: block;
   margin: 30px auto;
-  width: 100%;
-  height: auto;
+  max-width: 100%;
+  max-height: 250px;
 }
 
 .topTitle {
@@ -130,14 +134,15 @@ body {
 .stuPic {
   display: inline-block;
   margin: 10px auto;
-  width: 100%;
+  max-width: 95%;
 }
 
 /* 各学習ページの写真 */
 .stPic {
-  height: 200px;
-  width: auto;
+  max-height: 200px;
+  /* width: auto; */
   margin: 15px auto;
+  max-width: 95%;
 }
 
 /* 練習モード 問題選択画面 */
@@ -202,9 +207,10 @@ body {
 }
 
 #praPic, #testPic {
-  margin: 30px 0 20px;
-  width: auto;
-  height: 200px;
+  margin: 30px 5px 20px;
+  /* width: auto; */
+  max-width: 90%;
+  max-height: 200px;
 }
 
 .questionPage {

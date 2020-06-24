@@ -17,18 +17,23 @@
   </script>
 </head>
 <body>
-  <ons-page>
-    <div class="top">
-      <img class="topTitle" src="css/picture/トップタイトル.png">
-      <img class="titlePic" src="css/picture/タイトル.png">
+  <ons-navigator id="navigator" page="index.html"></ons-navigator>
 
-      <div class="top-btn-list">
-        <a class="top-btn btn" href="study.html">学習モード</a>
-        <a class="top-btn btn" href="practice.html">演習モード</a>
-        <a class="top-btn btn" href="test.html">テストモード</a>
-        <a class="top-btn btn" href="score.html">過去の成績</a>
+  <ons-template id="index.html">
+    <ons-page id="index-page" class="top">
+      <div>
+        <img class="topTitle" src="css/picture/トップタイトル.png">
+        <img class="titlePic" src="css/picture/タイトル.png">
+  
+        <div class="top-btn-list">
+          <a class="top-btn btn studybtn" href="study.html">学習モード</a>
+          <a class="top-btn btn" href="practice.html">演習モード</a>
+          <a class="top-btn btn" href="test.html">テストモード</a>
+          <a class="top-btn btn" href="score.html">過去の成績</a>
+        </div>
 
-      </div>
-  </ons-page>
+    </ons-page>
+  </ons-template>
+  
 </body>
 </html>
