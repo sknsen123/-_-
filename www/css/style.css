@@ -3,11 +3,12 @@
 
 body {
   font-family: sans-serif;
+  background-color: white;
 }
 
 .page__background {
   background-color: white; 
- }
+}
 
 .toolbar.toolbar--material {
   background-color: #00a3af;
